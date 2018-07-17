@@ -2,6 +2,11 @@
 
 public class NavigationPath
 {
+    public NavigationVertex Root
+    {
+        get { return _root; }
+    }
+
     public List<NavigationMeshSegment> Paths
     {
         get { return _paths; }
