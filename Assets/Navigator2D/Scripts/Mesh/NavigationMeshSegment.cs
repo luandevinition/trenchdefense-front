@@ -6,6 +6,11 @@ using UnityEngine;
 public class NavigationMeshSegment
 {
     public NavigationVertex Start, End;
+
+    public float Distance
+    {
+        get { return Vector2.Distance(Start.Point, End.Point); }
+    }
     
     public NavigationMeshSegment(NavigationVertex start, NavigationVertex end)
     {
@@ -24,7 +29,7 @@ public class NavigationMeshSegment
         var _intersection = Vector2.negativeInfinity;
 
         var isIntersection = segments.Any(x =>
-            Extensions.LineSegementsIntersect(Start.Point, End.Point, x.Start.Point, x.End.Point, out _intersection));
+            Extensions.LineSegmentsIntersection(Start.Point, End.Point, x.Start.Point, x.End.Point, out _intersection));
 
         intersection = _intersection;
 

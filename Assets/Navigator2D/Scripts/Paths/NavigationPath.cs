@@ -7,7 +7,7 @@ public class NavigationPath
         get { return _paths; }
     }
 
-    private List<NavigationMeshSegment> _paths;
+    private readonly List<NavigationMeshSegment> _paths;
 
     private NavigationVertex _root;
 
