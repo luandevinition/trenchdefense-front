@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class NavigationVertex
 {
+    public Guid InstanceId
+    {
+        get { return _instanceID; }
+    }
+
     public Vector2 Point
     {
         get { return _point; }
     }
 
-    private Guid _instanceID;
+    private readonly Guid _instanceID;
 
     private readonly Vector2 _point;
 

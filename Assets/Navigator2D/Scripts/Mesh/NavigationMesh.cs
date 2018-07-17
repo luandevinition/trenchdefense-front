@@ -16,7 +16,7 @@ public class NavigationMesh : ScriptableObject
     [HideInInspector][SerializeField]
     private readonly Dictionary<int, List<NavigationMeshSegment>> _boundaries = new Dictionary<int, List<NavigationMeshSegment>>();
 
-    private List<NavigationPath> _paths = new List<NavigationPath>();
+    private NavigationGraph _navigationGraph;
     
     [ContextMenu ("Bake navigator mesh")]
     void BakeNavigatorMesh ()
@@ -76,7 +76,16 @@ public class NavigationMesh : ScriptableObject
         var segments = new List<NavigationMeshSegment>();
         for (int i = 0; i < points.Count; i++)
         {
-            segments.Add(new NavigationMeshSegment(closedPath[i], closedPath[i + 1]));
+            if (i == 0)
+            {
+                segments.Add(new NavigationMeshSegment(closedPath[i], closedPath[i + 1]));
+            }
+            else
+            {
+                var startVertex = segments[i - 1].End;
+                var endVertex = new NavigationVertex(closedPath[i + 1]);
+                segments.Add(new NavigationMeshSegment(startVertex, endVertex));
+            }
         }
 
         return segments;
@@ -84,9 +93,11 @@ public class NavigationMesh : ScriptableObject
 
     void BakePaths()
     {
+        var paths = new List<NavigationPath>();
         foreach (var startBoundary in _boundaries)
         {
             var connectBoundaries = _boundaries.Where(x => x.Key != startBoundary.Key).ToList();
+
             connectBoundaries.ForEach(connectBoundary =>
             {
                 startBoundary.Value.ForEach(startSegment =>
@@ -104,16 +115,22 @@ public class NavigationMesh : ScriptableObject
                     });
                     
                     var path = new NavigationPath(startSegment.Start,segments);
-                    _paths.Add(path);
+                    paths.Add(path);
                 });
             });
         }
+        
+        _navigationGraph = new NavigationGraph(paths);
     }
 
     bool IsIntersectAnySegment(NavigationMeshSegment segment,out Vector2 intersection)
     {
+        var segments = _boundaries.SelectMany(x => x.Value).Where(x =>
+            x.Start.InstanceId != segment.Start.InstanceId && x.End.InstanceId != segment.Start.InstanceId
+            && x.Start.InstanceId != segment.End.InstanceId && x.End.InstanceId != segment.End.InstanceId).ToList();
+        
         var _intersection = Vector2.negativeInfinity;
-        var isIntersection = segment.IsIntersectWithAnySegment(_boundaries.SelectMany(x => x.Value).ToList(),out _intersection);
+        var isIntersection = segment.IsIntersectWithAnySegment(segments,out _intersection);
 
         intersection = _intersection;
 
@@ -133,7 +150,9 @@ public class NavigationMesh : ScriptableObject
             }
         }
 
-        _paths.SelectMany(path => path.Paths).ToList().ForEach(path =>
+        if(_navigationGraph == null) return;
+        
+        _navigationGraph.Paths.SelectMany(path => path.Paths).ToList().ForEach(path =>
         {
             Gizmos.DrawLine(path.Start.Point, path.End.Point);
         });
