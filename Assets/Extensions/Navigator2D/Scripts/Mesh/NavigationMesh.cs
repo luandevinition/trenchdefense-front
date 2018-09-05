@@ -13,16 +13,17 @@ public class NavigationMesh : ScriptableObject
 
     [SerializeField] private float _navigatorOffset = 0.1f;
 
-    [HideInInspector][SerializeField]
-    private readonly Dictionary<int, List<NavigationMeshSegment>> _boundaries = new Dictionary<int, List<NavigationMeshSegment>>();
+    [HideInInspector] [SerializeField]
+    private readonly Dictionary<int, List<NavigationMeshSegment>> _boundaries =
+        new Dictionary<int, List<NavigationMeshSegment>>();
 
     private NavigationGraph _navigationGraph;
-    
-    [ContextMenu ("Bake navigator mesh")]
-    void BakeNavigatorMesh ()
+
+    [ContextMenu("Bake navigator mesh")]
+    void BakeNavigatorMesh()
     {
         _boundaries.Clear();
-        
+
         // Find static collider
         var staticColliders = FindStaticCollider();
 
@@ -30,9 +31,9 @@ public class NavigationMesh : ScriptableObject
         foreach (var collider in staticColliders)
         {
             var boundary = CalculateNewBoundary(collider);
-            _boundaries.Add(collider.GetInstanceID(),boundary);
+            _boundaries.Add(collider.GetInstanceID(), boundary);
         }
-        
+
         // Bake paths
         BakePaths();
     }
@@ -47,7 +48,7 @@ public class NavigationMesh : ScriptableObject
         var points = new List<Vector2>(collider.points);
 
         if (points.Count <= 1) return ConvertToSegments(points);
-        
+
         points.Add(collider.points[0]);
 
         var newBoundaries = new List<Vector2>();
@@ -68,7 +69,7 @@ public class NavigationMesh : ScriptableObject
 
         return ConvertToSegments(newBoundaries);
     }
-    
+
     List<NavigationMeshSegment> ConvertToSegments(List<Vector2> points)
     {
         var closedPath = new List<Vector2>(points);
@@ -105,7 +106,7 @@ public class NavigationMesh : ScriptableObject
                     var segments = new List<NavigationMeshSegment>();
                     connectBoundary.Value.ForEach(connectSegment =>
                     {
-                        var connectedSegment = new NavigationMeshSegment(startSegment.Start,connectSegment.Start);
+                        var connectedSegment = new NavigationMeshSegment(startSegment.Start, connectSegment.Start);
 
                         var intersection = Vector2.negativeInfinity;
                         if (!IsIntersectAnySegment(connectedSegment, out intersection))
@@ -113,34 +114,35 @@ public class NavigationMesh : ScriptableObject
                             segments.Add(connectedSegment);
                         }
                     });
-                    
-                    var path = new NavigationPath(startSegment.Start,segments);
+
+                    var path = new NavigationPath(startSegment.Start, segments);
                     paths.Add(path);
                 });
             });
         }
-        
+
         _navigationGraph = new NavigationGraph(paths);
     }
 
-    bool IsIntersectAnySegment(NavigationMeshSegment segment,out Vector2 intersection)
+    bool IsIntersectAnySegment(NavigationMeshSegment segment, out Vector2 intersection)
     {
         var segments = _boundaries.SelectMany(x => x.Value).Where(x =>
             x.Start.InstanceId != segment.Start.InstanceId && x.End.InstanceId != segment.Start.InstanceId
             && x.Start.InstanceId != segment.End.InstanceId && x.End.InstanceId != segment.End.InstanceId).ToList();
-        
+
         var _intersection = Vector2.negativeInfinity;
-        var isIntersection = segment.IsIntersectWithAnySegment(segments,out _intersection);
+        var isIntersection = segment.IsIntersectWithAnySegment(segments, out _intersection);
 
         intersection = _intersection;
 
         return isIntersection;
     }
 
+#if UNITY_EDITOR
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        
+
         foreach (var keyValuePair in _boundaries)
         {
             var boundary = keyValuePair.Value;
@@ -150,11 +152,19 @@ public class NavigationMesh : ScriptableObject
             }
         }
 
-        if(_navigationGraph == null) return;
+        if (_navigationGraph == null) return;
         
+        Gizmos.color = Color.blue;
+
+        _navigationGraph.Paths.Select(path => path.Root).ToList().ForEach(root =>
+        {
+            Gizmos.DrawSphere(root.Point, .4f);
+        });
+
         _navigationGraph.Paths.SelectMany(path => path.Paths).ToList().ForEach(path =>
         {
             Gizmos.DrawLine(path.Start.Point, path.End.Point);
         });
     }
+#endif
 }
