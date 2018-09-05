@@ -1,0 +1,2 @@
+# trenchdefense-front
+/Extensions/[extension name] – by default, all third party extensions like NGUI are unpacked to the Assets folder root, but after fifth extension you’ll get mess in the project, so we have decided to create a separate folder.
