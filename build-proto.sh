@@ -21,3 +21,5 @@ mono protobuf-net/Precompile/precompile.exe Assets/Plugins/proto.dll -o:Assets/P
 rm -fr *.pb
 rm -fr *.pb.cs
 
+mcs Assets/Plugins/Editor/TypeTableBuild/TypeTableUtilBuilder.cs
+mono Assets/Plugins/Editor/TypeTableBuild/TypeTableUtilBuilder.exe ${modellist[@]} > Assets/Scripts/Utils/TypeTableUtil.cs
