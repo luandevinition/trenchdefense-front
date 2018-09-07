@@ -15,10 +15,11 @@ public class Navigator2D : MonoBehaviour
         if(Target == null) return;
     }
 
+    /*
     void OnDrawGizmos()
     {
         if(!_renderMesh) return;
         
         _navigationMesh.OnDrawGizmos();
-    }
+    }*/
 }
