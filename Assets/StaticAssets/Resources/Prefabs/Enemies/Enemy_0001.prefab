@@ -3190,7 +3190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 500
-  _character: {fileID: 0}
+  _avatar: {fileID: 0}
 --- !u!114 &114288496533639532
 MonoBehaviour:
   m_ObjectHideFlags: 1
