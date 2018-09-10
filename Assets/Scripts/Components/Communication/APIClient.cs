@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Extensions;
 using Program.Scripts.Components.Communication;
 using ProtoBuf;
+using StaticAssets.Configs;
 using UniRx;
 using UniRx.JsonWebRequest;
+using UnityEngine;
 using Utils;
 
 namespace Components.Communication
@@ -19,8 +22,8 @@ namespace Components.Communication
         /// <summary>
         /// バックエンドのベースURI
         /// </summary>
-        private static string _baseUri { get { return "url"; } }
-
+        private static string _baseUri = String.Empty;
+        
         /// <summary>
         /// シングルトンインスタンス
         /// </summary>
@@ -45,7 +48,18 @@ namespace Components.Communication
             }
 
             _instance = new ApiClient();
+            _baseUri = BaseURLFromScriptableObject();
             return _instance;
+        }
+
+
+        /// <summary>
+        /// Get Setting Data from ScriptableObject in StaticAsset/Configs/Resources
+        /// </summary>
+        /// <returns></returns>
+        private static string BaseURLFromScriptableObject()
+        {
+            return Resources.Load<SettingData>("SettingData").url;
         }
 
         /// <summary>
@@ -53,7 +67,7 @@ namespace Components.Communication
         /// </summary>
         /// <param name="path">アクセスするpath</param>
         /// <param name="throughCodes"></param>
-        public IObservable<List<IExtensible>> Get(string path, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Get(string path, HttpStatusCode[] throughCodes = null)
         {
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
             return Wrap(ObservableProtobufWebRequest.GetAndGetProtobufs(_baseUri + path, header));
@@ -75,7 +89,7 @@ namespace Components.Communication
         /// <param name="path">アクセスするpath</param>
         /// <param name="models">POST時に渡すモデルの配列</param>
         /// <param name="throughCodes"></param>
-        public IObservable<List<IExtensible>> Get(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Get(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
         {
             var payload = ProtobufConverter.SerializeModels (models);
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
@@ -88,7 +102,7 @@ namespace Components.Communication
         /// <param name="path">アクセスするpath</param>
         /// <param name="models">POST時に渡すモデルの配列</param>
         /// <param name="throughCodes"></param>
-        public IObservable<List<IExtensible>> Post(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Post(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
         {
             byte[] payload = null;
             if (models.Count > 0)
@@ -104,7 +118,7 @@ namespace Components.Communication
         /// </summary>
         /// <param name="path">アクセスするpath</param>
         /// <param name="throughCodes"></param>
-        public IObservable<List<IExtensible>> Post(string path, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Post(string path, HttpStatusCode[] throughCodes = null)
         {
             var models = new List<IExtensible>();
             return Post(path, models, throughCodes);
@@ -141,7 +155,7 @@ namespace Components.Communication
         /// <param name="path">アクセスするpath</param>
         /// <param name="throughCodes"></param>
         /// <returns></returns>
-        public IObservable<List<IExtensible>> Delete(string path, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Delete(string path, HttpStatusCode[] throughCodes = null)
         {
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
             return Wrap(ObservableProtobufWebRequest.DeleteAndGetProtobufs(_baseUri + path, header));
@@ -154,7 +168,7 @@ namespace Components.Communication
         /// <param name="models">DELETE時に渡すモデル</param>
         /// <param name="throughCodes"></param>
         /// <returns></returns>
-        public IObservable<List<IExtensible>> Delete(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
+        public UniRx.IObservable<List<IExtensible>> Delete(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
         {
             var payload = ProtobufConverter.SerializeModels (models);
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
@@ -166,7 +180,7 @@ namespace Components.Communication
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        private IObservable<List<IExtensible>> Wrap(IObservable<List<IExtensible>> source)
+        private UniRx.IObservable<List<IExtensible>> Wrap(UniRx.IObservable<List<IExtensible>> source)
         {
             var subject = new Subject<List<IExtensible>>();
 
