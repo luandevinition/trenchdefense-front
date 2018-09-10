@@ -3,6 +3,7 @@
 # =============== #
 Temp/
 Library/
+.idea/
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
