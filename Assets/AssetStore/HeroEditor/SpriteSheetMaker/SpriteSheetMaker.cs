@@ -101,8 +101,6 @@ namespace Assets.HeroEditor.SpriteSheetMaker
 	        _character.transform.SetParent(transform);
 			_character.transform.localPosition = Vector3.zero;
 	        _character.transform.localScale = Vector3.one;
-	        _character.GetComponent<CharacterFlip>().enabled = false;
-	        _character.GetComponent<WeaponControls>().FixHorizontal = true;
 
 			Debug.LogWarning("All materials were replaced by [Sprites/Default] to avoid outline artefacts.");
 
