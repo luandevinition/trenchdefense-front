@@ -9,7 +9,10 @@ namespace BattleStage.Controller.Enemy
 		// TODO : [Refractor] Should contain _speed in another domain such as CharacterStatus etc
 		[SerializeField]
 		private float _speed = 50f;
-
+		
+		[SerializeField]
+		public Animator Animator;
+		
 		[SerializeField]
 		private AvatarController _avatar;
 		
@@ -32,6 +35,9 @@ namespace BattleStage.Controller.Enemy
 
 			var isReachedToTarget =
 				Vector3.Dot((targetPosition - newPosition).normalized, (targetPosition - transform.position).normalized) <= 0f;
+
+			// Play animation run when joystick pressing
+			Animator.SetBool("Run", !isReachedToTarget);
 
 			transform.position = isReachedToTarget ? targetPosition : newPosition;
 		}

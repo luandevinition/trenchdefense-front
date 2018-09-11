@@ -3190,6 +3190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 500
+  Animator: {fileID: 95553666648782314}
   _avatar: {fileID: 0}
 --- !u!114 &114288496533639532
 MonoBehaviour:
@@ -3427,9 +3428,10 @@ MonoBehaviour:
   Character: {fileID: 114843243314439668}
   ArmL: {fileID: 4001426052347278}
   ArmR: {fileID: 4576085161067658}
-  FireButton: 324
   ReloadButton: 114
-  FixHorizontal: 0
+  _fireButtonView: {fileID: 0}
+  _characterController: {fileID: 0}
+  _isPlayer: 0
 --- !u!114 &114843243314439668
 MonoBehaviour:
   m_ObjectHideFlags: 1

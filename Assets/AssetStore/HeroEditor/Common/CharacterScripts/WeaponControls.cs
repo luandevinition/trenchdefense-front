@@ -1,6 +1,8 @@
 ﻿using System;
 using HeroEditor.Common.Enums;
+using UI.Views.Parts.Buttons;
 using UnityEngine;
+using CustomCharacterController = BattleStage.Controller.Character.CharacterController;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
 {
@@ -9,44 +11,62 @@ namespace Assets.HeroEditor.Common.CharacterScripts
     /// </summary>
     public class WeaponControls : MonoBehaviour
     {
+        private readonly Vector3 DEFAULT_VECTOR_ANGLE = new Vector3(0, 0, 20f);
+        private const float MAX_ANGLE_ALLOW = 100f;
+        
         public Character Character;
         public Transform ArmL;
         public Transform ArmR;
-        public KeyCode FireButton;
         public KeyCode ReloadButton;
-	    public bool FixHorizontal;
 
+        [SerializeField]
+        private FireButtonView _fireButtonView;
+
+        [SerializeField]
+        private CustomCharacterController _characterController;
+        
+        [SerializeField]
+        private bool _isPlayer = false;
+
+        public bool IsPlayer
+        {
+            get { return _isPlayer; }
+        }
+	    
+        /// <summary>
+        /// Lock for Dead
+        /// </summary>
         private bool _locked;
 
         public void Update()
         {
             _locked = !Character.Animator.GetBool("Ready") || Character.Animator.GetInteger("Dead") > 0;
 
-            if (_locked) return;
-
+            if (_locked || !_isPlayer) return;
+            
             switch (Character.WeaponType)
             {
                 case WeaponType.Melee1H:
                 case WeaponType.Melee2H:
                 case WeaponType.MeleePaired:
-                    if (Input.GetKeyDown(FireButton))
+                    if (_fireButtonView)
                     {
                         Character.Animator.SetTrigger(Time.frameCount % 2 == 0 ? "Slash" : "Jab"); // Play animation randomly
                     }
                     break;
                 case WeaponType.Bow:
-                    Character.BowShooting.ChargeButtonDown = Input.GetKeyDown(FireButton);
-                    Character.BowShooting.ChargeButtonUp = Input.GetKeyUp(FireButton);
+                    Character.BowShooting.ChargeButtonDown = _fireButtonView.IsButtonDown;
+                    Character.BowShooting.ChargeButtonUp = !_fireButtonView.IsButtonDown;
                     break;
                 case WeaponType.Firearms1H:
                 case WeaponType.Firearms2H:
-                    Character.Firearm.Fire.FireButtonDown = Input.GetKeyDown(FireButton);
-                    Character.Firearm.Fire.FireButtonPressed = Input.GetKey(FireButton);
-                    Character.Firearm.Fire.FireButtonUp = Input.GetKeyUp(FireButton);
+                    Character.Firearm.Fire.FireButtonDown = _fireButtonView.IsButtonDown;
+                    Character.Firearm.Fire.FireButtonPressed = _fireButtonView.IsButtonDown;
+                    Character.Firearm.Fire.FireButtonUp = !_fireButtonView.IsButtonDown;
                     Character.Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
                     break;
 	            case WeaponType.Supplies:
-		            if (Input.GetKeyDown(FireButton))
+		            if (_fireButtonView.IsButtonDown)
 		            {
 			            Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly
 		            }
@@ -59,7 +79,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         /// </summary>
         public void LateUpdate()
         {
-            if (_locked) return;
+            if (_locked || !_isPlayer) return;
 
             Transform arm;
             Transform weapon;
@@ -78,43 +98,18 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 default:
                     return;
             }
-
-            RotateArm(arm, weapon, FixHorizontal ? arm.position + 1000 * Vector3.right : Camera.main.ScreenToWorldPoint(Input.mousePosition), -40, 40);
+            
+            RotateArm(arm, weapon, _isPlayer ? _characterController.Joystick.Vertical : DEFAULT_VECTOR_ANGLE.z, 0, MAX_ANGLE_ALLOW);
         }
+
+        //[SerializeField] private Vector2 testPosition = Vector2.down;
 
         /// <summary>
         /// Selected arm to position (world space) rotation, with limits.
         /// </summary>
-        public void RotateArm(Transform arm, Transform weapon, Vector2 target, float angleMin, float angleMax) // TODO: Very hard to understand logic
+        public void RotateArm(Transform arm, Transform weapon, float weight, float angleMin, float angleMax) // TODO: Very hard to understand logic
         {
-            target = arm.transform.InverseTransformPoint(target);
-            
-            var angleToTarget = Vector2.SignedAngle(Vector2.right, target);
-            var angleToFirearm = Vector2.SignedAngle(weapon.right, arm.transform.right) * Math.Sign(weapon.lossyScale.x);
-            var angleFix = Mathf.Asin(weapon.InverseTransformPoint(arm.transform.position).y / target.magnitude) * Mathf.Rad2Deg;
-            var angle = angleToTarget + angleToFirearm + angleFix;
-
-            angleMin += angleToFirearm;
-            angleMax += angleToFirearm;
-
-            var z = arm.transform.localEulerAngles.z;
-
-            if (z > 180) z -= 360;
-
-            if (z + angle > angleMax)
-            {
-                angle = angleMax;
-            }
-            else if (z + angle < angleMin)
-            {
-                angle = angleMin;
-            }
-            else
-            {
-                angle += z;
-            }
-
-            arm.transform.localEulerAngles = new Vector3(0, 0, angle);
+            arm.transform.localEulerAngles = new Vector3(0, 0, Mathf.Clamp(weight * angleMax , 0 , MAX_ANGLE_ALLOW) );
         }
     }
 }

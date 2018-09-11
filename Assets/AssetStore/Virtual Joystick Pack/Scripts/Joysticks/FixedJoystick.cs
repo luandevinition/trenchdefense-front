@@ -7,11 +7,16 @@ public class FixedJoystick : Joystick
     
 
     Vector2 joystickPosition = Vector2.zero;
-    private Camera cam = new Camera();
+
+    [SerializeField] private Camera cam;
+    
 
     void Start()
     {
-        joystickPosition = RectTransformUtility.WorldToScreenPoint(cam, background.position);
+        if (cam != null)
+        {
+            joystickPosition = RectTransformUtility.WorldToScreenPoint(cam, background.position);   
+        }
     }
 
     public override void OnDrag(PointerEventData eventData)
