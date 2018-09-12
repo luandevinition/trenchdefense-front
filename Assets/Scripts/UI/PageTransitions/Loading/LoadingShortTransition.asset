@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400cb3d9651a24437b5123e76eb6cc78, type: 3}
+  m_Name: LoadingShortTransition
+  m_EditorClassIdentifier: 
+  _pagePrefab: {fileID: 1558378860219762, guid: 5327e5b80dbf5482c8786d513e0d8935,
+    type: 2}
+  _displayLog: 0
