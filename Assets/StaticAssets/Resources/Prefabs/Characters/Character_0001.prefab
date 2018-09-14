@@ -3337,6 +3337,8 @@ MonoBehaviour:
   _playerUnitStatus: {fileID: 114808599018445708}
   _joystick: {fileID: 0}
   _hpText: {fileID: 0}
+  ClickPosition: {x: 0, y: 0, z: 0}
+  CurrentCamera: {fileID: 0}
 --- !u!114 &114236680741511330
 MonoBehaviour:
   m_ObjectHideFlags: 1

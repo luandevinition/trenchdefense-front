@@ -7,6 +7,11 @@ namespace BattleStage.Controller
         public Vector3 Dicrection = Vector3.zero;
 
         public float MovementSpeed = 50f;
+
+        void Start()
+        {
+            DestroyObject(gameObject,5f);
+        }
         
         void Update()
         {

@@ -51,17 +51,5 @@ namespace BattleStage.Domain
             BaseWeaponID = baseWeaponId;
             BaseGranedaID = baseGranedaId;
         }
-
-        public BaseUnitStatus ToPlayerStatus(List<Weapon> listWeapon)
-        {
-            var weapon = listWeapon.FirstOrDefault(d => d.ID == BaseWeaponID);
-            Weapon granade = null;
-            if(BaseGranedaID != null)
-                granade = listWeapon.FirstOrDefault(d => d.ID == BaseGranedaID);
-            BaseUnitStatus result = new BaseUnitStatus(HP, Attack, Speed, ResourceID , weapon, granade);
-
-            return result;
-        }
-      
     }
 }

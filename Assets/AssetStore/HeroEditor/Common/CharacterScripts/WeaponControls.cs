@@ -99,7 +99,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     return;
             }
             
-            RotateArm(arm, weapon, _isPlayer ? _characterController.Joystick.Vertical : DEFAULT_VECTOR_ANGLE.z, 0, MAX_ANGLE_ALLOW);
+            RotateArm(arm, weapon, _isPlayer ? _characterController.ClickPosition.y : DEFAULT_VECTOR_ANGLE.z, 0, MAX_ANGLE_ALLOW);
         }
 
         //[SerializeField] private Vector2 testPosition = Vector2.down;

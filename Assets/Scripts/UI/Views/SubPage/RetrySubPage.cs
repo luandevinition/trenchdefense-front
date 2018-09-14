@@ -13,8 +13,7 @@ namespace UI.Views.SubPage
         {
             ButtonRetry.OnClickAsObservable().Subscribe(_ =>
             {
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+                SceneManager.LoadScene(1);
             }).AddTo(this);
         }
     }

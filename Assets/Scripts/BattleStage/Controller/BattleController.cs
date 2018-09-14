@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BattleStage.Domain;
+using EazyTools.SoundManager;
 using UniRx;
 using UnityEngine;
 using Utils;
@@ -30,12 +31,14 @@ namespace BattleStage.Controller
         [SerializeField]
         private GameObject _uIRetry;
 
+        [SerializeField]
+        private AudioClip _backgroundMusic;
+
         private BattleInitializeData _data;
         private readonly List<List<Zombie>> _waveZombies = new List<List<Zombie>>();
         private int baseWavePower = 1000;
         private int currentWave = 1;
         private int waveTime = 20;
-        
         
         void Start()
         {
@@ -53,6 +56,8 @@ namespace BattleStage.Controller
             }
             
             Initialize(new BattleInitializeData(unit,new List<Zombie>(){zombie01}, new List<Weapon>(){weapon} ));
+            
+            SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
         }
 
         private int currentSecondCounter = 0;
@@ -76,7 +81,7 @@ namespace BattleStage.Controller
                     var enemyPrefab = Resources.Load(path);
                     var enemyObject = Instantiate(enemyPrefab,_positionsSpawn[Random.Range(0,_positionsSpawn.Length)].position,Quaternion.identity) as GameObject;
                     if(enemyObject != null)
-                        enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.ToEnemyStatus());
+                        enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.HP, zombie.Attack, zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
                 }
              
                 currentSecondCounter++;

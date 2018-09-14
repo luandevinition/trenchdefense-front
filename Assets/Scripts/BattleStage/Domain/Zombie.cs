@@ -44,11 +44,6 @@ namespace BattleStage.Domain
             GoldDropCount = goldDropCount;
             ResourceID = resourceId;
         }
-          
-        public BaseUnitStatus ToEnemyStatus()
-        {
-            BaseUnitStatus result = new BaseUnitStatus(HP, Attack, Speed, ResourceID, null, null, GoldDropCount);
-            return result;
-        }
+    
     }
 }

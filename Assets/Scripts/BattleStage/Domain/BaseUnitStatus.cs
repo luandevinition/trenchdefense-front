@@ -63,29 +63,13 @@ namespace BattleStage.Domain
         {
             get { return _currentHP.AsObservable(); }
         }
+
+
+        public ReactiveProperty<bool> IsDie;
         
-        
-        public ReactiveProperty<bool> IsDie = new ReactiveProperty<bool>(false);
-        
-        /// <summary>
-        /// Constructure
-        /// </summary>
-        /// <param name="baseHp"></param>
-        /// <param name="baseAttack"></param>
-        /// <param name="baseSpeed"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="weapon"></param>
-        /// <param name="granade"></param>
-        /// <param name="levelHp"></param>
-        /// <param name="levelAttack"></param>
-        /// <param name="levelSpeed"></param>
-        /// <param name="percentHpByLevel"></param>
-        /// <param name="percentAttackByLevel"></param>
-        /// <param name="percentSpeedByLevel"></param>
-        /// <param name="goldDropCount"></param>
-        public BaseUnitStatus(int baseHp, int baseAttack, int baseSpeed, ResourceID resourceId, Weapon weapon = null,
+        public void SetBaseUnitStatus(int baseHp, int baseAttack, int baseSpeed, ResourceID resourceId, Weapon weapon = null,
             Weapon granade = null, int goldDropCount = 0, int levelHp = 1, int levelAttack = 1, int levelSpeed = 1,
-            float percentHpByLevel = 1, float percentAttackByLevel = 0, float percentSpeedByLevel = 0)
+            float percentHpByLevel = 0, float percentAttackByLevel = 0, float percentSpeedByLevel = 0)
         {
             _baseHP = baseHp;
             _baseAttack = baseAttack;
@@ -105,28 +89,7 @@ namespace BattleStage.Domain
             _grenadeEquiped = granade;
             
             _currentHP = new ReactiveProperty<float>(_baseHP  + (_levelHP * _percentHPByLevel * _baseHP));
-        }
-
-        public void SetBaseUnitStatus(BaseUnitStatus baseStatus)
-        {
-            _baseHP = baseStatus._baseHP;
-            _baseAttack = baseStatus._baseAttack;
-            _baseSpeed = baseStatus._baseSpeed;
-
-            ResourceId = baseStatus.ResourceId;
-            
-            _levelHP = baseStatus._levelHP;
-            _levelAttack = baseStatus._levelAttack;
-            _levelSpeed = baseStatus._levelSpeed;
-            _percentHPByLevel = baseStatus._percentHPByLevel;
-            _percentAttackByLevel = baseStatus._percentAttackByLevel;
-            _percentSpeedByLevel = baseStatus._percentSpeedByLevel;
-            _goldDropCount = baseStatus._goldDropCount;
-            
-            _weaponEquiped = baseStatus._weaponEquiped;
-            _grenadeEquiped = baseStatus._grenadeEquiped;
-            
-            _currentHP = new ReactiveProperty<float>(_baseHP  + (_levelHP * _percentHPByLevel * _baseHP));
+            IsDie = new ReactiveProperty<bool>(false);
         }
 
         public void GetDamage(float damage)

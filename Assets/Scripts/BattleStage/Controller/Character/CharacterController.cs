@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BattleStage.Domain;
 using UnityEngine;
 using UniRx;
@@ -31,6 +32,10 @@ namespace BattleStage.Controller.Character
 
         [SerializeField]
         private Text _hpText;
+
+        public Vector3 ClickPosition = Vector3.zero;
+
+        public Camera CurrentCamera;
         
         /// <summary>
         /// Local value for moving
@@ -48,7 +53,11 @@ namespace BattleStage.Controller.Character
 
         public void InitCharacterData(Unit unit, List<Weapon> weapons)
         {
-            _playerUnitStatus.SetBaseUnitStatus(unit.ToPlayerStatus(weapons));
+            var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
+            Weapon granade = null;
+            if(unit.BaseGranedaID != null)
+                granade = weapons.FirstOrDefault(d => d.ID == unit.BaseGranedaID);
+            _playerUnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
             _playerUnitStatus.CurrentHP.Subscribe(hpValue =>
             {
                 _hpText.text = hpValue.ToString();
@@ -66,13 +75,19 @@ namespace BattleStage.Controller.Character
         
         public void Update () 
         {
-            if(_joystick == null || _playerUnitStatus == null || _playerUnitStatus.IsDie.Value)
+            if(_joystick == null || _playerUnitStatus == null)
+                return;
+
+            if (_playerUnitStatus.IsDie.Value)
                 return;
             
             playerPosition = transform.position;
+
+            if(Input.GetMouseButtonDown(0) && Input.mousePosition.y > 210)
+                ClickPosition = CurrentCamera.ScreenToViewportPoint(Input.mousePosition);
             
             //Flip Character
-            transform.localScale = new Vector3(_joystick.Horizontal >= 0 ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(ClickPosition.x >= 0.5 ? 1 : -1, 1, 1);
         
             // Play animation run when joystick pressing
             Animator.SetBool("Run", _joystick.Horizontal != 0 || _joystick.Vertical != 0);
@@ -94,12 +109,12 @@ namespace BattleStage.Controller.Character
             
             var damgeValue = damgeComponent.DamageValue;
             _playerUnitStatus.GetDamage(damgeValue);
-			
+            DestroyObject(other.gameObject);
+            
             if (_playerUnitStatus.IsDie.Value)
             {
                 Animator.SetBool("DieFront",true);
                 Animator.speed = 1f;
-                DestroyObject(other.gameObject);
             }
         }
         

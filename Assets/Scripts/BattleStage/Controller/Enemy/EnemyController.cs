@@ -18,29 +18,42 @@ namespace BattleStage.Controller.Enemy
 		
 		[SerializeField]
 		private GameObject _bulletGameObject;
+
+		[SerializeField]
+		private AudioClip _audioThrowPosion;
 		
 		private Transform _followedTarget;
 		
 		private Vector3 scaleVector3 = Vector3.one;
 
+		[SerializeField]
+		private CapsuleCollider _capsuleCollider;
+
 		private bool _isReachedToTarget;
+
+		private float _rangeAttack = 300f;
 		
 		void Start()
 		{
 			_followedTarget = GameObject.FindGameObjectWithTag(TagFacade.PLAYER_TAG).transform;
-			
-			Observable.Interval(new TimeSpan(0, 0, 2, 500)).Where(_ => _isReachedToTarget).Subscribe(_ =>
+
+			_rangeAttack = UnityEngine.Random.Range(300, 500);
+				 
+			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
 			{
+				if(_enemyStatus.IsDie.Value) return;
+				
 				var pos = gameObject.transform.position;
-				pos.y += 20;
+				pos.y += 150;
 				var bullet = Instantiate(_bulletGameObject,pos,Quaternion.identity) as GameObject;
 				bullet.GetComponent<Damage>().DamageValue = _enemyStatus.Attack;
 				
 				var heading = _followedTarget.position - transform.position;
 				var distance = heading.magnitude;
 				var directionForBullet = heading / distance; // This is now the normalized direction.
-				Debug.Log("directionForBullet : " + directionForBullet);
 				bullet.GetComponent<MovingController>().Dicrection = directionForBullet;
+				
+				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);
 			}).AddTo(this);
 		}
 		
@@ -53,10 +66,10 @@ namespace BattleStage.Controller.Enemy
 			var offset = _enemyStatus.Speed * direction * Time.deltaTime;
 
 			var newPosition = transform.position + offset;
-
+			newPosition.z = 0;
 			var targetPosition = _followedTarget.position;
 
-			_isReachedToTarget = Vector2.Distance(targetPosition, newPosition) <= 300f;
+			_isReachedToTarget = Vector2.Distance(targetPosition, newPosition) <= _rangeAttack;
 			Animator.SetBool("Run", !_isReachedToTarget);
 			
 			//Flip Character
@@ -91,6 +104,7 @@ namespace BattleStage.Controller.Enemy
 			{
 				Animator.SetBool("DieFront",true);
 				Animator.speed = 1f;
+				_capsuleCollider.enabled = false;
 				DestroyObject(this.gameObject,3f);
 			}
 		}
