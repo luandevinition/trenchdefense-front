@@ -3,6 +3,7 @@ using System.Linq;
 using BattleStage.Domain;
 using UnityEngine;
 using UniRx;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unit = BattleStage.Domain.Unit;
 
@@ -51,6 +52,10 @@ namespace BattleStage.Controller.Character
         private readonly Subject<UniRx.Unit> _showRetryUI = new Subject<UniRx.Unit>();
 
 
+        private float _offsetValue = 200f;
+        private float _offsetratio = 0.225f;
+        
+        
         public void InitCharacterData(Unit unit, List<Weapon> weapons)
         {
             var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
@@ -63,6 +68,8 @@ namespace BattleStage.Controller.Character
                 _hpText.text = hpValue.ToString();
             }).AddTo(this);
 
+            _offsetValue = Screen.height * 0.225f;
+            Debug.Log("offset : " + _offsetValue);
             _playerUnitStatus.IsDie.Subscribe(isDie =>
             {
                 if (isDie)
@@ -83,7 +90,7 @@ namespace BattleStage.Controller.Character
             
             playerPosition = transform.position;
 
-            if(Input.GetMouseButtonDown(0) && Input.mousePosition.y > 210)
+            if(Input.GetMouseButtonDown(0) && Input.mousePosition.y > _offsetValue)
                 ClickPosition = CurrentCamera.ScreenToViewportPoint(Input.mousePosition);
             
             //Flip Character
