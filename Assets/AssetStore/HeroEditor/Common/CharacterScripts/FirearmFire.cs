@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.HeroEditor.Common.Enums;
 using Assets.MilitaryHeroes.Scripts.Enums;
+using BattleStage.Domain;
 using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -85,7 +86,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             _fireTime = Time.time;
 
             Character.Firearm.AmmoShooted++;
-            CreateBullet();
+            CreateBullet(Character.UnitStatus.Attack);
             FireMuzzlePlay();
             GetComponent<AudioSource>().PlayOneShot(Character.Firearm.Params.SoundFire, 0.5f);
             
@@ -172,7 +173,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             }
         }
 
-        private void CreateBullet() // TODO: Preload and caching prefabs is recommended to improve game performance
+        private void CreateBullet(float Damage = 1) // TODO: Preload and caching prefabs is recommended to improve game performance
         {
             if (SceneManager.GetActiveScene().name.Contains("CharacterEditor")) return; // Don't create bullets in editor scene
 
@@ -189,7 +190,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");
                 bullet.GetComponent<Rigidbody>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right + spread)
                     * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
-
+                bullet.GetComponent<Damage>().DamageValue = Damage;
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;
 
                 foreach (var r in bullet.Renderers)

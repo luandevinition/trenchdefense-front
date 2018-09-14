@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.HeroEditor.Common.Data;
 using Assets.HeroEditor.Common.Enums;
+using BattleStage.Domain;
 using HeroEditor.Common;
 using HeroEditor.Common.Enums;
 using UnityEngine;
+using CharacterController = BattleStage.Controller.Character.CharacterController;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
 {
@@ -18,6 +20,8 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public MeleeWeapon MeleeWeapon;
         public Firearm Firearm;
         public BowShooting BowShooting;
+
+	    public BaseUnitStatus UnitStatus;
 
 	    /// <summary>
         /// Called automatically when something was changed.
