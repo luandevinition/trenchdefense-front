@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57761d6049db2491f8c63b06819561c9, type: 3}
   m_Name: TitleTransition
   m_EditorClassIdentifier: 
-  _pagePrefab: {fileID: 0}
+  _pagePrefab: {fileID: 1324590454716954, guid: 83370ad8d9d0645e4aafad78b6ae3bb9,
+    type: 2}
   _isLongVersionLoading:
     value: 0

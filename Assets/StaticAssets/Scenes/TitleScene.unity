@@ -220,10 +220,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686bb7f2367bb4a7eb3931767a170ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingLongs: []
-  _loadingShort: {fileID: 0}
+  _loadingLongs:
+  - {fileID: 11400000, guid: b80232d9266da432a84169c044ae8ae6, type: 2}
+  _loadingShort: {fileID: 11400000, guid: 8d414e662cae14735bcdbf4cf2dfb1e7, type: 2}
   _uiDebug: 0
   _pageTransitionResourcePath: Page
+  _initializePage: {fileID: 11400000, guid: 57eee1a324e634d3d84c714ce9a09341, type: 2}
 --- !u!4 &1521693211
 Transform:
   m_ObjectHideFlags: 0
