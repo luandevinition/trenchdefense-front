@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400cb3d9651a24437b5123e76eb6cc78, type: 3}
   m_Name: LoadingShortTransition
   m_EditorClassIdentifier: 
-  _pagePrefab: {fileID: 1558378860219762, guid: 5327e5b80dbf5482c8786d513e0d8935,
+  _pagePrefab: {fileID: 1924301267589574, guid: 08709f43c317c4be09380ea940e748d8,
     type: 2}
   _displayLog: 0

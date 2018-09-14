@@ -52,6 +52,8 @@ namespace UI.Scripts.Route
         /// </summary>
         private static bool _gameBooted = false;
 
+        [SerializeField] private PageTransition _initializePage;
+
     #if UNITY_EDITOR
         /// <summary>
         /// ゲームが起動したつもりになる。
@@ -202,19 +204,12 @@ namespace UI.Scripts.Route
         {
             if (_uiDebug || _currentPageTransition != null || _gameBooted) return;
 
+            if (_initializePage != null)
+            {
+                StartCoroutine(Transition(_initializePage));
+            }
+
             _gameBooted = true;
-
-            RestartGame();
-        }
-
-        /// <summary>
-        /// Gameを初期状態からリスタートする
-        /// </summary>
-        public void RestartGame()
-        {
-            StopTransition();
-            PopupController.Instance.StopTransition();
-            PopupController.Instance.CloseAllImmediately();
         }
 
         /// <summary>

@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5a7a7ac7f7248efb077265afdd4f8e, type: 3}
   m_Name: LoadingLongTransition
   m_EditorClassIdentifier: 
-  _pagePrefab: {fileID: 0}
+  _pagePrefab: {fileID: 1946886755735582, guid: 9d466d91c45f8459c889d377985ddee4,
+    type: 2}
   _displayLog: 0
   _config:
     Id: 1

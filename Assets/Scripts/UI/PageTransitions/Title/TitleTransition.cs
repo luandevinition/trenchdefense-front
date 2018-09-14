@@ -1,5 +1,7 @@
 using System.Collections;
 using UI.Scripts.PageTransitions;
+using UI.ViewModels.Pages.Title;
+using UI.Views.Pages.Title;
 
 namespace UI.PageTransitions.Title
 {
@@ -20,6 +22,8 @@ namespace UI.PageTransitions.Title
 
         public override void BindLoadedModels()
         {
+            var viewModel = new TitleViewModel();
+            _pageInstance.GetComponent<TitleView>().Bind(viewModel);
         }
     }
 }
