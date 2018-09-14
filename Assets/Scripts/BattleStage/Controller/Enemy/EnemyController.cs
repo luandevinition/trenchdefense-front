@@ -102,8 +102,9 @@ namespace BattleStage.Controller.Enemy
 			
 			if (_enemyStatus.IsDie.Value)
 			{
+			    Animator.speed = 1f;
+				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);
-				Animator.speed = 1f;
 				_capsuleCollider.enabled = false;
 				DestroyObject(this.gameObject,3f);
 			}
