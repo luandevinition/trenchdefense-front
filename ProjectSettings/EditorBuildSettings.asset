@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/StaticAssets/Scenes/BattleScene.unity
     guid: 8e67726d9efd3459e8fa776b01ed6cc5
+  - enabled: 1
+    path: Assets/AssetStore/HeroEditor/MilitaryHeroes/Scenes/CharacterEditor [MH].unity
+    guid: 5f01e010822045899d9457b71a8a1492
+  - enabled: 1
+    path: Assets/AssetStore/HeroEditor/MilitaryHeroes/Scenes/TestRoom [MH].unity
+    guid: 6f140bac83604182b560d2a0af8668a7
