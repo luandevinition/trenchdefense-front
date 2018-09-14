@@ -38,7 +38,7 @@ namespace BattleStage.Controller
         private readonly List<List<Zombie>> _waveZombies = new List<List<Zombie>>();
         private int baseWavePower = 1000;
         private int currentWave = 1;
-        private int waveTime = 20;
+        private int waveTime = 30;
         
         void Start()
         {
@@ -96,7 +96,7 @@ namespace BattleStage.Controller
 
         private void CreateWaveData()
         {
-            int zombieCount = (int)((baseWavePower * currentWave * 0.2f) / 100f);
+            int zombieCount = (int)((baseWavePower * currentWave * 0.1f) / 100f);
             int currentZombieSpawn = 0;
             int currentIndex = 0;
             while (currentZombieSpawn < zombieCount)

@@ -90,8 +90,10 @@ namespace BattleStage.Controller.Character
             
             playerPosition = transform.position;
 
-            if(Input.GetMouseButtonDown(0) && Input.mousePosition.y > _offsetValue)
-                ClickPosition = CurrentCamera.ScreenToViewportPoint(Input.mousePosition);
+            Touch[] myTouches = Input.touches;  
+            
+            if(myTouches.Length > 1 && myTouches.Last().position.y > _offsetValue)
+                ClickPosition = CurrentCamera.ScreenToViewportPoint(myTouches.Last().position);
             
             //Flip Character
             transform.localScale = new Vector3(ClickPosition.x >= 0.5 ? 1 : -1, 1, 1);
