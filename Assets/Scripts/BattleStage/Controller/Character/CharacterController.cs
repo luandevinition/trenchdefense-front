@@ -32,7 +32,7 @@ namespace BattleStage.Controller.Character
         }
 
         [SerializeField]
-        private Text _hpText;
+        private Image _hpImage;
 
         public Vector3 ClickPosition = Vector3.zero;
 
@@ -65,7 +65,7 @@ namespace BattleStage.Controller.Character
             _playerUnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
             _playerUnitStatus.CurrentHP.Subscribe(hpValue =>
             {
-                _hpText.text = hpValue.ToString();
+                _hpImage.fillAmount = hpValue/_playerUnitStatus.HP;
             }).AddTo(this);
 
             _offsetValue = Screen.height * 0.225f;

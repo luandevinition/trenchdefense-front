@@ -2090,7 +2090,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656945616454280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2500, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4515406330313288}
@@ -3336,7 +3336,7 @@ MonoBehaviour:
   Animator: {fileID: 95076920843000736}
   _playerUnitStatus: {fileID: 114808599018445708}
   _joystick: {fileID: 0}
-  _hpText: {fileID: 0}
+  _hpImage: {fileID: 0}
   ClickPosition: {x: 0, y: 0, z: 0}
   CurrentCamera: {fileID: 0}
 --- !u!114 &114236680741511330
@@ -3630,7 +3630,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 50.36
+  m_Radius: 20
   m_Height: 200
   m_Direction: 1
   m_Center: {x: 0, y: 80.69, z: 0}
