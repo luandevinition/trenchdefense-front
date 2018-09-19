@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using EZ_Pooling;
+using UnityEngine;
 
 namespace Utils
 {
@@ -6,10 +8,16 @@ namespace Utils
 	{
 		public float SecondsForDestroy = 1f;
 	
-		// Use this for initialization
-		void Start () {
-			DestroyObject(gameObject,SecondsForDestroy);	
+		void OnSpawned()
+		{
+			StartCoroutine(DelayBeforeDespawn());
 		}
-	
+		
+
+		IEnumerator DelayBeforeDespawn()
+		{
+			yield return new WaitForSeconds(SecondsForDestroy);
+			EZ_PoolManager.Despawn(gameObject.transform);
+		}
 	}
 }

@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Assets.HeroEditor.Common.Data;
+using Assets.HeroEditor.Common.EditorScripts;
 using BattleStage.Domain;
+using EZ_Pooling;
+using HeroEditor.Common;
+using HeroEditor.Common.Enums;
 using UnityEngine;
 using UniRx;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unit = BattleStage.Domain.Unit;
+using CharacterHM = Assets.HeroEditor.Common.CharacterScripts.Character;
 
 namespace BattleStage.Controller.Character
 {
@@ -34,6 +41,14 @@ namespace BattleStage.Controller.Character
         [SerializeField]
         private Image _hpImage;
 
+        [SerializeField]
+        public SpriteCollection SpriteCollection;
+
+        public FirearmCollection FirearmCollection;
+        
+        
+        private CharacterHM Character;
+        
         public Vector3 ClickPosition = Vector3.zero;
 
         public Camera CurrentCamera;
@@ -44,7 +59,7 @@ namespace BattleStage.Controller.Character
         private Vector3 moveVector = Vector3.one;
         private Vector3 playerPosition = Vector3.one;
 
-        public IObservable<UniRx.Unit> ShowRetryUI
+        public UniRx.IObservable<UniRx.Unit> ShowRetryUI
         {
             get { return _showRetryUI.AsObservable(); }    
         }
@@ -109,6 +124,8 @@ namespace BattleStage.Controller.Character
             transform.position = moveVector;
         }
 		
+       
+        
         
         public void OnTriggerEnter(Collider other)
         {
@@ -117,8 +134,8 @@ namespace BattleStage.Controller.Character
                 return;
             
             var damgeValue = damgeComponent.DamageValue;
-            _playerUnitStatus.GetDamage(damgeValue);
-            DestroyObject(other.gameObject);
+            _playerUnitStatus.GetDamage(other.gameObject.transform.position, damgeValue);
+            EZ_PoolManager.Despawn(other.transform);
             
             if (_playerUnitStatus.IsDie.Value)
             {
@@ -127,6 +144,46 @@ namespace BattleStage.Controller.Character
             }
         }
         
+        protected void SetFirearmParams(string weaponName)
+        {
+            if (FirearmCollection.Firearms.Count(i => i.Name == weaponName) != 1) throw new Exception("Please check firearms params for: " + weaponName);
+
+            ((CharacterHM) Character).Firearm.Params = FirearmCollection.Firearms.Single(i => i.Name == weaponName);
+        }
+        
+        
+        public void EquipMeleeWeapon1H(string sname, string collection)
+        {
+            Character.PrimaryMeleeWeapon = SpriteCollection.MeleeWeapon1H.Single(i => i.Name == sname && i.Collection == collection).Sprite;
+            Character.WeaponType = WeaponType.Melee1H;
+            Character.Initialize();
+        }
+
+        public void EquipShield(string sname, string collection)
+        {
+            Character.Shield = SpriteCollection.Shield.Single(i => i.Name == sname && i.Collection == collection).Sprite;
+            Character.Initialize();
+        }
+
+        public void EquipBow(string sname, string collection)
+        {
+            Character.Bow = SpriteCollection.Bow.Single(i => i.Name == sname && i.Collection == collection).Sprites;
+            Character.Initialize();
+        }
+
+        public void EquipArmor(string sname, string collection)
+        {
+            Character.Armor = SpriteCollection.Armor.Single(i => i.Name == sname && i.Collection == collection).Sprites;
+            Character.Initialize();
+        }
+
+        public void EquipHelmet(string sname, string collection)
+        {
+            Character.Helmet = SpriteCollection.Helmet.Single(i => i.Name == sname && i.Collection == collection).Sprite;
+            Character.HairMaskType = HairMaskType.HelmetMask; // None, HelmetMask, HeadMask
+            Character.HelmetMask = SpriteCollection.HelmetMask.Single(i => i.Name == sname && i.Collection == collection).Sprite;
+            Character.Initialize();
+        }
         
     }
 }

@@ -3182,9 +3182,10 @@ MonoBehaviour:
   Character: {fileID: 114743661297054070}
   ArmL: {fileID: 4625410009188358}
   ArmR: {fileID: 4285160315435988}
-  FireButton: 324
   ReloadButton: 114
-  FixHorizontal: 0
+  _fireButtonView: {fileID: 0}
+  _characterController: {fileID: 0}
+  _isPlayer: 0
 --- !u!114 &114463461891502388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3458,6 +3459,7 @@ MonoBehaviour:
   MeleeWeapon: {fileID: 114941328265059164}
   Firearm: {fileID: 114506840512310626}
   BowShooting: {fileID: 114637728138811092}
+  UnitStatus: {fileID: 0}
 --- !u!114 &114780099477631726
 MonoBehaviour:
   m_ObjectHideFlags: 1

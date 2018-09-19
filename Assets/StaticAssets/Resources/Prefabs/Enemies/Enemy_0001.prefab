@@ -488,9 +488,9 @@ GameObject:
   - component: {fileID: 114839901034270286}
   - component: {fileID: 114720452145337270}
   - component: {fileID: 114280832199768934}
+  - component: {fileID: 114905459778897602}
   - component: {fileID: 54150675128785388}
   - component: {fileID: 136981173914673948}
-  - component: {fileID: 114905459778897602}
   - component: {fileID: 82832932796998564}
   m_Layer: 0
   m_Name: Enemy_0001
@@ -3683,6 +3683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee171a7a5a0488abb7feeeae06e58e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bloodGameObjectAnimation: {fileID: 1036343012587488, guid: dbe2c4ae45c27496dab22ad41aa333a0,
+    type: 2}
 --- !u!136 &136981173914673948
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3692,10 +3694,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 20.12
-  m_Height: 211.3
+  m_Radius: 22
+  m_Height: 200
   m_Direction: 1
-  m_Center: {x: 0, y: 90.7, z: 0}
+  m_Center: {x: 0, y: 91, z: 0}
 --- !u!198 &198256171139121750
 ParticleSystem:
   m_ObjectHideFlags: 1
