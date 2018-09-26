@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.HeroEditor.Common.CharacterScripts;
 using BattleStage.Domain;
+using EZ_Pooling;
 using Facade;
 using UniRx;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace BattleStage.Controller.Enemy
 				
 				var pos = gameObject.transform.position;
 				pos.y += 150;
-				var bullet = Instantiate(_bulletGameObject,pos,Quaternion.identity) as GameObject;
+				var bullet = EZ_PoolManager.Spawn(_bulletGameObject.transform,pos,Quaternion.identity);
 				bullet.GetComponent<Damage>().DamageValue = _enemyStatus.Attack;
 				
 				var heading = _followedTarget.position - transform.position;
@@ -97,8 +98,8 @@ namespace BattleStage.Controller.Enemy
 			if(_enemyStatus.IsDie.Value || damgeComponent.IsEnemyDamage)
 				return;
 			
-			var damgeVlaue = damgeComponent.DamageValue;
-			_enemyStatus.GetDamage(damgeVlaue);
+			var damgeValue = damgeComponent.DamageValue;
+			_enemyStatus.GetDamage(other.gameObject.transform.position, damgeValue);
 			
 			if (_enemyStatus.IsDie.Value)
 			{

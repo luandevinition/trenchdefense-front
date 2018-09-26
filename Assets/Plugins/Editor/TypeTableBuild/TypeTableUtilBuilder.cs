@@ -29,7 +29,7 @@ namespace Utils
 		/// ObjectToTypeId
 		/// </summary>
 		/// <returns>型ID</returns>
-		/// <param name=""obj"">モデル</param>
+		/// <param name=""obj"">Obj to convert</param>
 		public static uint ObjectToTypeId(IExtensible obj)
 		{
 			System.Type type = obj.GetType();

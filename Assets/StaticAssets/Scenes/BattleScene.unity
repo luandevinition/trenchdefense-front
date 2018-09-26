@@ -1868,9 +1868,12 @@ MonoBehaviour:
   - {fileID: 171041155}
   - {fileID: 315345917}
   - {fileID: 1362536546}
+  - {fileID: 1290865445}
+  - {fileID: 1146206962}
   _characterUnitStatus: {fileID: 289678018}
   _uIRetry: {fileID: 606304458}
   _backgroundMusic: {fileID: 8300000, guid: adb96177f30c01745bf992c263182ee0, type: 3}
+  _darknessUIGameObject: {fileID: 0}
 --- !u!1 &156670510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,11 +2042,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 171041154}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5597, y: 1816, z: 0}
+  m_LocalPosition: {x: -2679, y: 1816, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &176084467
 GameObject:
@@ -2326,68 +2329,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &196054320
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1792954055}
-    m_Modifications:
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114325108912663054, guid: 3d503c54789094fbb91e98c023d36bf3,
-        type: 2}
-      propertyPath: _fireButtonView
-      value: 
-      objectReference: {fileID: 1241629791}
-    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
-        type: 2}
-      propertyPath: _joystick
-      value: 
-      objectReference: {fileID: 419303121}
-    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
-        type: 2}
-      propertyPath: _hpText
-      value: 
-      objectReference: {fileID: 887761269}
-    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
-        type: 2}
-      propertyPath: CurrentCamera
-      value: 
-      objectReference: {fileID: 1676674450}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &196609563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,6 +3033,80 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &228617414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 228617415}
+  - component: {fileID: 228617417}
+  - component: {fileID: 228617416}
+  m_Layer: 5
+  m_Name: Value
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &228617415
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228617414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 575613772}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 56.63, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &228617416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228617414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9871935, g: 1, b: 0.9999693, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 7c5d95bae2874ac48d60420c08c340cd, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Ammo
+--- !u!222 &228617417
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228617414}
 --- !u!1 &242840032
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,7 +3330,7 @@ SpriteRenderer:
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
     type: 2}
-  m_PrefabInternal: {fileID: 196054320}
+  m_PrefabInternal: {fileID: 1379602071}
   m_Script: {fileID: 11500000, guid: f5fa117e5a26448d9dc50a5c7e0735d0, type: 3}
 --- !u!1 &290045708
 GameObject:
@@ -3773,7 +3788,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &324429600
 GameObject:
@@ -6209,11 +6224,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 528307004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -398, y: 1567, z: 0}
+  m_LocalPosition: {x: -8273, y: 1567, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531368014
 GameObject:
@@ -7156,6 +7171,1107 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &575613771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 575613772}
+  - component: {fileID: 575613774}
+  - component: {fileID: 575613773}
+  m_Layer: 5
+  m_Name: Ammo/Granade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &575613772
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 575613771}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_Children:
+  - {fileID: 228617415}
+  m_Father: {fileID: 1014337984}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -83.100006, y: -3.6000977}
+  m_SizeDelta: {x: 80, y: 36.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &575613773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 575613771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 8e0e38bcfb02141fab2105ba38306ff2, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &575613774
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 575613771}
+--- !u!1 &578117229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1901072831315744, guid: 7ed71d8ea3a348a2a96a6b31fc0ea3de,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 578117230}
+  - component: {fileID: 578117231}
+  m_Layer: 0
+  m_Name: FirearmCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578117230
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4755743461975192, guid: 7ed71d8ea3a348a2a96a6b31fc0ea3de,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578117229}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1139.4923, y: 865.51575, z: 56.743477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1592181831}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &578117231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114495671297107170, guid: 7ed71d8ea3a348a2a96a6b31fc0ea3de,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578117229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94f829c044f42c9bcf15980e902d7ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Firearms:
+  - Name: AK-47
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 600
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.48, y: 0.28}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.66, y: 0.24}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 19a9c0e052f9406c886a2604e072785b, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: f9d8471a7da04ffeab36c60b7dbed7a4, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: a3993b923f1f4a7eb7b30b93a034e699, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: AK-47 [Golden]
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 600
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.48, y: 0.28}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.66, y: 0.24}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 19a9c0e052f9406c886a2604e072785b, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: f9d8471a7da04ffeab36c60b7dbed7a4, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: a3993b923f1f4a7eb7b30b93a034e699, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: DesertEagle
+    FirearmTexture: {fileID: 0}
+    Type: 2
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 240
+    MagazineCapacity: 7
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.19, y: 0.41}
+    MagazinePosition: {x: 0.12, y: -0.04}
+    FireMuzzlePosition: {x: 0.79, y: 0.29}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e3feac30d3cf4675b2a5c77f69eee970, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: c9476dec77fa4208a1e7a29e1d29d689, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 336543d9d3b64a9e95dee71b191ceb03, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: SandFalcon
+    FirearmTexture: {fileID: 0}
+    Type: 2
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 260
+    MagazineCapacity: 9
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.32, y: 0.24}
+    MagazinePosition: {x: 0.16, y: -0.02}
+    FireMuzzlePosition: {x: 0.84, y: 0.32}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e3feac30d3cf4675b2a5c77f69eee970, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: c9476dec77fa4208a1e7a29e1d29d689, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 336543d9d3b64a9e95dee71b191ceb03, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: USP
+    FirearmTexture: {fileID: 0}
+    Type: 2
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 350
+    MagazineCapacity: 17
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.15, y: 0.45}
+    MagazinePosition: {x: 0.15, y: 0}
+    FireMuzzlePosition: {x: 0.75, y: 0.35}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: bba151180bb04d25a6d2205d2b8f393d, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 08371b2ee6e34ac0bed1213a9d56bbb4, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 62982d86a8854dcfb9c458e7d3417c83, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: USP [Silencer]
+    FirearmTexture: {fileID: 0}
+    Type: 2
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 350
+    MagazineCapacity: 17
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.15, y: 0.45}
+    MagazinePosition: {x: 0.15, y: 0}
+    FireMuzzlePosition: {x: 1.28, y: 0.35}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: fb3af6671497408fbe5cf0b1e6b2c39d, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 08371b2ee6e34ac0bed1213a9d56bbb4, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 62982d86a8854dcfb9c458e7d3417c83, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: M-16 [Paint]
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.3}
+    MagazinePosition: {x: 0.51, y: 0}
+    FireMuzzlePosition: {x: 1.66, y: 0.31}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2164ce31492c4cdda9baf570ba0ba3fc, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-249
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 100
+    Recoil: 0.1
+    Accuracy: 0.9
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.3}
+    MagazinePosition: {x: 0.53, y: 0.1}
+    FireMuzzlePosition: {x: 2.08, y: 0.32}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: ad192bec8bbe4209bb9abd45b91e8119, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 887ae42d5e014151ada4ae34cbed6d21, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 99d7357ddd944839b6e52119613d7a6f, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: HellBlade
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 100
+    Recoil: 0.1
+    Accuracy: 0.9
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.25, y: 0.3}
+    MagazinePosition: {x: 0.54, y: -0.04}
+    FireMuzzlePosition: {x: 2.3, y: 0.22}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: ad192bec8bbe4209bb9abd45b91e8119, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 887ae42d5e014151ada4ae34cbed6d21, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 99d7357ddd944839b6e52119613d7a6f, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: HMG
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 100
+    Recoil: 0.1
+    Accuracy: 0.9
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.48}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 2.02, y: 0.35}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: ad192bec8bbe4209bb9abd45b91e8119, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 887ae42d5e014151ada4ae34cbed6d21, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 99d7357ddd944839b6e52119613d7a6f, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-4 [Silencer]
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.37}
+    MagazinePosition: {x: 0.52, y: 0}
+    FireMuzzlePosition: {x: 1.7, y: 0.3}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e67a99597a36468fa894a8fae32c6cc1, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-4Collimator
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.37}
+    MagazinePosition: {x: 0.52, y: 0}
+    FireMuzzlePosition: {x: 1.7, y: 0.3}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e67a99597a36468fa894a8fae32c6cc1, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-4Laser
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.37}
+    MagazinePosition: {x: 0.52, y: 0}
+    FireMuzzlePosition: {x: 1.7, y: 0.3}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e67a99597a36468fa894a8fae32c6cc1, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-4Stich
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.37}
+    MagazinePosition: {x: 0.52, y: 0}
+    FireMuzzlePosition: {x: 1.7, y: 0.3}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e67a99597a36468fa894a8fae32c6cc1, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: M-47
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 700
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.51, y: 0.3}
+    MagazinePosition: {x: 0.56, y: 0.07}
+    FireMuzzlePosition: {x: 1.87, y: 0.28}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e67a99597a36468fa894a8fae32c6cc1, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 2400ede432394afab905a73b600461b8, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: f483030dac094389aea610d53c50d3bd, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: MAC-10
+    FirearmTexture: {fileID: 0}
+    Type: 3
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 900
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.12, y: 0.4}
+    MagazinePosition: {x: 0.13, y: 0}
+    FireMuzzlePosition: {x: 0.9, y: 0.33}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 8708dac01d5a4639b42d1efc92d53270, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3c09fea81c684f2192a9d2b9ff46a314, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c21f81e002e2490ca39d0a29a2157aaf, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: Mark-1 [Paint]
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.37, y: 0.31}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.48, y: 0.25}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: Mark-2 [Paint]
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 1000
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.47, y: 0.23}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.44, y: 0.27}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: Mark-3
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 1000
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.15, y: 0.4}
+    MagazinePosition: {x: 0.06, y: 0.06}
+    FireMuzzlePosition: {x: 0.82, y: 0.33}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: MP-40
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.59, y: 0.39}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.28, y: 0.28}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: TomG
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.23, y: 0.32}
+    MagazinePosition: {x: 0.59, y: 0.06}
+    FireMuzzlePosition: {x: 1.55, y: 0.28}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: AR-25
+    FirearmTexture: {fileID: 0}
+    Type: 4
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.24, y: 0.35}
+    MagazinePosition: {x: 0.51, y: 0}
+    FireMuzzlePosition: {x: 1.4, y: 0.29}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: MP-5
+    FirearmTexture: {fileID: 0}
+    Type: 6
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.39, y: 0.39}
+    MagazinePosition: {x: 0.5, y: 0.15}
+    FireMuzzlePosition: {x: 1.13, y: 0.33}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 2afe0b3dadd24637b8e078b9c10153fd, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3d208c48a2014406bd70ef568374968a, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c374f7eed3334c01a60c262007e92da3, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: Revolver
+    FirearmTexture: {fileID: 0}
+    Type: 1
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 1
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 200
+    MagazineCapacity: 6
+    Recoil: 0.1
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.3, y: 0.32}
+    MagazinePosition: {x: 0, y: 0}
+    FireMuzzlePosition: {x: 0.9, y: 0.37}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e3feac30d3cf4675b2a5c77f69eee970, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: c9476dec77fa4208a1e7a29e1d29d689, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 336543d9d3b64a9e95dee71b191ceb03, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: RPG
+    FirearmTexture: {fileID: 0}
+    Type: 9
+    HoldType: 1
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 60
+    MagazineCapacity: 1
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1000
+    SlidePosition: {x: 0.46, y: 0.3}
+    MagazinePosition: {x: 0.5, y: 0}
+    FireMuzzlePosition: {x: 1.3, y: 0.32}
+    FireMuzzlePrefab: {fileID: 198582016570033758, guid: 607e2376eb244ede866c744620eb10d3,
+      type: 2}
+    ProjectilePrefab: {fileID: 114663788644885588, guid: 478588f4d4eb41fda4dec576221e6463,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 0f6029584fcb424d9d2b717fd6f7096d, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: f27971b7b89c4de78bb3b4fa6f5c4e44, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 4f8ff5bd2538443a8d89ea07b1251d19, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: RocketLauncher
+    FirearmTexture: {fileID: 0}
+    Type: 9
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 120
+    MagazineCapacity: 3
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1000
+    SlidePosition: {x: 0.46, y: 0.3}
+    MagazinePosition: {x: 0.5, y: 0.23}
+    FireMuzzlePosition: {x: 1.75, y: 0.33}
+    FireMuzzlePrefab: {fileID: 198582016570033758, guid: 607e2376eb244ede866c744620eb10d3,
+      type: 2}
+    ProjectilePrefab: {fileID: 114663788644885588, guid: 478588f4d4eb41fda4dec576221e6463,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 0f6029584fcb424d9d2b717fd6f7096d, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: f27971b7b89c4de78bb3b4fa6f5c4e44, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 4f8ff5bd2538443a8d89ea07b1251d19, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: SRL
+    FirearmTexture: {fileID: 0}
+    Type: 9
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 150
+    MagazineCapacity: 12
+    Recoil: 0.05
+    Accuracy: 0.95
+    MuzzleVelocity: 1000
+    SlidePosition: {x: 0.46, y: 0.3}
+    MagazinePosition: {x: 0.64, y: 0.4}
+    FireMuzzlePosition: {x: 1.36, y: 0.36}
+    FireMuzzlePrefab: {fileID: 198582016570033758, guid: 607e2376eb244ede866c744620eb10d3,
+      type: 2}
+    ProjectilePrefab: {fileID: 114663788644885588, guid: 478588f4d4eb41fda4dec576221e6463,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 0f6029584fcb424d9d2b717fd6f7096d, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: f27971b7b89c4de78bb3b4fa6f5c4e44, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 4f8ff5bd2538443a8d89ea07b1251d19, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: bdbe696b29504f6bb801d242a2c46e1f, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: f7a7af76fe18466c8708271e8908981e, type: 2}
+    Meta: []
+  - Name: Scout
+    FirearmTexture: {fileID: 0}
+    Type: 7
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 60
+    MagazineCapacity: 5
+    Recoil: 0.1
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.44, y: 0.24}
+    MagazinePosition: {x: 0.54, y: 0.06}
+    FireMuzzlePosition: {x: 2.1, y: 0.24}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e0345ed57bf54e2287020e96ffdc2a27, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: d0401793ed8e459ab221be716da46574, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c3566ebafb5d473c8241eb480984bf61, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: 611cd8a7b76249d0abfbfe83d8fc0d39, type: 2}
+    Meta: []
+  - Name: Sheperd
+    FirearmTexture: {fileID: 0}
+    Type: 7
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 120
+    MagazineCapacity: 12
+    Recoil: 0.1
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.46, y: 0.21}
+    MagazinePosition: {x: 0.56, y: 0.06}
+    FireMuzzlePosition: {x: 2.02, y: 0.24}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: e0345ed57bf54e2287020e96ffdc2a27, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: d0401793ed8e459ab221be716da46574, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c3566ebafb5d473c8241eb480984bf61, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: 611cd8a7b76249d0abfbfe83d8fc0d39, type: 2}
+    Meta: []
+  - Name: Shotgun
+    FirearmTexture: {fileID: 0}
+    Type: 8
+    HoldType: 2
+    MagazineType: 1
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 0
+    FireRateInMinute: 60
+    MagazineCapacity: 12
+    Recoil: 0.075
+    Accuracy: 0.8
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.1, y: 0.35}
+    MagazinePosition: {x: 0.65, y: 0.06}
+    FireMuzzlePosition: {x: 1.31, y: 0.32}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 1e89335c9d9a42b0896df5b2236e818e, type: 3}
+    SoundClipIn: {fileID: 0}
+    SoundClipOut: {fileID: 0}
+    SoundLoad: {fileID: 8300000, guid: 3452cf6db04c440f8186524519d1c40a, type: 3}
+    SoundPump: {fileID: 8300000, guid: d17ed3d4145b43fe99c898baa60eee30, type: 3}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 7400000, guid: 2d71631bd0124422bfd97d702fe6b8a6, type: 2}
+    ReloadAnimation: {fileID: 7400000, guid: 611cd8a7b76249d0abfbfe83d8fc0d39, type: 2}
+    Meta:
+    - Spread=6
+  - Name: SPAS-12
+    FirearmTexture: {fileID: 0}
+    Type: 8
+    HoldType: 2
+    MagazineType: 1
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 240
+    MagazineCapacity: 8
+    Recoil: 0.075
+    Accuracy: 0.9
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.5, y: 0.37}
+    MagazinePosition: {x: 0.74, y: 0.14}
+    FireMuzzlePosition: {x: 1.38, y: 0.33}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 92879d4d07d44adbb10189def625a0c1, type: 3}
+    SoundClipIn: {fileID: 0}
+    SoundClipOut: {fileID: 0}
+    SoundLoad: {fileID: 8300000, guid: 94cd5c4ae76442679fdc68e12b2562c2, type: 3}
+    SoundPump: {fileID: 8300000, guid: 27629c1fe55c41919fd7399c3a30b3ed, type: 3}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 7400000, guid: 2d71631bd0124422bfd97d702fe6b8a6, type: 2}
+    ReloadAnimation: {fileID: 7400000, guid: 611cd8a7b76249d0abfbfe83d8fc0d39, type: 2}
+    Meta:
+    - Spread=4
+  - Name: SVD
+    FirearmTexture: {fileID: 0}
+    Type: 7
+    HoldType: 2
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 0
+    AutomaticLoad: 1
+    FireRateInMinute: 30
+    MagazineCapacity: 10
+    Recoil: 0.1
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.57, y: 0.29}
+    MagazinePosition: {x: 0.55, y: 0.04}
+    FireMuzzlePosition: {x: 2.12, y: 0.24}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: fb14c1503b4a490db5527e6613e5d797, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: af0576a727034bbbbcc4cedd79b085c2, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: 877bd5697b0847318716733656f6ba8c, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: 36ac64d1125f434586cf44864d89e459, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: 611cd8a7b76249d0abfbfe83d8fc0d39, type: 2}
+    Meta: []
+  - Name: UZI
+    FirearmTexture: {fileID: 0}
+    Type: 3
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 800
+    MagazineCapacity: 30
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.02, y: 0.36}
+    MagazinePosition: {x: 0.16, y: -0.18}
+    FireMuzzlePosition: {x: 0.64, y: 0.32}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 8708dac01d5a4639b42d1efc92d53270, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3c09fea81c684f2192a9d2b9ff46a314, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c21f81e002e2490ca39d0a29a2157aaf, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
+  - Name: NNT
+    FirearmTexture: {fileID: 0}
+    Type: 3
+    HoldType: 0
+    MagazineType: 0
+    LoadType: 0
+    AutomaticFire: 1
+    AutomaticLoad: 1
+    FireRateInMinute: 900
+    MagazineCapacity: 45
+    Recoil: 0.025
+    Accuracy: 0.95
+    MuzzleVelocity: 1500
+    SlidePosition: {x: 0.25, y: 0.15}
+    MagazinePosition: {x: 0.14, y: 0.14}
+    FireMuzzlePosition: {x: 0.87, y: 0.26}
+    FireMuzzlePrefab: {fileID: 198416100499550440, guid: f7d2d271405741c1a12c68a73936c306,
+      type: 2}
+    ProjectilePrefab: {fileID: 114844765844241412, guid: ee5a35562afa4d73b64cd5b1d3fb168c,
+      type: 2}
+    SoundFire: {fileID: 8300000, guid: 8708dac01d5a4639b42d1efc92d53270, type: 3}
+    SoundClipIn: {fileID: 8300000, guid: 3c09fea81c684f2192a9d2b9ff46a314, type: 3}
+    SoundClipOut: {fileID: 8300000, guid: c21f81e002e2490ca39d0a29a2157aaf, type: 3}
+    SoundLoad: {fileID: 0}
+    SoundPump: {fileID: 0}
+    HoldAnimation: {fileID: 7400000, guid: e6e270c937f94570b3af8770b73a4fdf, type: 2}
+    LoadAnimation: {fileID: 0}
+    ReloadAnimation: {fileID: 7400000, guid: e05a9ee40fd44c17aa9f202ea5ee8853, type: 2}
+    Meta: []
 --- !u!1 &585987555
 GameObject:
   m_ObjectHideFlags: 0
@@ -11004,7 +12120,7 @@ GameObject:
   - component: {fileID: 887761270}
   - component: {fileID: 887761269}
   m_Layer: 5
-  m_Name: HPValue
+  m_Name: Username
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11023,10 +12139,10 @@ RectTransform:
   m_Father: {fileID: 1014337984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -15.00046}
-  m_SizeDelta: {x: 80, y: 30}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 51.1, y: 0}
+  m_SizeDelta: {x: 98.69, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &887761269
 MonoBehaviour:
@@ -11048,19 +12164,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_Font: {fileID: 12800000, guid: 7c5d95bae2874ac48d60420c08c340cd, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: User
 --- !u!222 &887761270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11965,7 +13081,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 934557096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5000, y: -4776, z: 0}
+  m_LocalPosition: {x: -8003, y: -4776, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
@@ -12691,7 +13807,7 @@ SpriteRenderer:
 Transform:
   m_PrefabParentObject: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3,
     type: 2}
-  m_PrefabInternal: {fileID: 196054320}
+  m_PrefabInternal: {fileID: 1379602071}
 --- !u!1 &983645082
 GameObject:
   m_ObjectHideFlags: 0
@@ -13256,7 +14372,7 @@ GameObject:
   - component: {fileID: 1014337986}
   - component: {fileID: 1014337985}
   m_Layer: 5
-  m_Name: HPGroup
+  m_Name: PlayerProfile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13273,13 +14389,16 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 887761268}
+  - {fileID: 1873122737}
+  - {fileID: 2067179943}
+  - {fileID: 575613772}
   m_Father: {fileID: 1003030991}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -41.990234}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 250, y: -40}
+  m_SizeDelta: {x: 500, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014337985
 MonoBehaviour:
@@ -13289,31 +14408,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1014337983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9871935, g: 1, b: 0.9999693, a: 1}
+  m_Color: {r: 0.12980811, g: 1, b: 0.9492434, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'HP : '
+  m_Sprite: {fileID: 21300006, guid: 61d9bc7edb6bd41ac9b2950c0aaf99a1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &1014337986
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13805,7 +14918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.94234693, g: 1, b: 0.97100323, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13813,7 +14926,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 7c5d95bae2874ac48d60420c08c340cd, type: 3}
     m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
@@ -13825,7 +14938,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "One More \nTime"
+  m_Text: Play Again
 --- !u!222 &1064140440
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14489,6 +15602,34 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1146206961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1146206962}
+  m_Layer: 0
+  m_Name: Top_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146206962
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146206961}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3014, y: 1815.9999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2118181300}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153914718
 GameObject:
   m_ObjectHideFlags: 0
@@ -15803,6 +16944,82 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1238456846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1238456847}
+  - component: {fileID: 1238456849}
+  - component: {fileID: 1238456848}
+  m_Layer: 5
+  m_Name: Value
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1238456847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238456846}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2067179943}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 57.9, y: 45.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1238456848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238456846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9871935, g: 1, b: 0.9999693, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 75
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '8
+
+'
+--- !u!222 &1238456849
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238456846}
 --- !u!1 &1241237217
 GameObject:
   m_ObjectHideFlags: 0
@@ -16510,6 +17727,34 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1290865444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1290865445}
+  m_Layer: 0
+  m_Name: Bottom_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1290865445
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1290865444}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2913, y: -4751, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2118181300}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313512820
 GameObject:
   m_ObjectHideFlags: 0
@@ -17412,7 +18657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375336267
 GameObject:
@@ -17560,6 +18805,211 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &1379602071
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1792954055}
+    m_Modifications:
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114325108912663054, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: _fireButtonView
+      value: 
+      objectReference: {fileID: 1241629791}
+    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: _joystick
+      value: 
+      objectReference: {fileID: 419303121}
+    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: _hpImage
+      value: 
+      objectReference: {fileID: 1873122738}
+    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: SpriteCollection
+      value: 
+      objectReference: {fileID: 1379920477}
+    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: FirearmCollection
+      value: 
+      objectReference: {fileID: 578117231}
+    - target: {fileID: 114220203086538012, guid: 3d503c54789094fbb91e98c023d36bf3,
+        type: 2}
+      propertyPath: CurrentCamera
+      value: 
+      objectReference: {fileID: 1676674450}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1379920475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1379920476}
+  - component: {fileID: 1379920477}
+  m_Layer: 0
+  m_Name: SpriteCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1379920476
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379920475}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1139.4923, y: 865.51575, z: 56.743477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1592181831}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1379920477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379920475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -501458331, guid: 5e2b0f693b5b47a481e10f7c5c672b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScanFolderTags: []
+  Head: []
+  Ears: []
+  Hair: []
+  Eyebrows: []
+  Eyes: []
+  Mouth: []
+  Beard: []
+  Body: []
+  Helmet: []
+  HelmetMask: []
+  Glasses: []
+  Mask: []
+  Earrings: []
+  Armor: []
+  Cape: []
+  Back: []
+  MeleeWeapon1H: []
+  MeleeWeapon2H: []
+  MeleeWeaponTrail1H:
+  - Name: BaseballBat
+    Collection: Basic
+    Sprite: {fileID: 21300000, guid: eb3fc5fba6f74014084c2f1bd5b4cd59, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: eb3fc5fba6f74014084c2f1bd5b4cd59, type: 3}
+    Multiple: 1
+    Hash: dd0a21cf85af4e240cb121831f97daa2
+    Config: 
+    Meta: 
+  - Name: PinBaseballBat
+    Collection: Basic
+    Sprite: {fileID: 21300000, guid: 012c3441e31ff4d4dbc584bc4d301582, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: 012c3441e31ff4d4dbc584bc4d301582, type: 3}
+    Multiple: 1
+    Hash: 22d6317db408c687fec332e1673fd6f5
+    Config: 
+    Meta: 
+  - Name: PolicemanBaton
+    Collection: Basic
+    Sprite: {fileID: 21300000, guid: d147fa5fc93c4fdbb7c45f3567214d69, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: d147fa5fc93c4fdbb7c45f3567214d69, type: 3}
+    Multiple: 1
+    Hash: 22758e7a22271288cd33dfd3fcfd8397
+    Config: 
+    Meta: 
+  - Name: ArmyKnife
+    Collection: Basic
+    Sprite: {fileID: 21300000, guid: e305e4174534433bbc52040adfacba9b, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: e305e4174534433bbc52040adfacba9b, type: 3}
+    Multiple: 1
+    Hash: 29a2a42dc67fe313e15f0588ec7b4bec
+    Config: 
+    Meta: 
+  - Name: ScoutKnife
+    Collection: Basic
+    Sprite: {fileID: 21300000, guid: e366f7d86f8730e45b905ea6d731cc43, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: e366f7d86f8730e45b905ea6d731cc43, type: 3}
+    Multiple: 1
+    Hash: be93506a7344d89dc5a81cf0b428e630
+    Config: 
+    Meta: 
+  MeleeWeaponTrail2H:
+  - Name: FireAxe
+    Collection: Pro
+    Sprite: {fileID: 21300000, guid: f625651097b84d48a5f66913cd144902, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: f625651097b84d48a5f66913cd144902, type: 3}
+    Multiple: 1
+    Hash: b01cf1b1b9d2933391bbe5bc140dd482
+    Config: 
+    Meta: 
+  - Name: HockeyStick
+    Collection: Pro
+    Sprite: {fileID: 21300000, guid: 52d8b72d9fd8b4943934f3dcca91daaf, type: 3}
+    Sprites:
+    - {fileID: 21300000, guid: 52d8b72d9fd8b4943934f3dcca91daaf, type: 3}
+    Multiple: 1
+    Hash: 2cfb824b9bb207e90f34a1b83641faba
+    Config: 
+    Meta: 
+  Bow: []
+  Firearms1H: []
+  Firearms2H: []
+  Shield: []
+  Supplies: []
 --- !u!1 &1387834569
 GameObject:
   m_ObjectHideFlags: 0
@@ -18483,7 +19933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7681283}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -19808,6 +21258,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 147926183}
+  - {fileID: 1729589295}
+  - {fileID: 1379920476}
+  - {fileID: 578117230}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20869,7 +22322,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 169.2, y: 88.5}
+  m_SizeDelta: {x: 265.78, y: 88.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658346716
 MonoBehaviour:
@@ -20931,8 +22384,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 969320aa167c54cf4af9cbb531d7b80a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21744,6 +23197,90 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1729589294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1729589295}
+  - component: {fileID: 1729589296}
+  m_Layer: 0
+  m_Name: PoolController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1729589295
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729589294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1592181831}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729589296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729589294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1701af0df6c96fa45bfa3662b319541b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPoolOptions:
+  - prefabTransform: {fileID: 4371411179717378, guid: dbe2c4ae45c27496dab22ad41aa333a0,
+      type: 2}
+    instancesToPreload: 10
+    isPoolExpanded: 1
+    showDebugLog: 0
+    poolCanGrow: 1
+    cullDespawned: 0
+    cullAbove: 10
+    cullDelay: 2
+    cullAmount: 1
+    enableHardLimit: 0
+    hardLimit: 10
+    recycle: 0
+  - prefabTransform: {fileID: 4677540327054454, guid: 61af1367ff2e04187ab68ae073cda757,
+      type: 2}
+    instancesToPreload: 5
+    isPoolExpanded: 1
+    showDebugLog: 0
+    poolCanGrow: 1
+    cullDespawned: 0
+    cullAbove: 10
+    cullDelay: 2
+    cullAmount: 1
+    enableHardLimit: 0
+    hardLimit: 10
+    recycle: 0
+  - prefabTransform: {fileID: 4317019958060258, guid: fa14c7ee348fa479eb839c2084e2d064,
+      type: 2}
+    instancesToPreload: 5
+    isPoolExpanded: 1
+    showDebugLog: 0
+    poolCanGrow: 1
+    cullDespawned: 0
+    cullAbove: 10
+    cullDelay: 2
+    cullAmount: 1
+    enableHardLimit: 0
+    hardLimit: 10
+    recycle: 0
+  showDebugLog: 0
+  isRootExpanded: 1
+  autoAddMissingPrefabPool: 1
+  usePoolManager: 1
 --- !u!1 &1730213871
 GameObject:
   m_ObjectHideFlags: 0
@@ -23080,6 +24617,74 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1873122736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1873122737}
+  - component: {fileID: 1873122739}
+  - component: {fileID: 1873122738}
+  m_Layer: 5
+  m_Name: HPFillImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1873122737
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873122736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1014337984}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 36.2, y: 0}
+  m_SizeDelta: {x: 365, y: 26}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1873122738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873122736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.98533696, g: 0, b: 0.9940342, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 61d9bc7edb6bd41ac9b2950c0aaf99a1, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1873122739
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873122736}
 --- !u!1 &1878846884
 GameObject:
   m_ObjectHideFlags: 0
@@ -25074,6 +26679,75 @@ Transform:
   m_Father: {fileID: 1628383325}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2067179942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2067179943}
+  - component: {fileID: 2067179945}
+  - component: {fileID: 2067179944}
+  m_Layer: 5
+  m_Name: WeaponCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2067179943
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067179942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1238456847}
+  m_Father: {fileID: 1014337984}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 91.3, y: -33.6}
+  m_SizeDelta: {x: 80, y: 36.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2067179944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067179942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 8e0e38bcfb02141fab2105ba38306ff2, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2067179945
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067179942}
 --- !u!1 &2070713618
 GameObject:
   m_ObjectHideFlags: 0
@@ -25096,7 +26770,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2070713618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 746, y: -4751, z: 0}
+  m_LocalPosition: {x: -2490, y: -4751, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2118181300}
@@ -25859,8 +27533,10 @@ Transform:
   m_Children:
   - {fileID: 934557097}
   - {fileID: 2070713619}
+  - {fileID: 1290865445}
   - {fileID: 528307005}
   - {fileID: 171041155}
+  - {fileID: 1146206962}
   - {fileID: 315345917}
   - {fileID: 1362536546}
   m_Father: {fileID: 0}

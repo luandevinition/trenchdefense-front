@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI.PageTransitions.Loading;
 using UI.Scripts.PageTransitions;
 using UnityEngine;
 using UniRx;

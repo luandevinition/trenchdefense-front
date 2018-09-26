@@ -971,9 +971,9 @@ GameObject:
   - component: {fileID: 114325108912663054}
   - component: {fileID: 114971919924528030}
   - component: {fileID: 114220203086538012}
+  - component: {fileID: 114808599018445708}
   - component: {fileID: 54308228302221950}
   - component: {fileID: 136951415325580358}
-  - component: {fileID: 114808599018445708}
   m_Layer: 0
   m_Name: Character_0001
   m_TagString: Player
@@ -2090,7 +2090,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656945616454280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2500, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4515406330313288}
@@ -3336,7 +3336,9 @@ MonoBehaviour:
   Animator: {fileID: 95076920843000736}
   _playerUnitStatus: {fileID: 114808599018445708}
   _joystick: {fileID: 0}
-  _hpText: {fileID: 0}
+  _hpImage: {fileID: 0}
+  SpriteCollection: {fileID: 0}
+  FirearmCollection: {fileID: 0}
   ClickPosition: {x: 0, y: 0, z: 0}
   CurrentCamera: {fileID: 0}
 --- !u!114 &114236680741511330
@@ -3369,7 +3371,7 @@ MonoBehaviour:
   Params:
     Name: AK-47
     FirearmTexture: {fileID: 0}
-    Type: 6
+    Type: 5
     HoldType: 1
     MagazineType: 0
     LoadType: 0
@@ -3490,6 +3492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee171a7a5a0488abb7feeeae06e58e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bloodGameObjectAnimation: {fileID: 1036343012587488, guid: dbe2c4ae45c27496dab22ad41aa333a0,
+    type: 2}
 --- !u!114 &114938289372250886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3630,10 +3634,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 50.36
+  m_Radius: 20
   m_Height: 200
   m_Direction: 1
-  m_Center: {x: 0, y: 80.69, z: 0}
+  m_Center: {x: 0, y: 83.81, z: 0}
 --- !u!198 &198117872629367146
 ParticleSystem:
   m_ObjectHideFlags: 1

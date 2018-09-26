@@ -33,6 +33,9 @@ namespace BattleStage.Controller
 
         [SerializeField]
         private AudioClip _backgroundMusic;
+        
+        [SerializeField]
+        private GameObject _darknessUIGameObject;
 
         private BattleInitializeData _data;
         private readonly List<List<Zombie>> _waveZombies = new List<List<Zombie>>();
@@ -41,6 +44,11 @@ namespace BattleStage.Controller
         private int waveTime = 30;
         
         void Start()
+        {
+            Bind();
+        }
+
+        public void Bind()
         {
             // Dummy Data for Sprint 2 
             // TODO : Later will get from backend.

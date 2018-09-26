@@ -7,10 +7,10 @@ namespace UI.Scripts.PageTransitions
     /// </summary>
     public abstract class LoadingTransition : ScriptableObject
     {
-        [SerializeField, Header("ローディング画面のprefab")]
+        [SerializeField, Header("Page Prefab")]
         protected GameObject _pagePrefab;
 
-        [SerializeField, Header("ローディング状態のログの出力")]
+        [SerializeField, Header("Display log or not !")]
         protected bool _displayLog;
 
         protected GameObject _pageInstance;

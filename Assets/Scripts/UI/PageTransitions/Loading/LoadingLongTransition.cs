@@ -1,17 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UI.Scripts.PageTransitions;
 using UI.Scripts.Route;
+using UnityEngine;
 
-namespace UI.Scripts.PageTransitions
+namespace UI.PageTransitions.Loading
 {
-    /// <summary>
-    /// 長いバージョンのローディング画面の遷移処理を司る
-    /// </summary>
     public class LoadingLongTransition : LoadingTransition
     {
-        private static System.Random _random = new System.Random();
+        private static readonly System.Random _random = new System.Random();
 
         /// <summary>
         /// ローディング画面の設定

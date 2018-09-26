@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using EZ_Pooling;
+using UniRx;
 using UnityEngine;
 
 namespace BattleStage.Domain
@@ -64,6 +65,8 @@ namespace BattleStage.Domain
             get { return _currentHP.AsObservable(); }
         }
 
+        [SerializeField]
+        private GameObject _bloodGameObjectAnimation;
 
         public ReactiveProperty<bool> IsDie;
         
@@ -92,8 +95,11 @@ namespace BattleStage.Domain
             IsDie = new ReactiveProperty<bool>(false);
         }
 
-        public void GetDamage(float damage)
+        public void GetDamage(Vector3 position, float damage)
         {
+            EZ_PoolManager.Spawn(_bloodGameObjectAnimation.transform, position,
+                Quaternion.identity);
+            
             _currentHP.Value -= damage;
             if (_currentHP.Value <= 0)
             {
