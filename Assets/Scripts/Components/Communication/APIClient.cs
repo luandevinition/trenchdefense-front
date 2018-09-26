@@ -192,7 +192,7 @@ namespace Components.Communication
         }
 
         /// <summary>
-        /// Authorization ヘッダーを設定する
+        /// Set Authorization To Header
         /// </summary>
         /// <param name="accessToken"></param>
         public static void SetAccessTokenToHeader(string accessToken)
@@ -202,8 +202,18 @@ namespace Components.Communication
             _defaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
         }
 
+
         /// <summary>
-        /// Authorization ヘッダーを削除する
+        /// Check Authorization Exists or Not
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsExistAccessTokenToHeader()
+        {
+            return _defaultRequestHeaders.ContainsKey("Authorization");
+        }
+        
+        /// <summary>
+        /// Remove Authorization To Header
         /// </summary>
         public static void RemoveAccessTokenToHeader()
         { 
@@ -214,7 +224,7 @@ namespace Components.Communication
         }
 
         /// <summary>
-        /// 現在リクエスト中の購読情報を破棄する（）
+        /// Clear all pending request.
         /// </summary>
         public static void ClearPendingRequest()
         {

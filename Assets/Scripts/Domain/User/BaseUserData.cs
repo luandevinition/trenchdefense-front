@@ -1,0 +1,25 @@
+﻿using System;
+
+namespace Domain.User
+{
+    public class BaseUserData
+    {
+        public string Token { get; private set; }
+
+        public TokenID TokenID { get; private set; }
+
+        public GameUserID GameUserID { get; private set; }
+
+
+        public BaseUserData(string token, TokenID tokenId, GameUserID gameUserId)
+        {
+            if (token == null) throw new ArgumentNullException("token");
+            if (tokenId == null) throw new ArgumentNullException("tokenId");
+            if (gameUserId == null) throw new ArgumentNullException("gameUserId");
+
+            Token = token;
+            TokenID = tokenId;
+            GameUserID = gameUserId;
+        }
+    }
+}

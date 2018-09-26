@@ -1873,6 +1873,7 @@ MonoBehaviour:
   _characterUnitStatus: {fileID: 289678018}
   _uIRetry: {fileID: 606304458}
   _backgroundMusic: {fileID: 8300000, guid: adb96177f30c01745bf992c263182ee0, type: 3}
+  _darknessUIGameObject: {fileID: 0}
 --- !u!1 &156670510
 GameObject:
   m_ObjectHideFlags: 0
@@ -18873,6 +18874,10 @@ Prefab:
       propertyPath: CurrentCamera
       value: 
       objectReference: {fileID: 1676674450}
+    - target: {fileID: 4335986851446288, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d503c54789094fbb91e98c023d36bf3, type: 2}
   m_IsPrefabParent: 0
