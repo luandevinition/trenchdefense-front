@@ -3,6 +3,7 @@ using System.Collections;
 using Components;
 using Components.Communication;
 using Domain.User;
+using StaticAssets.Configs;
 using UI.Scripts.PageTransitions;
 using UI.ViewModels.Pages.Title;
 using UI.Views.Pages.Title;
@@ -23,24 +24,43 @@ namespace UI.PageTransitions.Title
             _loading.Value = true;
             
             var accessToken = PlayerPrefs.GetString("AccessToken",String.Empty);
+            var settingData = Resources.Load<SettingData>("SettingData");
+            // Begin For Testing
+            if(!settingData.keepUsingOldToken)
+                accessToken = "";
+            // End For Testing
             if (string.IsNullOrEmpty(accessToken))
             {
-                
-            yield return UserComponents.Instance.CreateGameUser(SystemInfo.deviceUniqueIdentifier).StartAsCoroutine(baseGameUser =>
-                {
-                    accessToken = baseGameUser.Token;
-                    PlayerPrefs.SetString("AccessToken",accessToken);
-                },  ex =>
-                {
-                    Debug.LogError("Can't create access token");
-                });
+                // Begin For Testing
+                var imeiFromSetting = settingData.imei;
+                // End For Testing
+                yield return UserComponents.Instance
+                    .CreateGameUser(string.IsNullOrEmpty(imeiFromSetting)
+                        ? SystemInfo.deviceUniqueIdentifier
+                        : imeiFromSetting).StartAsCoroutine(baseGameUser =>
+                    {
+                        accessToken = baseGameUser.Token;
+                        PlayerPrefs.SetString("AccessToken", accessToken);
+                        Debug.LogWarning("Create new Access Token :" + accessToken);
+                    }, ex => { Debug.LogError("Can't create access token"); });
             }
             ApiClient.SetAccessTokenToHeader(accessToken);    
             
                         
+            yield return UserComponents.Instance.GetGameUserData().StartAsCoroutine(gameUser =>
+            {
+                _gameUser = gameUser;
+            },  ex =>
+            {
+                Debug.LogError("Can't get ");
+            });
             
             Debug.LogWarning("Access Token :" + accessToken);
-            
+            Debug.LogWarning("Game User : " + _gameUser.Name);
+            Debug.LogWarning("Game User : " + _gameUser.GameSetting.VolumeValue);
+            Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteBGM);
+            Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteSFX);
+      
             yield return null;
             _loading.Value = false;
         }
