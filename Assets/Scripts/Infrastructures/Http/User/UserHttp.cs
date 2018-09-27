@@ -15,6 +15,10 @@ namespace Infrastructures.Http.User
     {
         private const string API_CREATE_ACCESS_TOKEN = "/create-access-token";
 		
+        
+        private const string API_GET_GAME_USER = "/user";
+		
+        
         private readonly IApiClient _apiClient;
 	
         public UserHttp(IApiClient apiClient)
@@ -22,15 +26,6 @@ namespace Infrastructures.Http.User
             _apiClient = apiClient;
         }
   
-        private BaseUserData MakeUserDataByProtobufs(IList<IExtensible> protobufs)
-        {
-            if (protobufs.Count < 1) {
-                return null;
-            }
-
-            return protobufs.Cast<App.Proto.AccessCode>().Select(UserFactory.Make).FirstOrDefault();
-        }
-        
         public IObservable<BaseUserData> CreateGameUser(string imeiString)
         {
             RequestAccessTokenParameter request = new RequestAccessTokenParameter
@@ -42,6 +37,31 @@ namespace Infrastructures.Http.User
             return _apiClient.Post(API_CREATE_ACCESS_TOKEN,models)
                 .Select(MakeUserDataByProtobufs)
                 .First();
+        }
+        
+        private BaseUserData MakeUserDataByProtobufs(IList<IExtensible> protobufs)
+        {
+            if (protobufs.Count < 1) {
+                return null;
+            }
+
+            return protobufs.Cast<App.Proto.AccessCode>().Select(UserFactory.Make).FirstOrDefault();
+        }
+        
+        public IObservable<GameUser> GetGameUserData()
+        {
+             return _apiClient.Get(API_GET_GAME_USER)
+                .Select(MakeGameUserDataByProtobufs)
+                .First();
+        }
+        
+        private GameUser MakeGameUserDataByProtobufs(IList<IExtensible> protobufs)
+        {
+            if (protobufs.Count < 1) {
+                return null;
+            }
+
+            return protobufs.Cast<App.Proto.User>().Select(UserFactory.Make).FirstOrDefault();
         }
     }
 }

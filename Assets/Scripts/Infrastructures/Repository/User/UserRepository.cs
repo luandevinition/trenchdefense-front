@@ -31,5 +31,10 @@ namespace Infrastructures.Repository.User
         {
             return _userHttp.CreateGameUser(imeiString);
         }
+        
+        public IObservable<GameUser> GetGameUserData()
+        {
+            return _userHttp.GetGameUserData();
+        }
     }
 }

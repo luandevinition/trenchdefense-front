@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR.WSA;
 
 namespace BattleStage.Domain
 {
@@ -19,6 +21,10 @@ namespace BattleStage.Domain
         
         public ResourceID ResourceID { get; private set; }
 
+        public int Position { get; private set; }
+
+        public int TimeSpawn { get; private set; }
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -29,8 +35,11 @@ namespace BattleStage.Domain
         /// <param name="speed"></param>
         /// <param name="goldDropCount"></param>
         /// <param name="resourceId"></param>
+        /// <param name="position"></param>
+        /// <param name="timeSpawn"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Zombie(ZombieID id, string name, int attack, int hp, int speed, int goldDropCount, ResourceID resourceId)
+        public Zombie(ZombieID id, string name, int attack, int hp, int speed, int goldDropCount, ResourceID resourceId
+            , int position, int timeSpawn)
         {
             if (id == null) throw new ArgumentNullException("id");
             if (name == null) throw new ArgumentNullException("name");
@@ -43,6 +52,8 @@ namespace BattleStage.Domain
             Speed = speed;
             GoldDropCount = goldDropCount;
             ResourceID = resourceId;
+            Position = position;
+            TimeSpawn = timeSpawn;
         }
     
     }

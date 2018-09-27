@@ -6,12 +6,12 @@ namespace Domain.User
     {
         public string Token { get; private set; }
 
-        public TokenID TokenID { get; private set; }
+        public string TokenID { get; private set; }
 
         public GameUserID GameUserID { get; private set; }
 
 
-        public BaseUserData(string token, TokenID tokenId, GameUserID gameUserId)
+        public BaseUserData(string token, string tokenId, GameUserID gameUserId)
         {
             if (token == null) throw new ArgumentNullException("token");
             if (tokenId == null) throw new ArgumentNullException("tokenId");

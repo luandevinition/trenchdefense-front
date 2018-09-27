@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4162f52903e08432e978551d146a86ef
+labels:
+- BattleTransition
+- Data
+- ScriptableObject
+timeCreated: 1537957378
+licenseType: Pro
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
