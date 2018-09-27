@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BattleStage.Domain;
+using Domain.Wave;
 using EazyTools.SoundManager;
 using UniRx;
 using UnityEngine;
@@ -37,98 +39,55 @@ namespace BattleStage.Controller
         [SerializeField]
         private GameObject _darknessUIGameObject;
 
-        private BattleInitializeData _data;
-        private readonly List<List<Zombie>> _waveZombies = new List<List<Zombie>>();
-        private int baseWavePower = 1000;
         private int currentWave = 1;
-        private int waveTime = 30;
+        private Wave _currentWave;
         
-        void Start()
+        public void InitData(List<Wave> waves)
         {
-            Bind();
-        }
-
-        public void Bind()
-        {
-            // Dummy Data for Sprint 2 
+            // For Character
             // TODO : Later will get from backend.
             Unit unit = new Unit(new UnitID(1), "Character 1", 10 , 100, 700, new ResourceID(1), new WeaponID(1), null);
-            Zombie zombie01= new Zombie(new ZombieID(1), "Zombie 1", 10 , 50, 500, 30, new ResourceID(1));
-            //Zombie zombie02= new Zombie(new ZombieID(2), "Zombie 2", 5 , 150, 450, 30, new ResourceID(2));
-            
             Weapon weapon= new Weapon(new WeaponID(1), 5 , 150, 450);
             
-            for(int index = 0 ; index < waveTime ; index++)
-            {
-                _waveZombies.Add(new List<Zombie>());
-            }
-            
-            Initialize(new BattleInitializeData(unit,new List<Zombie>(){zombie01}, new List<Weapon>(){weapon} ));
-            
+            //For Play Music
             SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+            
+            _currentWave = waves.First();
+            Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon} ));
+            
         }
 
         private int currentSecondCounter = 0;
         public void Initialize(BattleInitializeData data)
         {
-            _data = data;
-            CreateWaveData();
-            
             _characterUnitStatus.InitCharacterData(data.Player , data.Weapons);
             _characterUnitStatus.ShowRetryUI.Subscribe(_ =>
             {
                 _uIRetry.SetActive(true);
             }).AddTo(this);
-            
+
             Observable.Interval(new TimeSpan(0, 0, 1)).TakeUntilDisable(this).Subscribe(_ =>
             {
-                List<Zombie> listOfSecond = _waveZombies[currentSecondCounter];
-                foreach (var zombie in listOfSecond)
+                Wave wave = data.Wave;
+                if (wave.WavezsZombies.ContainsKey(currentSecondCounter))
                 {
-                    var path = string.Format(ENEMY_RESOURCE_FOLDER + ENEMY_RESOURCE_PREFIX,zombie.ResourceID.Value);
-                    var enemyPrefab = Resources.Load(path);
-                    var enemyObject = Instantiate(enemyPrefab,_positionsSpawn[Random.Range(0,_positionsSpawn.Length)].position,Quaternion.identity) as GameObject;
-                    if(enemyObject != null)
-                        enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.HP, zombie.Attack, zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
+                    List<Zombie> listOfSecond = wave.WavezsZombies[currentSecondCounter];
+                    foreach (var zombie in listOfSecond)
+                    {
+                        var path = string.Format(ENEMY_RESOURCE_FOLDER + ENEMY_RESOURCE_PREFIX, zombie.ResourceID.Value);
+                        var enemyPrefab = Resources.Load(path);
+                        var enemyObject = Instantiate(enemyPrefab,
+                            _positionsSpawn[zombie.Position].position,
+                            Quaternion.identity) as GameObject;
+                        if (enemyObject != null)
+                            enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.HP, zombie.Attack,
+                                zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
+                    }
                 }
-             
                 currentSecondCounter++;
-                if (currentSecondCounter >= waveTime)
-                {
-                    currentSecondCounter = 0;
-                    CreateWaveData();
-                }
             });
-            
-        }
-
-        private void CreateWaveData()
-        {
-            int zombieCount = (int)((baseWavePower * currentWave * 0.1f) / 100f);
-            int currentZombieSpawn = 0;
-            int currentIndex = 0;
-            while (currentZombieSpawn < zombieCount)
-            {
-                var listOnIndex = _waveZombies[currentIndex];
-                var result = Random.Range(1, 4) == 1;
-                if (result)
-                {
-                    var randomZombie = _data.ListZombies.GetRandomZombie();
-                    listOnIndex.Add(randomZombie);
-                    currentZombieSpawn++;
-                }
-                
-                currentIndex++;
-                if (currentIndex >= waveTime)
-                {
-                    currentIndex = 0;
-                }
-            }
-            currentWave++;
 
         }
-        
-        
     }
 }
 

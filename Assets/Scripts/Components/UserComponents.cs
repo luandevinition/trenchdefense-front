@@ -32,9 +32,9 @@ namespace Components
             return _repository.CreateGameUser(imeiString);
         }
         
-        public IObservable<BaseUserData> GetGameUserData()
+        public IObservable<GameUser> GetGameUserData()
         {
-            return _repository.CreateGameUser("21312");
+            return _repository.GetGameUserData();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Infrastructures.Repository.Wave
         }
 
 
-        public IObservable<List<Domain.Wave>> GetListWaves(int page)
+        public IObservable<List<Domain.Wave.Wave>> GetListWaves(int page)
         {
             return _waveHttp.GetListWaves(page);
         }

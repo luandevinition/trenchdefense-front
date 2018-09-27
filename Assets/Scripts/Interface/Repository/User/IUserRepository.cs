@@ -6,5 +6,7 @@ namespace Interface.Repository.User
     public interface IUserRepository
     {
         IObservable<BaseUserData> CreateGameUser(string devicesID);
+
+        IObservable<GameUser> GetGameUserData();
     }
 }

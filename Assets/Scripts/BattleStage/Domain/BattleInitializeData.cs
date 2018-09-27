@@ -1,18 +1,11 @@
 ﻿using System.Collections.Generic;
+using Domain.Wave;
 using UnityEngine;
 
 namespace BattleStage.Domain
 {
     public class BattleInitializeData
     {
-        public List<WaveData> Waves
-        {
-            get { return _waves; }
-        }
-        
-        private readonly List<WaveData> _waves = new List<WaveData>();
-
-        
         public List<Weapon> Weapons
         {
             get { return _weapons; }
@@ -20,51 +13,12 @@ namespace BattleStage.Domain
 
         private readonly List<Weapon> _weapons;
 
-        
-        /* Get Backend and include data.
-        public BattleInitializeData(List<WaveData> waves)
+        public Wave Wave
         {
-            waves.ForEach(x =>
-            {
-                _waves.Add(x);
-            });
-            
-        }
-        
-        public static BattleInitializeData CreateDummy()
-        {
-            var data = new BattleInitializeData(new List<WaveData>()
-            {
-                new WaveData(new List<SpawnData>()
-                {
-                    new SpawnData(
-                        new Vector3(Random.Range(1000, 2000),
-                            Random.Range(1000, 2000), 0f), 1),
-                    new SpawnData(
-                        new Vector3(Random.Range(1000, 2000),
-                            Random.Range(1000, 2000), 0f), 1),
-                    new SpawnData(
-                        new Vector3(Random.Range(1000, 2000),
-                            Random.Range(1000, 2000), 0f), 1),
-                    new SpawnData(
-                        new Vector3(Random.Range(1000, 2000),
-                            Random.Range(1000, 2000), 0f), 1),
-                    new SpawnData(
-                        new Vector3(Random.Range(1000, 2000),
-                            Random.Range(1000, 2000), 0f), 1)
-                })
-            });
-            return data;
-        }
-        */
-        #region For Testing Sprint 2
-
-        public List<Zombie> ListZombies
-        {
-            get { return _zombies; }
+            get { return _wave; }
         }
 
-        private readonly List<Zombie> _zombies;
+        private readonly Wave _wave;
 
         private readonly Unit _player;
 
@@ -73,14 +27,11 @@ namespace BattleStage.Domain
             get { return _player; }
         }
 
-        public BattleInitializeData(Unit unitSelectedData, List<Zombie> listZombieIds, List<Weapon> weapons)
+        public BattleInitializeData(Unit unitSelectedData, Wave wave, List<Weapon> weapons)
         {
-            _zombies = listZombieIds;
+            _wave = wave;
             _player = unitSelectedData;
             _weapons = weapons;
         }
-        
-        #endregion
-      
     }
 }

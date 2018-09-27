@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Domain;
+using Domain.Wave;
 using Infrastructures.Repository.Wave;
 using Interface.Repository.Wave;
 using UniRx;

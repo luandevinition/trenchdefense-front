@@ -21,20 +21,20 @@ namespace Infrastructures.Http.Wave
 			_apiClient = apiClient;
 		}
 	
-		public IObservable<List<Domain.Wave>> GetListWaves(int page)
+		public IObservable<List<Domain.Wave.Wave>> GetListWaves(int page)
 		{
 			return _apiClient.Get(string.Format(API_WAVE_DATAS, page))
 				.Select(MakeWavesByProtobufs)
 				.First();
 		}
 		
-		private List<Domain.Wave> MakeWavesByProtobufs(IList<IExtensible> protobufs)
+		private List<Domain.Wave.Wave> MakeWavesByProtobufs(IList<IExtensible> protobufs)
 		{
 			if (protobufs.Count < 1) {
-				return new List<Domain.Wave>();
+				return new List<Domain.Wave.Wave>();
 			}
 
-			return protobufs.Cast<App.Proto.RequestAccessTokenParameter>().Select(WaveFactory.Make).ToList();
+			return protobufs.Cast<App.Proto.Wave>().Select(WaveFactory.Make).ToList();
 		}
 		
 	}
