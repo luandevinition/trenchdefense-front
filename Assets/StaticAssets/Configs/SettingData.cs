@@ -9,6 +9,10 @@ namespace StaticAssets.Configs
 
 		public string url;
 
+		public bool keepUsingOldToken;
+		
+		public string imei;
+		
 		#endregion
 	}
 }
