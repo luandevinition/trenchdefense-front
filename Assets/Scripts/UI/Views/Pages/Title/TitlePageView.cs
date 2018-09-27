@@ -53,15 +53,15 @@ namespace UI.Views.Pages.Title
             _readyGroup.gameObject.SetActive(true);
 
             var gameUserData = viewModel.GetGameUser();
-            _titleText.text = string.Format(FORMAT_WELCOME_STRING, gameUserData.Name);
-            _muteToggleSFX.isOn = !gameUserData.GameSetting.MuteSFX;
-            _muteToggleBGM.isOn = !gameUserData.GameSetting.MuteBGM;
 
-            _scollbarVolume.value = (gameUserData.GameSetting.VolumeValue/100f);
 
-            _accountNameSetting.text = gameUserData.Name;
+            UpdateUIforGameUser(gameUserData);
 
-            viewModel.OnCompleteSaveSetting().Subscribe(_ => { ClickBackButtonFunction(); }).AddTo(this);
+            viewModel.OnCompleteSaveSetting().Subscribe(newGameUser =>
+            {
+                ClickBackButtonFunction();
+                UpdateUIforGameUser(newGameUser);
+            }).AddTo(this);
 
             _saveAccountButton.OnClickAsObservable().Subscribe(_ =>
             {
@@ -178,6 +178,15 @@ namespace UI.Views.Pages.Title
                     });
                 }
             }).AddTo(this);
+        }
+
+        private void UpdateUIforGameUser(GameUser gameUserData)
+        {
+            _titleText.text = string.Format(FORMAT_WELCOME_STRING, gameUserData.Name);
+            _muteToggleSFX.isOn = !gameUserData.GameSetting.MuteSFX;
+            _muteToggleBGM.isOn = !gameUserData.GameSetting.MuteBGM;
+            _scollbarVolume.value = (gameUserData.GameSetting.VolumeValue/100f);
+            _accountNameSetting.text = gameUserData.Name;
         }
 
         private void ClickBackButtonFunction()

@@ -35,7 +35,7 @@ namespace UI.ViewModels.Pages.Title
 			{
 				if (result)
 				{
-					_onCompleteSaveSetting.OnNext(Unit.Default);				
+					_onCompleteSaveSetting.OnNext(newGameUser);				
 					MyData.MyGameUser = newGameUser;
 				}
 			},  ex =>
@@ -44,9 +44,9 @@ namespace UI.ViewModels.Pages.Title
 			});
 		}
 
-		private readonly Subject<Unit> _onCompleteSaveSetting = new Subject<Unit>();
+		private readonly Subject<GameUser> _onCompleteSaveSetting = new Subject<GameUser>();
 		
-		public IObservable<Unit> OnCompleteSaveSetting()
+		public IObservable<GameUser> OnCompleteSaveSetting()
 		{
 			return _onCompleteSaveSetting.AsObservable();
 		}

@@ -12,7 +12,7 @@ namespace UI.ViewModels.Pages.Title
 		
 		void SaveGameSetting(GameUser newGameUser);
 
-		IObservable<Unit> OnCompleteSaveSetting();
+		IObservable<GameUser> OnCompleteSaveSetting();
 		
 	}
 }
