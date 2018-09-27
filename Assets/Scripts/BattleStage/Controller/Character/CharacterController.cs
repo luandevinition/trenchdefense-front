@@ -69,10 +69,13 @@ namespace BattleStage.Controller.Character
 
         private float _offsetValue = 200f;
         private float _offsetratio = 0.225f;
-        
+
+        private bool _isInit = false;
         
         public void InitCharacterData(Unit unit, List<Weapon> weapons)
         {
+            CurrentCamera = GameObject.Find("BattleCameraFollow").GetComponent<Camera>();
+            
             var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
             Weapon granade = null;
             if(unit.BaseGranedaID != null)
@@ -93,11 +96,12 @@ namespace BattleStage.Controller.Character
                     _showRetryUI.OnNext(UniRx.Unit.Default);
                 }
             }).AddTo(this);
+            _isInit = true;
         }
         
         public void Update () 
         {
-            if(_joystick == null || _playerUnitStatus == null)
+            if(_joystick == null || _playerUnitStatus == null || !_isInit)
                 return;
 
             if (_playerUnitStatus.IsDie.Value)

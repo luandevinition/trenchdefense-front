@@ -18,12 +18,6 @@ public class LoadingLongView : MonoBehaviour
     [SerializeField, Header("ローディングロング背景	")]
     private Image _backgroundImage;
 
-    [SerializeField, Header("タイトルテキスト")]
-    private Text _titleText;
-
-    [SerializeField, Header("メインテキスト")]
-    private Text _tipsText;
-    
     /// <summary>
     /// ローディング画面の要素を置き換えます。
     /// </summary>
@@ -32,8 +26,6 @@ public class LoadingLongView : MonoBehaviour
     public void Bind(LoadingLongConfigs config, GameObject pageInstance)
     {
         Instantiate(_loadingGroupA, _loadingGroupAPartsNode.transform, false);
-        _titleText.text = config.TitleText;
-        _tipsText.text = config.BodyText;
         _backgroundImage.sprite = config.BackgroundImage;
     }
 }

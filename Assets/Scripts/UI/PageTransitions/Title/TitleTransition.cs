@@ -25,15 +25,14 @@ namespace UI.PageTransitions.Title
             
             var accessToken = PlayerPrefs.GetString("AccessToken",String.Empty);
             var settingData = Resources.Load<SettingData>("SettingData");
-            // Begin For Testing
+#if DEBUG_TD
             if(!settingData.keepUsingOldToken)
                 accessToken = "";
-            // End For Testing
+#endif
             if (string.IsNullOrEmpty(accessToken))
             {
-                // Begin For Testing
+#if DEBUG_TD
                 var imeiFromSetting = settingData.imei;
-                // End For Testing
                 yield return UserComponents.Instance
                     .CreateGameUser(string.IsNullOrEmpty(imeiFromSetting)
                         ? SystemInfo.deviceUniqueIdentifier
@@ -42,6 +41,17 @@ namespace UI.PageTransitions.Title
                         accessToken = baseGameUser.Token;
                         PlayerPrefs.SetString("AccessToken", accessToken);
                         Debug.LogWarning("Create new Access Token :" + accessToken);
+                    }, ex => { Debug.LogError("Can't create access token"); });
+    
+#endif
+                yield return UserComponents.Instance
+                    .CreateGameUser(SystemInfo.deviceUniqueIdentifier).StartAsCoroutine(baseGameUser =>
+                    {
+                        accessToken = baseGameUser.Token;
+                        PlayerPrefs.SetString("AccessToken", accessToken);
+#if DEBUG_TD_LOG  
+                        Debug.LogWarning("Create new Access Token :" + accessToken);
+#endif
                     }, ex => { Debug.LogError("Can't create access token"); });
             }
             ApiClient.SetAccessTokenToHeader(accessToken);    
@@ -52,15 +62,15 @@ namespace UI.PageTransitions.Title
                 _gameUser = gameUser;
             },  ex =>
             {
-                Debug.LogError("Can't get ");
+                Debug.LogError("Can't get Gameuser");
             });
-            
+#if DEBUG_TD_LOG  
             Debug.LogWarning("Access Token :" + accessToken);
             Debug.LogWarning("Game User : " + _gameUser.Name);
             Debug.LogWarning("Game User : " + _gameUser.GameSetting.VolumeValue);
             Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteBGM);
             Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteSFX);
-      
+#endif
             yield return null;
             _loading.Value = false;
         }

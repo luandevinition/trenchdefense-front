@@ -1,5 +1,7 @@
 ﻿using Domain;
 using Domain.User;
+using UI.PageTransitions.Battle;
+using UI.Scripts.Route;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +18,7 @@ namespace UI.ViewModels.Pages.Title
 		
 		public void OnClickReadyButton()
 		{
-			SceneManager.LoadScene("BattleScene");
+			PageRouter.Instance.DoTransition<BattleTransition>();
 		}
 	}
 }
