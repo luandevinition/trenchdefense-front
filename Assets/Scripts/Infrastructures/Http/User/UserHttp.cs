@@ -15,8 +15,9 @@ namespace Infrastructures.Http.User
     {
         private const string API_CREATE_ACCESS_TOKEN = "/create-access-token";
 		
-        
         private const string API_GET_GAME_USER = "/user";
+		
+        private const string API_UPDATE_GAME_USER_SETTING = "/user/setting";
 		
         
         private readonly IApiClient _apiClient;
@@ -63,5 +64,22 @@ namespace Infrastructures.Http.User
 
             return protobufs.Cast<App.Proto.User>().Select(UserFactory.Make).FirstOrDefault();
         }
+        
+        public IObservable<bool> UpdateGameSetting(GameUser gameUser)
+        {
+            UpdateSettingParameter request = new UpdateSettingParameter
+            {
+                name = gameUser.Name,
+                sfx = gameUser.GameSetting.MuteSFX,
+                bgm = gameUser.GameSetting.MuteBGM,
+                volume = (uint) gameUser.GameSetting.VolumeValue
+            };
+            var models = new List<IExtensible> {request};
+            
+            return _apiClient.Post(API_UPDATE_GAME_USER_SETTING,models)
+                .Select(_=>true)
+                .First();
+        }
+        
     }
 }

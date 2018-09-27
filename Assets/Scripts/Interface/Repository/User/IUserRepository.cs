@@ -8,5 +8,7 @@ namespace Interface.Repository.User
         IObservable<BaseUserData> CreateGameUser(string devicesID);
 
         IObservable<GameUser> GetGameUserData();
+
+        IObservable<bool> UpdateGameSetting(GameUser gameUser);
     }
 }

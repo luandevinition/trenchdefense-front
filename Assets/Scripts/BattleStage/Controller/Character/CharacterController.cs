@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.HeroEditor.Common.Data;
@@ -127,25 +128,47 @@ namespace BattleStage.Controller.Character
             // For Moving the character
             transform.position = moveVector;
         }
-		
-       
+
+
+        private bool _canGetDamageByHit = true;
+        private Coroutine getHitCoroutine;
         
         
         public void OnTriggerEnter(Collider other)
         {
-            var damgeComponent = other.gameObject.GetComponent<Damage>();
-            if(_playerUnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
-                return;
-            
-            var damgeValue = damgeComponent.DamageValue;
+            float damgeValue = 0;
+            if (other.tag.Equals("Weapon"))
+            {
+                var damgeComponent = other.gameObject.GetComponent<Damage>();
+                if(_playerUnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
+                    return;
+                damgeValue = damgeComponent.DamageValue;
+            }
+
+            if (other.tag.Equals("Enemy") && _canGetDamageByHit)
+            {
+                _canGetDamageByHit = false;
+                if(getHitCoroutine != null)
+                    StopCoroutine(getHitCoroutine);
+                StartCoroutine(DelayForHit());
+                damgeValue = other.gameObject.GetComponent<BaseUnitStatus>().Attack;
+                if(_playerUnitStatus.IsDie.Value)
+                    return;
+            }
+          
             _playerUnitStatus.GetDamage(other.gameObject.transform.position, damgeValue);
-            EZ_PoolManager.Despawn(other.transform);
             
             if (_playerUnitStatus.IsDie.Value)
             {
                 Animator.SetBool("DieFront",true);
                 Animator.speed = 1f;
             }
+        }
+
+        IEnumerator DelayForHit()
+        {
+            yield return new WaitForSeconds(0.8f);
+            _canGetDamageByHit = true;
         }
         
         protected void SetFirearmParams(string weaponName)

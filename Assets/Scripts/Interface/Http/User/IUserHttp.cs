@@ -8,5 +8,7 @@ namespace Interface.Http.User
         IObservable<BaseUserData> CreateGameUser(string imeiString);
 
         IObservable<GameUser> GetGameUserData();
+
+        IObservable<bool> UpdateGameSetting(GameUser gameUser);
     }
 }

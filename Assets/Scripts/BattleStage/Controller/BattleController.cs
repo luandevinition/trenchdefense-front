@@ -7,6 +7,7 @@ using EazyTools.SoundManager;
 using UniRx;
 using UnityEngine;
 using Utils;
+using Vexe.Runtime.Extensions;
 using CharacterController = BattleStage.Controller.Character.CharacterController;
 using Random = UnityEngine.Random;
 using Unit = BattleStage.Domain.Unit;
@@ -37,7 +38,7 @@ namespace BattleStage.Controller
         private AudioClip _backgroundMusic;
         
         [SerializeField]
-        private GameObject _darknessUIGameObject;
+        private GameObject _gameObjetcManagerPool;
 
         private int currentWave = 1;
         private Wave _currentWave;
@@ -56,13 +57,14 @@ namespace BattleStage.Controller
             Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon} ));
             
         }
-
+        
         private int currentSecondCounter = 0;
         public void Initialize(BattleInitializeData data)
         {
             _characterUnitStatus.InitCharacterData(data.Player , data.Weapons);
             _characterUnitStatus.ShowRetryUI.Subscribe(_ =>
             {
+                _gameObjetcManagerPool.transform.DestroyChildren();
                 _uIRetry.SetActive(true);
             }).AddTo(this);
 
@@ -77,11 +79,14 @@ namespace BattleStage.Controller
                         var path = string.Format(ENEMY_RESOURCE_FOLDER + ENEMY_RESOURCE_PREFIX, zombie.ResourceID.Value);
                         var enemyPrefab = Resources.Load(path);
                         var enemyObject = Instantiate(enemyPrefab,
-                            _positionsSpawn[zombie.Position].position,
+                            _positionsSpawn[(zombie.Position - 1)].position,
                             Quaternion.identity) as GameObject;
                         if (enemyObject != null)
+                        {
+                            enemyObject.transform.SetParent(_gameObjetcManagerPool.transform);
                             enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.HP, zombie.Attack,
                                 zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
+                        }
                     }
                 }
                 currentSecondCounter++;

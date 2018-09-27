@@ -3427,6 +3427,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &1441061648466306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4713959270254602}
+  m_Layer: 0
+  m_Name: ==== Pool ===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1442817802376022
 GameObject:
   m_ObjectHideFlags: 1
@@ -12119,6 +12134,19 @@ Transform:
   m_Father: {fileID: 4544272620441062}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4713959270254602
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1441061648466306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4891303845873434}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4716804487593516
 Transform:
   m_ObjectHideFlags: 1
@@ -13231,6 +13259,7 @@ Transform:
   - {fileID: 4030384545673280}
   - {fileID: 4938399571494006}
   - {fileID: 4532688570091832}
+  - {fileID: 4713959270254602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16275,7 +16304,7 @@ MonoBehaviour:
   _characterUnitStatus: {fileID: 114110914903095260}
   _uIRetry: {fileID: 1146108670540570}
   _backgroundMusic: {fileID: 8300000, guid: adb96177f30c01745bf992c263182ee0, type: 3}
-  _darknessUIGameObject: {fileID: 0}
+  _gameObjetcManagerPool: {fileID: 1441061648466306}
 --- !u!114 &114498781062684652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16480,32 +16509,6 @@ MonoBehaviour:
   - prefabTransform: {fileID: 4371411179717378, guid: dbe2c4ae45c27496dab22ad41aa333a0,
       type: 2}
     instancesToPreload: 10
-    isPoolExpanded: 1
-    showDebugLog: 0
-    poolCanGrow: 1
-    cullDespawned: 0
-    cullAbove: 10
-    cullDelay: 2
-    cullAmount: 1
-    enableHardLimit: 0
-    hardLimit: 10
-    recycle: 0
-  - prefabTransform: {fileID: 4677540327054454, guid: 61af1367ff2e04187ab68ae073cda757,
-      type: 2}
-    instancesToPreload: 5
-    isPoolExpanded: 1
-    showDebugLog: 0
-    poolCanGrow: 1
-    cullDespawned: 0
-    cullAbove: 10
-    cullDelay: 2
-    cullAmount: 1
-    enableHardLimit: 0
-    hardLimit: 10
-    recycle: 0
-  - prefabTransform: {fileID: 4317019958060258, guid: fa14c7ee348fa479eb839c2084e2d064,
-      type: 2}
-    instancesToPreload: 5
     isPoolExpanded: 1
     showDebugLog: 0
     poolCanGrow: 1

@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - Bullet
   - Posion
+  - UiCanvas
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

@@ -36,5 +36,10 @@ namespace Components
         {
             return _repository.GetGameUserData();
         }
+        
+        public IObservable<bool> UpdateGameSetting(GameUser gameUser)
+        {
+            return _repository.UpdateGameSetting(gameUser);
+        }
     }
 }

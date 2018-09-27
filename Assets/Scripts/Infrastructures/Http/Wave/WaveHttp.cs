@@ -34,7 +34,7 @@ namespace Infrastructures.Http.Wave
 				return new List<Domain.Wave.Wave>();
 			}
 
-			return protobufs.Cast<App.Proto.Wave>().Select(WaveFactory.Make).ToList();
+			return protobufs.Cast<App.Proto.WaveListResult>().Select(WaveFactory.Make).First();
 		}
 		
 	}
