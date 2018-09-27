@@ -7,7 +7,7 @@ namespace Infrastructures.Factories.User
     {
         public static BaseUserData Make(App.Proto.AccessCode dto)
         {
-            return new BaseUserData(dto.token, new TokenID((int) dto.tokenID),
+            return new BaseUserData(dto.token, dto.tokenID,
                 new GameUserID((int) dto.gameUserID));
         }
         
