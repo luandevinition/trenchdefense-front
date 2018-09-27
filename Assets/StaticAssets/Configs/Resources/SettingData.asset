@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: SettingData
   m_EditorClassIdentifier: 
   url: http://trenchdefense.com/api
+  keepUsingOldToken: 1
+  imei: 
