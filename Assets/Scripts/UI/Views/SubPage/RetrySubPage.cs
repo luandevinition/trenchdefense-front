@@ -1,4 +1,7 @@
-﻿using UniRx;
+﻿using EZ_Pooling;
+using UI.PageTransitions.Title;
+using UI.Scripts.Route;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +16,8 @@ namespace UI.Views.SubPage
         {
             ButtonRetry.OnClickAsObservable().Subscribe(_ =>
             {
-                SceneManager.LoadScene(2);
+                Time.timeScale = 1f;
+                PageRouter.Instance.DoTransition<TitleTransition>(true);
             }).AddTo(this);
         }
     }

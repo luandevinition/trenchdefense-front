@@ -36,5 +36,10 @@ namespace Infrastructures.Repository.User
         {
             return _userHttp.GetGameUserData();
         }
+
+        public IObservable<bool> UpdateGameSetting(GameUser gameUser)
+        {
+            return _userHttp.UpdateGameSetting(gameUser);
+        }
     }
 }

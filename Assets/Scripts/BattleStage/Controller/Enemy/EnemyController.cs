@@ -15,6 +15,9 @@ namespace BattleStage.Controller.Enemy
 		private BaseUnitStatus _enemyStatus;
 		
 		[SerializeField]
+		private Damage _weaponDamage;
+		
+		[SerializeField]
 		public Animator Animator;
 		
 		[SerializeField]
@@ -38,12 +41,14 @@ namespace BattleStage.Controller.Enemy
 		{
 			_followedTarget = GameObject.FindGameObjectWithTag(TagFacade.PLAYER_TAG).transform;
 
-			_rangeAttack = UnityEngine.Random.Range(300, 500);
+			_rangeAttack = UnityEngine.Random.Range(15, 50);
 				 
-			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
+			Observable.Interval(new TimeSpan(0, 0, 1)).Where(_ => _isReachedToTarget).Subscribe(_ =>
 			{
 				if(_enemyStatus.IsDie.Value) return;
-				
+
+				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);
+				/*
 				var pos = gameObject.transform.position;
 				pos.y += 150;
 				var bullet = EZ_PoolManager.Spawn(_bulletGameObject.transform,pos,Quaternion.identity);
@@ -54,7 +59,7 @@ namespace BattleStage.Controller.Enemy
 				var directionForBullet = heading / distance; // This is now the normalized direction.
 				bullet.GetComponent<MovingController>().Dicrection = directionForBullet;
 				
-				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);
+				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);*/
 			}).AddTo(this);
 		}
 		
@@ -85,16 +90,27 @@ namespace BattleStage.Controller.Enemy
 			}
 			else
 			{
+				if (_weaponDamage != null)
+				{
+					_weaponDamage.DamageValue = _enemyStatus.Attack;
+				}
 				Animator.SetTrigger(Time.frameCount % 2 == 0 ? "Slash" : "Jab"); // Play animation randomly
-				Animator.speed = 0.3f;
+				Animator.speed = 0.4f;
 			}
-
 			
 		}
 		
 		public void OnTriggerEnter(Collider other)
 		{
+			if(!other.tag.Equals("Bullet"))
+				return;
+
 			var damgeComponent = other.gameObject.GetComponent<Damage>();
+			if (damgeComponent == null)
+			{
+				return;
+			}
+			
 			if(_enemyStatus.IsDie.Value || damgeComponent.IsEnemyDamage)
 				return;
 			

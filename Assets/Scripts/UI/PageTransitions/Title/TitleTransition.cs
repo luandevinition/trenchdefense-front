@@ -3,6 +3,7 @@ using System.Collections;
 using Components;
 using Components.Communication;
 using Domain.User;
+using Facade;
 using StaticAssets.Configs;
 using UI.Scripts.PageTransitions;
 using UI.ViewModels.Pages.Title;
@@ -60,6 +61,7 @@ namespace UI.PageTransitions.Title
             yield return UserComponents.Instance.GetGameUserData().StartAsCoroutine(gameUser =>
             {
                 _gameUser = gameUser;
+                MyData.MyGameUser = _gameUser;
             },  ex =>
             {
                 Debug.LogError("Can't get Gameuser");
