@@ -1,4 +1,5 @@
 ﻿using Assets.HeroEditor.Common.Data;
+using Facade;
 using HeroEditor.Common;
 using UnityEngine;
 
@@ -47,7 +48,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 case "Pump": clip = Params.SoundPump; break;
                 default: return;
             }
-
+            if(MyData.MyGameUser.GameSetting.MuteSFX)
+                return;
+            
             GetComponent<AudioSource>().PlayOneShot(clip, 0.5f);
         }
     }

@@ -47,6 +47,9 @@ namespace BattleStage.Controller.Enemy
 			{
 				if(_enemyStatus.IsDie.Value) return;
 
+				if(MyData.MyGameUser.GameSetting.MuteSFX)
+					return;
+				
 				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);
 				/*
 				var pos = gameObject.transform.position;
@@ -115,7 +118,7 @@ namespace BattleStage.Controller.Enemy
 				return;
 			
 			var damgeValue = damgeComponent.DamageValue;
-			_enemyStatus.GetDamage(other.gameObject.transform.position, damgeValue);
+			_enemyStatus.GetDamage(other.gameObject.transform.position, damgeValue, Vector3.zero);
 			
 			if (_enemyStatus.IsDie.Value)
 			{

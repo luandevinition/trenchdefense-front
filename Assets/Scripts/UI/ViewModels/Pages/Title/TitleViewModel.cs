@@ -36,7 +36,6 @@ namespace UI.ViewModels.Pages.Title
 				if (result)
 				{
 					_onCompleteSaveSetting.OnNext(newGameUser);				
-					MyData.MyGameUser = newGameUser;
 				}
 			},  ex =>
 			{

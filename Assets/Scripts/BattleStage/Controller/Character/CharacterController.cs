@@ -44,11 +44,13 @@ namespace BattleStage.Controller.Character
 
         [SerializeField]
         public SpriteCollection SpriteCollection;
+        
+        [SerializeField]
+        public Button _SwitchWeaponButton;
 
         public FirearmCollection FirearmCollection;
         
-        
-        private CharacterHM Character;
+        public CharacterHM Character;
         
         public Vector3 ClickPosition = Vector3.zero;
 
@@ -72,12 +74,24 @@ namespace BattleStage.Controller.Character
         private float _offsetratio = 0.225f;
 
         private bool _isInit = false;
+
+        private List<Weapon> _weapons;
+        
         
         public void InitCharacterData(Unit unit, List<Weapon> weapons)
         {
             CurrentCamera = GameObject.Find("BattleCameraFollow").GetComponent<Camera>();
-            
+            _weapons = weapons;
             var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
+            if (weapon == null)
+            {
+                Debug.LogError("Problem of Data Weapon !");
+                return;
+            }
+            
+            SetFirearmParams(weapon.Name);
+            Character.Initialize();
+            
             Weapon granade = null;
             if(unit.BaseGranedaID != null)
                 granade = weapons.FirstOrDefault(d => d.ID == unit.BaseGranedaID);
@@ -156,7 +170,7 @@ namespace BattleStage.Controller.Character
                     return;
             }
           
-            _playerUnitStatus.GetDamage(other.gameObject.transform.position, damgeValue);
+            _playerUnitStatus.GetDamage(transform.position, damgeValue, new Vector3(0,45,0));
             
             if (_playerUnitStatus.IsDie.Value)
             {
@@ -175,9 +189,12 @@ namespace BattleStage.Controller.Character
         {
             if (FirearmCollection.Firearms.Count(i => i.Name == weaponName) != 1) throw new Exception("Please check firearms params for: " + weaponName);
 
+            var weaponParams = FirearmCollection.Firearms.Single(i => i.Name == weaponName);
+            Debug.Log("Weapon name : " + weaponParams.Name);
+            
+            
             ((CharacterHM) Character).Firearm.Params = FirearmCollection.Firearms.Single(i => i.Name == weaponName);
         }
-        
         
         public void EquipMeleeWeapon1H(string sname, string collection)
         {
@@ -185,7 +202,7 @@ namespace BattleStage.Controller.Character
             Character.WeaponType = WeaponType.Melee1H;
             Character.Initialize();
         }
-
+        
         public void EquipShield(string sname, string collection)
         {
             Character.Shield = SpriteCollection.Shield.Single(i => i.Name == sname && i.Collection == collection).Sprite;

@@ -95,9 +95,9 @@ namespace BattleStage.Domain
             IsDie = new ReactiveProperty<bool>(false);
         }
 
-        public void GetDamage(Vector3 position, float damage)
+        public void GetDamage(Vector3 position, float damage , Vector3 offset)
         {
-            EZ_PoolManager.Spawn(_bloodGameObjectAnimation.transform, position,
+            EZ_PoolManager.Spawn(_bloodGameObjectAnimation.transform, position + offset,
                 Quaternion.identity);
             
             _currentHP.Value -= damage;

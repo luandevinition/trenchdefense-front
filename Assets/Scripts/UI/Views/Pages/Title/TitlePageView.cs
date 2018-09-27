@@ -59,13 +59,13 @@ namespace UI.Views.Pages.Title
 
             viewModel.OnCompleteSaveSetting().Subscribe(newGameUser =>
             {
+                MyData.MyGameUser = newGameUser;
                 ClickBackButtonFunction();
-                UpdateUIforGameUser(newGameUser);
             }).AddTo(this);
 
             _saveAccountButton.OnClickAsObservable().Subscribe(_ =>
             {
-                var newGameUserData = new GameUser(_accountNameSetting.name, MyData.MyGameUser.GameSetting);
+                var newGameUserData = new GameUser(_accountNameSetting.text, MyData.MyGameUser.GameSetting);
                 viewModel.SaveGameSetting(newGameUserData);
             }).AddTo(this);
 
@@ -191,6 +191,7 @@ namespace UI.Views.Pages.Title
 
         private void ClickBackButtonFunction()
         {
+            UpdateUIforGameUser(MyData.MyGameUser);
             if (isCompleteMoveMenu)
             {
                 isCompleteMoveMenu = false;

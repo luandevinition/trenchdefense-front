@@ -4,6 +4,7 @@ using System.Linq;
 using BattleStage.Domain;
 using Domain.Wave;
 using EazyTools.SoundManager;
+using Facade;
 using UniRx;
 using UnityEngine;
 using Utils;
@@ -47,14 +48,20 @@ namespace BattleStage.Controller
         {
             // For Character
             // TODO : Later will get from backend.
-            Unit unit = new Unit(new UnitID(1), "Character 1", 10 , 100, 700, new ResourceID(1), new WeaponID(1), null);
-            Weapon weapon= new Weapon(new WeaponID(1), 5 , 150, 450);
-            
-            //For Play Music
-            SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+            Unit unit = new Unit(new UnitID(1), "Character 1", 10 , 200, 750, new ResourceID(1), new WeaponID(1), null);
+            Weapon weapon1= new Weapon(new WeaponID(1),"AR-25", "Pro" , 5 , 150, 450);
+            Weapon weapon2= new Weapon(new WeaponID(2),"AK-47" , "Basic", 5 , 150, 450);
+            Weapon weapon3= new Weapon(new WeaponID(3),"HellBlade","Pro" , 5 , 150, 450);
+
+            if (!MyData.MyGameUser.GameSetting.MuteBGM)
+            {
+                //For Play Music
+                SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+                SoundManager.globalVolume = (MyData.MyGameUser.GameSetting.VolumeValue / 100f);
+            }
             
             _currentWave = waves.First();
-            Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon} ));
+            Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon1, weapon2 ,weapon3}));
             
         }
         
