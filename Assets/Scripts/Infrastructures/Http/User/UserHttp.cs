@@ -70,8 +70,8 @@ namespace Infrastructures.Http.User
             UpdateSettingParameter request = new UpdateSettingParameter
             {
                 name = gameUser.Name,
-                sfx = gameUser.GameSetting.MuteSFX,
-                bgm = gameUser.GameSetting.MuteBGM,
+                sfx = gameUser.GameSetting.EnableSFX,
+                bgm = gameUser.GameSetting.EnableBGM,
                 volume = (uint) gameUser.GameSetting.VolumeValue
             };
             var models = new List<IExtensible> {request};

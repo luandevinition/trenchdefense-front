@@ -5,7 +5,9 @@ using Components.Communication;
 using Domain.User;
 using Facade;
 using StaticAssets.Configs;
+using UI.PageTransitions.Loading;
 using UI.Scripts.PageTransitions;
+using UI.Scripts.Route;
 using UI.ViewModels.Pages.Title;
 using UI.Views.Pages.Title;
 using UniRx;
@@ -26,6 +28,7 @@ namespace UI.PageTransitions.Title
             
             var accessToken = PlayerPrefs.GetString("AccessToken",String.Empty);
             var settingData = Resources.Load<SettingData>("SettingData");
+            
 #if DEBUG_TD
             if(!settingData.keepUsingOldToken)
                 accessToken = "";
@@ -56,7 +59,6 @@ namespace UI.PageTransitions.Title
                     }, ex => { Debug.LogError("Can't create access token"); });
             }
             ApiClient.SetAccessTokenToHeader(accessToken);    
-            
                         
             yield return UserComponents.Instance.GetGameUserData().StartAsCoroutine(gameUser =>
             {
@@ -64,7 +66,9 @@ namespace UI.PageTransitions.Title
                 MyData.MyGameUser = _gameUser;
             },  ex =>
             {
-                Debug.LogError("Can't get Gameuser");
+                PlayerPrefs.SetString("AccessToken",String.Empty);
+                Debug.LogError("Can't get Gameuser : " + ex.ToString());
+                PageRouter.Instance.DoTransition<LoadingBundleTransition>();
             });
 #if DEBUG_TD_LOG  
             Debug.LogWarning("Access Token :" + accessToken);

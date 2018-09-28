@@ -655,6 +655,9 @@ namespace EazyTools.SoundManager
         /// <param name="fadeOutSeconds"> How many seconds it needs for all music audio to fade out. It will override  their own fade out seconds. If -1 is passed, all music will keep their own fade out seconds</param>
         public static void StopAllMusic(float fadeOutSeconds)
         {
+            if(musicAudio == null)
+                return;
+            
             List<int> keys = new List<int>(musicAudio.Keys);
             foreach (int key in keys)
             {

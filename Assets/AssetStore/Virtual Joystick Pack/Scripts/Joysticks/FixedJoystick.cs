@@ -4,19 +4,16 @@ using UnityEngine.EventSystems;
 public class FixedJoystick : Joystick
 {
     [Header("Fixed Joystick")]
-    
-
     Vector2 joystickPosition = Vector2.zero;
 
-    [SerializeField] private Camera cam;
+    private Camera _cam;
     
-
-    void Start()
+    public override void SetCamera(Camera camera)
     {
-        if (cam != null)
-        {
-            joystickPosition = RectTransformUtility.WorldToScreenPoint(cam, background.position);   
-        }
+        _cam = camera;
+        joystickPosition = RectTransformUtility.WorldToScreenPoint(_cam, background.position);   
+        
+        joystickPosition = background.position;   
     }
 
     public override void OnDrag(PointerEventData eventData)

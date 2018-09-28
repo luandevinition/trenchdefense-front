@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.HeroEditor.Common.CharacterScripts;
 using BattleStage.Domain;
+using EazyTools.SoundManager;
 using EZ_Pooling;
 using Facade;
 using UniRx;
@@ -13,6 +14,11 @@ namespace BattleStage.Controller.Enemy
 	{
 		[SerializeField]
 		private BaseUnitStatus _enemyStatus;
+
+		public BaseUnitStatus GetEnemyStatus()
+		{
+			return _enemyStatus;
+		}
 		
 		[SerializeField]
 		private Damage _weaponDamage;
@@ -37,20 +43,20 @@ namespace BattleStage.Controller.Enemy
 
 		private float _rangeAttack = 300f;
 		
-		void Start()
+		public void InitData(Transform followedTarget)
 		{
-			_followedTarget = GameObject.FindGameObjectWithTag(TagFacade.PLAYER_TAG).transform;
+			_followedTarget = followedTarget;
 
 			_rangeAttack = UnityEngine.Random.Range(15, 50);
 				 
-			Observable.Interval(new TimeSpan(0, 0, 1)).Where(_ => _isReachedToTarget).Subscribe(_ =>
+			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
 			{
 				if(_enemyStatus.IsDie.Value) return;
 
-				if(MyData.MyGameUser.GameSetting.MuteSFX)
+				if(MyData.MyGameUser.GameSetting.EnableSFX)
 					return;
 				
-				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);
+				SoundManager.PlaySound(_audioThrowPosion, 0.5f);
 				/*
 				var pos = gameObject.transform.position;
 				pos.y += 150;
@@ -98,7 +104,7 @@ namespace BattleStage.Controller.Enemy
 					_weaponDamage.DamageValue = _enemyStatus.Attack;
 				}
 				Animator.SetTrigger(Time.frameCount % 2 == 0 ? "Slash" : "Jab"); // Play animation randomly
-				Animator.speed = 0.4f;
+				Animator.speed = 0.2f;
 			}
 			
 		}

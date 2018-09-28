@@ -4,6 +4,7 @@ using System.Linq;
 using Assets.HeroEditor.Common.Enums;
 using Assets.MilitaryHeroes.Scripts.Enums;
 using BattleStage.Domain;
+using EazyTools.SoundManager;
 using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -89,9 +90,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             Character.Firearm.AmmoShooted++;
             CreateBullet(Character.UnitStatus.Attack);
             FireMuzzlePlay();
-            if (!MyData.MyGameUser.GameSetting.MuteSFX)
+            if (!MyData.MyGameUser.GameSetting.EnableSFX)
             {
-                GetComponent<AudioSource>().PlayOneShot(Character.Firearm.Params.SoundFire, 0.5f);
+                SoundManager.PlaySound(Character.Firearm.Params.SoundFire, 0.5f);
             }
             
             var offset = -Character.Firearm.Params.Recoil * ArmR.parent.InverseTransformDirection(Character.Firearm.FireTransform.right);

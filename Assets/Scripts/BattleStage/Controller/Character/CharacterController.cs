@@ -81,6 +81,7 @@ namespace BattleStage.Controller.Character
         public void InitCharacterData(Unit unit, List<Weapon> weapons)
         {
             CurrentCamera = GameObject.Find("BattleCameraFollow").GetComponent<Camera>();
+            Joystick.SetCamera(CurrentCamera);
             _weapons = weapons;
             var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
             if (weapon == null)
@@ -88,9 +89,7 @@ namespace BattleStage.Controller.Character
                 Debug.LogError("Problem of Data Weapon !");
                 return;
             }
-            
-            SetFirearmParams(weapon.Name);
-            Character.Initialize();
+            //SetFirearmParams(weapon.Name);
             
             Weapon granade = null;
             if(unit.BaseGranedaID != null)
@@ -102,7 +101,6 @@ namespace BattleStage.Controller.Character
             }).AddTo(this);
 
             _offsetValue = Screen.height * 0.225f;
-            Debug.Log("offset : " + _offsetValue);
             _playerUnitStatus.IsDie.Subscribe(isDie =>
             {
                 if (isDie)
