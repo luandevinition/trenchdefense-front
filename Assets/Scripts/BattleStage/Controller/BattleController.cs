@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BattleStage.Controller.Enemy;
 using BattleStage.Domain;
 using Domain.Wave;
 using EazyTools.SoundManager;
+using Facade;
 using UniRx;
 using UnityEngine;
 using Utils;
@@ -35,9 +37,6 @@ namespace BattleStage.Controller
         private GameObject _uIRetry;
 
         [SerializeField]
-        private AudioClip _backgroundMusic;
-        
-        [SerializeField]
         private GameObject _gameObjetcManagerPool;
 
         private int currentWave = 1;
@@ -47,14 +46,13 @@ namespace BattleStage.Controller
         {
             // For Character
             // TODO : Later will get from backend.
-            Unit unit = new Unit(new UnitID(1), "Character 1", 10 , 100, 700, new ResourceID(1), new WeaponID(1), null);
-            Weapon weapon= new Weapon(new WeaponID(1), 5 , 150, 450);
-            
-            //For Play Music
-            SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+            Unit unit = new Unit(new UnitID(1), "Character 1", 10 , 200, 750, new ResourceID(1), new WeaponID(1), null);
+            Weapon weapon1= new Weapon(new WeaponID(1),"AR-25", "Pro" , 5 , 150, 450);
+            Weapon weapon2= new Weapon(new WeaponID(2),"AK-47" , "Basic", 5 , 150, 450);
+            Weapon weapon3= new Weapon(new WeaponID(3),"HellBlade","Pro" , 5 , 150, 450);
             
             _currentWave = waves.First();
-            Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon} ));
+            Initialize(new BattleInitializeData(unit, _currentWave, new List<Weapon>(){weapon1, weapon2 ,weapon3}));
             
         }
         
@@ -68,7 +66,7 @@ namespace BattleStage.Controller
                 _uIRetry.SetActive(true);
             }).AddTo(this);
 
-            Observable.Interval(new TimeSpan(0, 0, 1)).TakeUntilDisable(this).Subscribe(_ =>
+            Observable.Interval(new TimeSpan(0, 0, 1)).TakeUntilDisable(this).Where(d=>((int)Time.timeScale) == 1).Subscribe(_ =>
             {
                 Wave wave = data.Wave;
                 if (wave.WavezsZombies.ContainsKey(currentSecondCounter))
@@ -84,7 +82,10 @@ namespace BattleStage.Controller
                         if (enemyObject != null)
                         {
                             enemyObject.transform.SetParent(_gameObjetcManagerPool.transform);
-                            enemyObject.GetComponent<BaseUnitStatus>().SetBaseUnitStatus(zombie.HP, zombie.Attack,
+                            var enemyController = enemyObject.GetComponent<EnemyController>();
+                            
+                            enemyController.InitData(_characterUnitStatus.transform);
+                            enemyController.GetEnemyStatus().SetBaseUnitStatus(zombie.HP, zombie.Attack,
                                 zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
                         }
                     }

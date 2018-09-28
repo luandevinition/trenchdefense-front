@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Domain.User;
+using EazyTools.SoundManager;
 using Facade;
 using UI.ViewModels.Pages.Title;
 using UniRx;
@@ -31,14 +32,16 @@ namespace UI.Views.Pages.Title
         
         [SerializeField] private Scrollbar _scollbarVolume;
         
-        [SerializeField] private Toggle _muteToggleSFX;
-        [SerializeField] private Toggle _muteToggleBGM;
+        [SerializeField] private Toggle _enableToggleSFX;
+        [SerializeField] private Toggle _enableToggleBGM;
 
         [SerializeField] private InputField _accountNameSetting;
         
         [SerializeField] private Button _saveSettingButton;
         [SerializeField] private Button _saveAccountButton;
-
+        
+        [SerializeField]
+        private AudioClip _backgroundMusic;
         
         [SerializeField]
         private ReactiveProperty<bool> _isShowMenu = new ReactiveProperty<bool>(true);
@@ -59,20 +62,20 @@ namespace UI.Views.Pages.Title
 
             viewModel.OnCompleteSaveSetting().Subscribe(newGameUser =>
             {
+                MyData.MyGameUser = newGameUser;
                 ClickBackButtonFunction();
-                UpdateUIforGameUser(newGameUser);
             }).AddTo(this);
 
             _saveAccountButton.OnClickAsObservable().Subscribe(_ =>
             {
-                var newGameUserData = new GameUser(_accountNameSetting.name, MyData.MyGameUser.GameSetting);
+                var newGameUserData = new GameUser(_accountNameSetting.text, MyData.MyGameUser.GameSetting);
                 viewModel.SaveGameSetting(newGameUserData);
             }).AddTo(this);
 
             _saveSettingButton.OnClickAsObservable().Subscribe(_ =>
             {
                 var newGameUserData = new GameUser(MyData.MyGameUser.Name,
-                    new GameUserSetting(_muteToggleSFX.isOn, _muteToggleBGM.isOn,
+                    new GameUserSetting(_enableToggleSFX.isOn, _enableToggleBGM.isOn,
                         (int) (_scollbarVolume.value * 100f)));
                 viewModel.SaveGameSetting(newGameUserData);
             }).AddTo(this);
@@ -84,13 +87,13 @@ namespace UI.Views.Pages.Title
                 if (isShow)
                 {
                     isCompleteMoveMenu = false;
-                    _backButton.transform.DOMoveX(-650f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
+                    _backButton.transform.DOLocalMoveX(-650f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
                     _titleText.transform.DOScale(1f, 0.2f).SetRelative();
-                    _readyButton.transform.DOMoveX(750f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
-                    _accountButton.transform.DOMoveX(750f, 0.55f).SetEase(Ease.InOutFlash).SetRelative();
-                    _leaderboardButton.transform.DOMoveX(750f, 0.6f).SetEase(Ease.InOutFlash).SetRelative();
-                    _settingButton.transform.DOMoveX(750f, 0.65f).SetEase(Ease.InOutFlash).SetRelative();
-                    _multiplayButton.transform.DOMoveX(750f, 0.7f).SetEase(Ease.InOutFlash).SetRelative().OnComplete(() =>
+                    _readyButton.transform.DOLocalMoveX(750f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
+                    _accountButton.transform.DOLocalMoveX(750f, 0.55f).SetEase(Ease.InOutFlash).SetRelative();
+                    _leaderboardButton.transform.DOLocalMoveX(750f, 0.6f).SetEase(Ease.InOutFlash).SetRelative();
+                    _settingButton.transform.DOLocalMoveX(750f, 0.65f).SetEase(Ease.InOutFlash).SetRelative();
+                    _multiplayButton.transform.DOLocalMoveX(750f, 0.7f).SetEase(Ease.InOutFlash).SetRelative().OnComplete(() =>
                         {
                             isCompleteMoveMenu = true;
                         });
@@ -98,12 +101,12 @@ namespace UI.Views.Pages.Title
                 else
                 {
                     _titleText.transform.DOScale(-1f, 0.2f).SetRelative();
-                    _backButton.transform.DOMoveX(650f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
-                    _readyButton.transform.DOMoveX(-750f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
-                    _accountButton.transform.DOMoveX(-750f, 0.55f).SetEase(Ease.InOutFlash).SetRelative();
-                    _leaderboardButton.transform.DOMoveX(-750f, 0.6f).SetEase(Ease.InOutFlash).SetRelative();
-                    _settingButton.transform.DOMoveX(-750f, 0.65f).SetEase(Ease.InOutFlash).SetRelative();
-                    _multiplayButton.transform.DOMoveX(-750f, 0.7f).SetEase(Ease.InOutFlash).SetRelative().OnComplete(() =>
+                    _backButton.transform.DOLocalMoveX(650f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
+                    _readyButton.transform.DOLocalMoveX(-750f, 0.5f).SetEase(Ease.InOutFlash).SetRelative();
+                    _accountButton.transform.DOLocalMoveX(-750f, 0.55f).SetEase(Ease.InOutFlash).SetRelative();
+                    _leaderboardButton.transform.DOLocalMoveX(-750f, 0.6f).SetEase(Ease.InOutFlash).SetRelative();
+                    _settingButton.transform.DOLocalMoveX(-750f, 0.65f).SetEase(Ease.InOutFlash).SetRelative();
+                    _multiplayButton.transform.DOLocalMoveX(-750f, 0.7f).SetEase(Ease.InOutFlash).SetRelative().OnComplete(() =>
                     {
                         isCompleteMoveMenu = true;
                     });
@@ -183,14 +186,29 @@ namespace UI.Views.Pages.Title
         private void UpdateUIforGameUser(GameUser gameUserData)
         {
             _titleText.text = string.Format(FORMAT_WELCOME_STRING, gameUserData.Name);
-            _muteToggleSFX.isOn = !gameUserData.GameSetting.MuteSFX;
-            _muteToggleBGM.isOn = !gameUserData.GameSetting.MuteBGM;
+            _enableToggleSFX.isOn = gameUserData.GameSetting.EnableSFX;
+            _enableToggleBGM.isOn = gameUserData.GameSetting.EnableBGM;
             _scollbarVolume.value = (gameUserData.GameSetting.VolumeValue/100f);
             _accountNameSetting.text = gameUserData.Name;
+
+
+            if (MyData.MyGameUser.GameSetting.EnableBGM)
+            {
+                //For Play Music
+                SoundManager.StopAllMusic();
+                SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+            }
+            else
+            {
+                SoundManager.StopAllMusic();
+            }
+            
+            SoundManager.globalVolume = (MyData.MyGameUser.GameSetting.VolumeValue / 100f);
         }
 
         private void ClickBackButtonFunction()
         {
+            UpdateUIforGameUser(MyData.MyGameUser);
             if (isCompleteMoveMenu)
             {
                 isCompleteMoveMenu = false;

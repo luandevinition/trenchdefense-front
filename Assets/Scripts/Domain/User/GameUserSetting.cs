@@ -2,16 +2,16 @@
 {
     public class GameUserSetting
     {
-        public bool MuteSFX { get; private set; }
+        public bool EnableSFX { get; private set; }
 
-        public bool MuteBGM { get; private set; }
+        public bool EnableBGM { get; private set; }
 
         public int VolumeValue { get; private set; }
 
-        public GameUserSetting(bool muteSfx, bool muteBgm, int volumeValue)
+        public GameUserSetting(bool enableSFX, bool enableBgm, int volumeValue)
         {
-            MuteSFX = muteSfx;
-            MuteBGM = muteBgm;
+            EnableSFX = enableSFX;
+            EnableBGM = enableBgm;
             VolumeValue = volumeValue;
         }
     }

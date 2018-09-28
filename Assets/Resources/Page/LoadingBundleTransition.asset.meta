@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7da456cf0d2f04b9e82129d1b6727bd3
+labels:
+- Data
+- LoadingBundleTransition
+- ScriptableObject
+timeCreated: 1538107896
+licenseType: Pro
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

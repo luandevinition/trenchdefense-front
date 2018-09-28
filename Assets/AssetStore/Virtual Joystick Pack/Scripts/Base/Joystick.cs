@@ -15,6 +15,11 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public float Horizontal { get { return inputVector.x; } }
     public float Vertical { get { return inputVector.y; } }
 
+    public virtual void SetCamera(Camera camera)
+    {
+        
+    }
+
     public virtual void OnDrag(PointerEventData eventData)
     {
 

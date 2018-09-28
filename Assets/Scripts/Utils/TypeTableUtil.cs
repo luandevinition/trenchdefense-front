@@ -21,8 +21,11 @@ namespace Utils
 				case "App.Proto.AccessCode": return 3954737699; // ebb88223
 				case "App.Proto.RequestAccessTokenParameter": return 1479466557; // 582ede3d
 				case "App.Proto.Character": return 4003022536; // ee9946c8
+				case "App.Proto.CharacterStatus": return 1708509719; // 65d5ca17
 				case "App.Proto.HavingCharacter": return 3970969170; // ecb02e52
 				case "App.Proto.Error": return 2133813781; // 7f2f6a15
+				case "App.Proto.BeginMatchParameter": return 3623522443; // d7fa908b
+				case "App.Proto.EndMatchParameter": return 2294637224; // 88c562a8
 				case "App.Proto.ProtobufMessage": return 3854281208; // e5bba9f8
 				case "App.Proto.ProtobufMessages": return 4218599789; // fb72b96d
 				case "App.Proto.UpdateSettingParameter": return 1287612623; // 4cbf68cf
@@ -50,8 +53,11 @@ namespace Utils
 				case 3954737699: return new App.Proto.AccessCode(); //ebb88223
 				case 1479466557: return new App.Proto.RequestAccessTokenParameter(); //582ede3d
 				case 4003022536: return new App.Proto.Character(); //ee9946c8
+				case 1708509719: return new App.Proto.CharacterStatus(); //65d5ca17
 				case 3970969170: return new App.Proto.HavingCharacter(); //ecb02e52
 				case 2133813781: return new App.Proto.Error(); //7f2f6a15
+				case 3623522443: return new App.Proto.BeginMatchParameter(); //d7fa908b
+				case 2294637224: return new App.Proto.EndMatchParameter(); //88c562a8
 				case 3854281208: return new App.Proto.ProtobufMessage(); //e5bba9f8
 				case 4218599789: return new App.Proto.ProtobufMessages(); //fb72b96d
 				case 1287612623: return new App.Proto.UpdateSettingParameter(); //4cbf68cf
