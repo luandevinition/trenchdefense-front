@@ -5,6 +5,7 @@ using Assets.HeroEditor.Common.Enums;
 using Assets.MilitaryHeroes.Scripts.Enums;
 using BattleStage.Domain;
 using EazyTools.SoundManager;
+using EZ_Pooling;
 using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -90,9 +91,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             Character.Firearm.AmmoShooted++;
             CreateBullet(Character.UnitStatus.Attack);
             FireMuzzlePlay();
-            if (!MyData.MyGameUser.GameSetting.EnableSFX)
+            if (MyData.MyGameUser.GameSetting.EnableSFX)
             {
-                SoundManager.PlaySound(Character.Firearm.Params.SoundFire, 0.5f);
+                GetComponent<AudioSource>().PlayOneShot(Character.Firearm.Params.SoundFire,MyData.MyGameUser.GameSetting.VolumeFloatValue* 0.5f);
             }
             
             var offset = -Character.Firearm.Params.Recoil * ArmR.parent.InverseTransformDirection(Character.Firearm.FireTransform.right);
@@ -186,10 +187,12 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
             for (var i = 0; i < iterations; i++)
             {
-                var bullet = Instantiate(Character.Firearm.Params.ProjectilePrefab, Character.Firearm.FireTransform);
-                var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
+                var bullet = EZ_PoolManager
+                    .Spawn(Character.Firearm.Params.ProjectilePrefab.transform,
+                        Character.Firearm.FireTransform.position, Quaternion.identity).GetComponent<Projectile>();
+                var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) *
+                             (1 - Character.Firearm.Params.Accuracy);
 
-                bullet.transform.localPosition = Vector3.zero;
                 bullet.transform.localRotation = Quaternion.identity;
                 bullet.transform.SetParent(null);
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");

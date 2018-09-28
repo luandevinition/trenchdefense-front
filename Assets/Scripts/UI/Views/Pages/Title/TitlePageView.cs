@@ -190,20 +190,20 @@ namespace UI.Views.Pages.Title
             _enableToggleBGM.isOn = gameUserData.GameSetting.EnableBGM;
             _scollbarVolume.value = (gameUserData.GameSetting.VolumeValue/100f);
             _accountNameSetting.text = gameUserData.Name;
-
+            SoundManager.globalMusicVolume = (MyData.MyGameUser.GameSetting.VolumeValue / 100f);
+            SoundManager.globalSoundsVolume = (MyData.MyGameUser.GameSetting.VolumeValue / 100f);
 
             if (MyData.MyGameUser.GameSetting.EnableBGM)
             {
                 //For Play Music
-                SoundManager.StopAllMusic();
-                SoundManager.PlayMusic(_backgroundMusic, 1f, true, false);
+                SoundManager.StopAllMusic(0);
+                SoundManager.PlayMusic(_backgroundMusic, 1f, true, false,0,0,0,null);
             }
             else
             {
-                SoundManager.StopAllMusic();
+                SoundManager.StopAllMusic(0);
             }
             
-            SoundManager.globalVolume = (MyData.MyGameUser.GameSetting.VolumeValue / 100f);
         }
 
         private void ClickBackButtonFunction()

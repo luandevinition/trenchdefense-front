@@ -37,7 +37,7 @@ namespace BattleStage.Controller.Enemy
 		private Vector3 scaleVector3 = Vector3.one;
 
 		[SerializeField]
-		private CapsuleCollider _capsuleCollider;
+		private BoxCollider _capsuleCollider;
 
 		private bool _isReachedToTarget;
 
@@ -47,7 +47,7 @@ namespace BattleStage.Controller.Enemy
 		{
 			_followedTarget = followedTarget;
 
-			_rangeAttack = UnityEngine.Random.Range(15, 50);
+			_rangeAttack = UnityEngine.Random.Range(40, 50);
 				 
 			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
 			{
@@ -56,19 +56,8 @@ namespace BattleStage.Controller.Enemy
 				if(MyData.MyGameUser.GameSetting.EnableSFX)
 					return;
 				
-				SoundManager.PlaySound(_audioThrowPosion, 0.5f);
-				/*
-				var pos = gameObject.transform.position;
-				pos.y += 150;
-				var bullet = EZ_PoolManager.Spawn(_bulletGameObject.transform,pos,Quaternion.identity);
-				bullet.GetComponent<Damage>().DamageValue = _enemyStatus.Attack;
-				
-				var heading = _followedTarget.position - transform.position;
-				var distance = heading.magnitude;
-				var directionForBullet = heading / distance; // This is now the normalized direction.
-				bullet.GetComponent<MovingController>().Dicrection = directionForBullet;
-				
-				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, 0.5f);*/
+				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, MyData.MyGameUser.GameSetting.VolumeFloatValue*0.5f);
+			
 			}).AddTo(this);
 		}
 		

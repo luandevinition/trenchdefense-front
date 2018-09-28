@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using EZ_Pooling;
 using UnityEngine;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
@@ -13,9 +15,27 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public GameObject Impact;
 	    public Rigidbody Rigidbody;
 
-		public void Start()
+        IEnumerator DespawnedAfter(float second)
         {
-            Destroy(gameObject, 5);
+            yield return  new WaitForSeconds(second);
+            Bang();
+        }
+        
+             
+        void OnSpawned()
+        {
+            
+            StartCoroutine(DespawnedAfter(3));
+            Impact.SetActive(false);
+            foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
+            {
+                ps.Play();
+            }
+
+            foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
+            {
+                tr.enabled = true;
+            }
         }
 
 	    public void Update()
@@ -25,7 +45,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 			    transform.right = Rigidbody.velocity.normalized;
 		    }
 	    }
-
+        
         public void OnTriggerEnter(Collider other)
         {
             Bang(other.gameObject);
@@ -35,15 +55,27 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         {
             Bang(other.gameObject);
         }
+        
+        private void Bang()
+        {
+            foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
+            {
+                ps.Stop();
+            }
+
+            foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
+            {
+                tr.enabled = false;
+            }
+            
+            EZ_PoolManager.Despawn(gameObject.transform);
+
+        }
 
         private void Bang(GameObject other)
         {
             ReplaceImpactSound(other);
             Impact.SetActive(true);
-            Destroy(GetComponent<SpriteRenderer>());
-            Destroy(GetComponent<Rigidbody>());
-            Destroy(GetComponent<Collider>());
-            Destroy(gameObject, 1);
 
             foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
             {
@@ -54,6 +86,8 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 	        {
 		        tr.enabled = false;
 			}
+            
+            EZ_PoolManager.Despawn(gameObject.transform);
 		}
 
         private void ReplaceImpactSound(GameObject other)
