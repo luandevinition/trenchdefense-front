@@ -105,7 +105,7 @@ namespace BattleStage.Controller
                 {
                     Time.timeScale = 0f;
                     _gameObjetcNewWaveUI.SetActive(true);
-                    StartCoroutine(viewModel.NextWave(currentWave));
+                    StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
                 }
             }).AddTo(this);
 
@@ -128,6 +128,7 @@ namespace BattleStage.Controller
            
             _characterUnitStatus.ShowRetryUI.Subscribe(_ =>
             {
+                StartCoroutine(viewModel.LoseWave(currentWave, 0));
                 _gameObjetcManagerPool.transform.DestroyChildren();
                 _uIRetry.SetActive(true);
             }).AddTo(this);

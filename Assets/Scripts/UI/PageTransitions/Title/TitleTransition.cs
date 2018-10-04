@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Components;
 using Components.Communication;
 using Domain.User;
@@ -21,6 +22,9 @@ namespace UI.PageTransitions.Title
     public class TitleTransition : PageTransition
     {
         private GameUser _gameUser;
+
+        private List<LeaderboardRecord> _listLeaderboard;
+		
         
         public override IEnumerator LoadAsync()
         {
@@ -58,14 +62,16 @@ namespace UI.PageTransitions.Title
 #endif
                     }, ex => { Debug.LogError("Can't create access token"); });
             }
-            ApiClient.SetAccessTokenToHeader(accessToken);    
-                        
+            ApiClient.SetAccessTokenToHeader(accessToken);
+
+            bool isLoadingNewTransition = false;
             yield return UserComponents.Instance.GetGameUserData().StartAsCoroutine(gameUser =>
             {
                 _gameUser = gameUser;
                 MyData.MyGameUser = _gameUser;
             },  ex =>
             {
+                isLoadingNewTransition = true;
                 PlayerPrefs.SetString("AccessToken",String.Empty);
                 Debug.LogError("Can't get Gameuser : " + ex.ToString());
                 PageRouter.Instance.DoTransition<LoadingBundleTransition>();
@@ -77,13 +83,25 @@ namespace UI.PageTransitions.Title
             Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteBGM);
             Debug.LogWarning("Game User : " + _gameUser.GameSetting.MuteSFX);
 #endif
+
+            if (!isLoadingNewTransition)
+            {
+                yield return UserComponents.Instance.GetLeaderboard().StartAsCoroutine(listLeaderboard =>
+                {
+                    _listLeaderboard = listLeaderboard;
+                },  ex =>
+                {
+                    Debug.LogError("Can't get Leaderboard");
+                });
+            }
+            
             yield return null;
             _loading.Value = false;
         }
 
         public override void BindLoadedModels()
         {
-            var viewModel = new TitleViewModel(_gameUser);
+            var viewModel = new TitleViewModel(_gameUser,_listLeaderboard);
             _pageInstance.GetComponent<TitlePageView>().Bind(viewModel);
         }
     }

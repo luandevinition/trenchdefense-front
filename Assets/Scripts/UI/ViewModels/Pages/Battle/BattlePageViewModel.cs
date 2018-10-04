@@ -62,7 +62,18 @@ namespace UI.ViewModels.Pages.Battle
             }
         }
 
-        public IEnumerator NextWave(int currentWave)
+        public IEnumerator LoseWave(int currentWave, int hp = 0)
+        {
+            yield return WavesComponents.Instance.EndWave(currentWave,hp,0).StartAsCoroutine(unit =>
+            {
+                Debug.LogWarning("Send Lose");
+            },  ex =>
+            {
+                Debug.LogError("Can't End Waves " + currentWave + " with exception " +  ex.ToString());
+            });
+        }
+
+        public IEnumerator NextWave(int currentWave, int hp)
         {
             int nextWave = (currentWave+1);
 
@@ -82,7 +93,7 @@ namespace UI.ViewModels.Pages.Battle
                 });
             }
             
-            yield return WavesComponents.Instance.EndWave(currentWave,0,0).StartAsCoroutine(unit =>
+            yield return WavesComponents.Instance.EndWave(currentWave,hp,0).StartAsCoroutine(unit =>
             {
                 
             },  ex =>

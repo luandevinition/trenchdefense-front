@@ -4,6 +4,7 @@ using Domain.User;
 using EazyTools.SoundManager;
 using Facade;
 using UI.ViewModels.Pages.Title;
+using UI.Views.Parts;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -208,7 +209,16 @@ namespace UI.Views.Pages.Title
                             _girdLayoutTransform.DestroyChildren();
                             for (int i = 0; i < 10; i++)
                             {
-                                Instantiate(leaderBoardItemPrefab, _girdLayoutTransform);
+                                var list = viewModel.ListLeaderboard();
+                                var gameObjectLeaderboard = Instantiate(leaderBoardItemPrefab, _girdLayoutTransform);
+                                string username = "--";
+                                string record = "--";
+                                if (i < list.Count)
+                                {
+                                    username = list[i].UserName;
+                                    record = list[i].result;
+                                }
+                                gameObjectLeaderboard.GetComponent<LeaderboardItem>().InitView((i + 1),record, username);
                             }
                             isCompleteMoveMenu = true;
                         });

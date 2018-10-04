@@ -1,4 +1,5 @@
-﻿using Components;
+﻿using System.Collections.Generic;
+using Components;
 using Domain;
 using Domain.User;
 using Facade;
@@ -14,9 +15,12 @@ namespace UI.ViewModels.Pages.Title
 	{
 		public GameUser GameUserData { get; private set; }
 
-		public TitleViewModel(GameUser gameUser)
+		public List<LeaderboardRecord> _listLeaderboard { get; private set; }
+		
+		public TitleViewModel(GameUser gameUser, List<LeaderboardRecord> listLeaderboard)
 		{
 			GameUserData = gameUser;
+			_listLeaderboard = listLeaderboard;
 		}
 
 		public GameUser GetGameUser()
@@ -48,6 +52,11 @@ namespace UI.ViewModels.Pages.Title
 		public IObservable<GameUser> OnCompleteSaveSetting()
 		{
 			return _onCompleteSaveSetting.AsObservable();
+		}
+
+		public List<LeaderboardRecord> ListLeaderboard()
+		{
+			return _listLeaderboard;
 		}
 	}
 }

@@ -63,7 +63,9 @@ namespace Infrastructures.Http.Wave
 			{
 				waveID = (uint) wave,
 				dropGold = (uint) dropGoldOfWave,
-				hp = (uint) hp
+				hp = (uint) hp,
+				matchResult = hp > 0 ? "complete" : "failure"  //complete, failure
+
 			};
 			var models = new List<IExtensible> {request};
             
