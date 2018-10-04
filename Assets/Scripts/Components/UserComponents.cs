@@ -1,4 +1,5 @@
-﻿using Domain.User;
+﻿using System.Collections.Generic;
+using Domain.User;
 using Infrastructures.Repository.User;
 using Interface.Repository.User;
 using UniRx;
@@ -46,6 +47,11 @@ namespace Components
         public IObservable<Unit> GetCurrentCharacter()
         {
             return _repository.GetCurrentCharacter();
+        }
+
+        public IObservable<List<LeaderboardRecord>> GetLeaderboard()
+        {
+            return _repository.GetLeaderboard();
         }
     }
 }

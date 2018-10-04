@@ -1,4 +1,5 @@
-﻿using Domain.User;
+﻿using System.Collections.Generic;
+using Domain.User;
 using UniRx;
 using BattleStage.Domain;
 using Unit = BattleStage.Domain.Unit;
@@ -14,5 +15,7 @@ namespace Interface.Repository.User
         IObservable<bool> UpdateGameSetting(GameUser gameUser);
 
         IObservable<Unit> GetCurrentCharacter();
+
+        IObservable<List<LeaderboardRecord>> GetLeaderboard();
     }
 }

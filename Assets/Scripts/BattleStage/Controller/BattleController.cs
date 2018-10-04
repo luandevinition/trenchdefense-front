@@ -86,10 +86,10 @@ namespace BattleStage.Controller
             
             viewModel.NextWaveObservable.Subscribe(newWaveData =>
             {
-                Time.timeScale = 1f;
                 _gameObjetcNewWaveUI.SetActive(false);
                 currentSecondCounter = 0;
                 _killedZombies = 0;
+                timePlayed.OnNext(currentSecondCounter);
                 killedZombies.OnNext(_killedZombies);
                 _currentWaveData = newWaveData;
                 
@@ -112,7 +112,7 @@ namespace BattleStage.Controller
                 {
                     Time.timeScale = 0f;
                     _gameObjetcNewWaveUI.SetActive(true);
-                    viewModel.NextWave(currentWave);
+                    StartCoroutine(viewModel.NextWave(currentWave));
                 }
             }).AddTo(this);
 

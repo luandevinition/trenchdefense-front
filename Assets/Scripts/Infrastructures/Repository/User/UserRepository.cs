@@ -1,4 +1,5 @@
-﻿using Components.Communication;
+﻿using System.Collections.Generic;
+using Components.Communication;
 using Domain.User;
 using Infrastructures.Http.User;
 using Interface.Http.User;
@@ -45,6 +46,11 @@ namespace Infrastructures.Repository.User
         public IObservable<BattleStage.Domain.Unit> GetCurrentCharacter()
         {
             return _userHttp.GetCurrentCharacter();
+        }
+
+        public IObservable<List<LeaderboardRecord>> GetLeaderboard()
+        {
+            return _userHttp.GetLeaderboard();
         }
     }
 }

@@ -30,5 +30,11 @@ namespace Infrastructures.Factories.User
             return new Unit(new UnitID(0), dto.name, (int) dto.attack, (int) dto.hp, (int) dto.speed,
                 new ResourceID(int.Parse(dto.resourceID)), weapons.First().ID, null, weapons);
         }
+        
+        
+        public static List<LeaderboardRecord> Make(App.Proto.Character dto)
+        {
+            return new List<LeaderboardRecord>(){new LeaderboardRecord("name",1,2)};
+        }
     }
 }

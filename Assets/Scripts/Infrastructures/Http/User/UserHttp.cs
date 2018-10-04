@@ -23,6 +23,8 @@ namespace Infrastructures.Http.User
 		
         private const string API_CURRENT_CHARACTER = "/characters/profile";
         
+        private const string API_GET_LEADERBOARD = "/characters/leaderboard";
+        
         private readonly IApiClient _apiClient;
 	
         public UserHttp(IApiClient apiClient)
@@ -98,6 +100,23 @@ namespace Infrastructures.Http.User
             }
 
             return protobufs.Cast<App.Proto.CharacterStatus>().Select(UserFactory.Make).FirstOrDefault();
+        }
+        
+        
+        public IObservable<List<LeaderboardRecord>> GetLeaderboard()
+        {
+            return _apiClient.Get(API_GET_LEADERBOARD)
+                .Select(MakeListLeaderbaordByProtobufs)
+                .First();
+        }
+        
+        private List<LeaderboardRecord> MakeListLeaderbaordByProtobufs(IList<IExtensible> protobufs)
+        {
+            if (protobufs.Count < 1) {
+                return new List<LeaderboardRecord>();
+            }
+
+            return protobufs.Cast<App.Proto.Character>().Select(UserFactory.Make).First();
         }
     }
 }

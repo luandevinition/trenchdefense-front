@@ -64,7 +64,7 @@ namespace UI.ViewModels.Pages.Battle
 
         public IEnumerator NextWave(int currentWave)
         {
-            int nextWave = currentWave++;
+            int nextWave = (currentWave+1);
 
             if (nextWave > _waves.Count)
             {
@@ -94,11 +94,15 @@ namespace UI.ViewModels.Pages.Battle
             {
                 _unit.Value = unitNew;
                 AddMoreWeapon(unitNew.Weapons.ToList());
-                _nextWaveObservable.OnNext(_waves[nextWave]);
             },  ex =>
             {
                 Debug.LogError("Can't Begin Waves " + nextWave + " with exception " + ex.ToString());
             });
+
+            Time.timeScale = 1f;
+            yield return new WaitForSeconds(2f);
+            
+            _nextWaveObservable.OnNext(_waves[nextWave-1]);
         }
     }
 }

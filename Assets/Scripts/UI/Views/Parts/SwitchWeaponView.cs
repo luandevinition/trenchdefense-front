@@ -22,7 +22,7 @@ namespace UI.Views.Parts
 
         public void ShowNumberOfWeaponEnabled(int count)
         {
-            for (int i = 0; i < Mathf.Min(ButtonWeapon.Length,(count-1)); i++)
+            for (int i = 0; i < Mathf.Min(ButtonWeapon.Length,count); i++)
             {
                 ButtonWeapon[i].interactable = true;
             }
