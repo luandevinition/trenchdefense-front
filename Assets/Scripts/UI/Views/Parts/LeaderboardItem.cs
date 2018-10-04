@@ -12,6 +12,7 @@ namespace UI.Views.Parts
 
         public Text TextScore;
 
+        public Color[] Colors;
 
         private const string SCORE_FORMAT = "{0}\n Wave";
         private const string RANK_FORMAT = "Rank {0}";
@@ -28,6 +29,8 @@ namespace UI.Views.Parts
             TextScore.text = score;
 
             TextRanking.text = String.Format(RANK_FORMAT, rank);
+
+            TextRanking.color = Colors[rank > 2 ? 2 : rank - 1];
         }
         
     }
