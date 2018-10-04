@@ -27,9 +27,6 @@ namespace BattleStage.Controller.Enemy
 		public Animator Animator;
 		
 		[SerializeField]
-		private GameObject _bulletGameObject;
-
-		[SerializeField]
 		private AudioClip _audioThrowPosion;
 		
 		private Transform _followedTarget;
@@ -37,7 +34,10 @@ namespace BattleStage.Controller.Enemy
 		private Vector3 scaleVector3 = Vector3.one;
 
 		[SerializeField]
-		private BoxCollider _capsuleCollider;
+		private BoxCollider _boxsuleCollider;
+		
+		[SerializeField]
+		private CapsuleCollider _capsuleCollider;
 
 		private bool _isReachedToTarget;
 
@@ -125,6 +125,7 @@ namespace BattleStage.Controller.Enemy
 				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);
 				_capsuleCollider.enabled = false;
+				_boxsuleCollider.enabled = false;
 				DestroyObject(this.gameObject,3f);
 			}
 		}
