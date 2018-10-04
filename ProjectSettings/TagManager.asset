@@ -10,6 +10,7 @@ TagManager:
   - UiCanvas
   - Enemy
   - Weapon
+  - Rocket
   layers:
   - Default
   - TransparentFX

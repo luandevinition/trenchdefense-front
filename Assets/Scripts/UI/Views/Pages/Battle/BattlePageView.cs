@@ -3,6 +3,7 @@ using System.Linq;
 using BattleStage.Controller;
 using Domain.Wave;
 using UI.ViewModels.Pages.Battle;
+using UI.Views.Parts;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,16 +19,39 @@ namespace UI.Views.Pages.Battle
 		private Button _pauseButton;
 		
 		[SerializeField]
+		public Button _SwitchWeaponButton;
+		
+		[SerializeField]
 		private GameObject _pauseSubPageGameObject;
+		
+		[SerializeField]
+		private GameObject _switchPartGameObject;
 
+		[SerializeField]
+		private SwitchWeaponView _switchWeaponView;
+
+		private readonly Subject<int> _selectWeaponIndex= new Subject<int>();
+		
 		public void Bind(IBattlePageViewModel viewModel)
 		{
-			BattleController.InitData(viewModel.Waves.ToList());
+			_switchWeaponView.Bind(_selectWeaponIndex);
 
+			BattleController.InitData(viewModel, _selectWeaponIndex);
+
+			viewModel.Weapons.ToReactiveCollection().ObserveCountChanged(true).Subscribe(newCount =>
+			{
+				_switchWeaponView.ShowNumberOfWeaponEnabled(newCount);
+			}).AddTo(this);
+			
 			_pauseButton.OnClickAsObservable().Subscribe(_ =>
 			{
 				Time.timeScale = 0f;
 				_pauseSubPageGameObject.SetActive(true);
+			}).AddTo(this);
+			
+			_SwitchWeaponButton.OnClickAsObservable().Subscribe(_ =>
+			{
+				_switchPartGameObject.SetActive(true);
 			}).AddTo(this);
 		}
 		

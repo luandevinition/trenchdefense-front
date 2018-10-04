@@ -38,6 +38,13 @@ namespace BattleStage.Controller.Character
         {
             get { return _joystick; }
         }
+        
+        [SerializeField]
+        private Joystick _joystickWeapon;
+        public Joystick JoystickWeapon
+        {
+            get { return _joystickWeapon; }
+        }
 
         [SerializeField]
         private Image _hpImage;
@@ -45,15 +52,10 @@ namespace BattleStage.Controller.Character
         [SerializeField]
         public SpriteCollection SpriteCollection;
         
-        [SerializeField]
-        public Button _SwitchWeaponButton;
-
         public FirearmCollection FirearmCollection;
         
         public CharacterHM Character;
         
-        public Vector3 ClickPosition = Vector3.zero;
-
         public Camera CurrentCamera;
         
         /// <summary>
@@ -70,26 +72,29 @@ namespace BattleStage.Controller.Character
         private readonly Subject<UniRx.Unit> _showRetryUI = new Subject<UniRx.Unit>();
 
 
-        private float _offsetValue = 200f;
-        private float _offsetratio = 0.225f;
-
-        private bool _isInit = false;
-
+        private bool _isInit;
         private List<Weapon> _weapons;
-        
-        
-        public void InitCharacterData(Unit unit, List<Weapon> weapons)
+
+        public void SetNewListWeapon(List<Weapon> weapons)
+        {
+            _weapons = weapons;
+        }
+
+        public void InitCharacterData(Unit unit, List<Weapon> weapons, ISubject<int> indexOfButtonClick)
         {
             CurrentCamera = GameObject.Find("BattleCameraFollow").GetComponent<Camera>();
-            Joystick.SetCamera(CurrentCamera);
             _weapons = weapons;
+            _joystick.SetCamera(CurrentCamera);
+            _joystickWeapon.SetCamera(CurrentCamera);
             var weapon = weapons.FirstOrDefault(d => d.ID == unit.BaseWeaponID);
             if (weapon == null)
             {
                 Debug.LogError("Problem of Data Weapon !");
                 return;
             }
-            //SetFirearmParams(weapon.Name);
+            _playerUnitStatus.SetWeapon(weapon);
+            SetFirearmParams(weapon.Name);
+            EquipFirearms(weapon.Name, weapon.Collection);
             
             Weapon granade = null;
             if(unit.BaseGranedaID != null)
@@ -100,7 +105,6 @@ namespace BattleStage.Controller.Character
                 _hpImage.fillAmount = hpValue/_playerUnitStatus.HP;
             }).AddTo(this);
 
-            _offsetValue = Screen.height * 0.225f;
             _playerUnitStatus.IsDie.Subscribe(isDie =>
             {
                 if (isDie)
@@ -109,6 +113,26 @@ namespace BattleStage.Controller.Character
                     _showRetryUI.OnNext(UniRx.Unit.Default);
                 }
             }).AddTo(this);
+
+            indexOfButtonClick.Subscribe(currentButtonClick =>
+            {
+                if (currentButtonClick >= _weapons.Count)
+                {
+                    return;
+                }
+                
+                var weaponChange = _weapons[currentButtonClick];
+                if (weaponChange == null)
+                {
+                    Debug.LogError("Problem of Data Weapon !");
+                    return;
+                }
+                
+                _playerUnitStatus.SetWeapon(weapon);
+                SetFirearmParams(weaponChange.Name);
+                EquipFirearms(weaponChange.Name, weaponChange.Collection);
+            }).AddTo(this);
+            
             _isInit = true;
         }
         
@@ -122,13 +146,8 @@ namespace BattleStage.Controller.Character
             
             playerPosition = transform.position;
 
-            Touch[] myTouches = Input.touches;  
-            
-            if(myTouches.Length > 1 && myTouches.Last().position.y > _offsetValue)
-                ClickPosition = CurrentCamera.ScreenToViewportPoint(myTouches.Last().position);
-            
             //Flip Character
-            transform.localScale = new Vector3(ClickPosition.x >= 0.5 ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(_joystickWeapon.Horizontal >= 0 ? 1 : -1, 1, 1);
         
             // Play animation run when joystick pressing
             Animator.SetBool("Run", _joystick.Horizontal != 0 || _joystick.Vertical != 0);
@@ -144,7 +163,6 @@ namespace BattleStage.Controller.Character
 
         private bool _canGetDamageByHit = true;
         private Coroutine getHitCoroutine;
-        
         
         public void OnTriggerEnter(Collider other)
         {
@@ -192,6 +210,12 @@ namespace BattleStage.Controller.Character
             
             
             ((CharacterHM) Character).Firearm.Params = FirearmCollection.Firearms.Single(i => i.Name == weaponName);
+        }
+        
+        public void EquipFirearms(string sname, string collection)
+        {
+            Character.Firearms = SpriteCollection.Firearms2H.Single(i => i.Name == sname && i.Collection == collection).Sprites;
+            Character.Initialize();
         }
         
         public void EquipMeleeWeapon1H(string sname, string collection)

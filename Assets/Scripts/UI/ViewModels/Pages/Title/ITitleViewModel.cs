@@ -14,5 +14,6 @@ namespace UI.ViewModels.Pages.Title
 
 		IObservable<GameUser> OnCompleteSaveSetting();
 		
+		
 	}
 }

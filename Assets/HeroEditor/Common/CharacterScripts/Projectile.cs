@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using BattleStage.Domain;
+using EZ_Pooling;
 using UnityEngine;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
@@ -13,18 +16,22 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public GameObject Impact;
 	    public Rigidbody Rigidbody;
 
-		public void Start()
+        public bool IsExplosion;
+        public Transform ExplosionPrefab;
+        
+
+        public void Start()
         {
-            Destroy(gameObject, 5);
+            Destroy(gameObject, IsExplosion ? 3f : 2f);
         }
 
-	    public void Update()
-	    {
-		    if (Rigidbody != null && Rigidbody.useGravity)
-		    {
-			    transform.right = Rigidbody.velocity.normalized;
-		    }
-	    }
+        public void Update()
+        {
+            if (Rigidbody != null && Rigidbody.useGravity)
+            {
+                transform.right = Rigidbody.velocity.normalized;
+            }
+        }
 
         public void OnTriggerEnter(Collider other)
         {
@@ -50,11 +57,24 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 ps.Stop();
             }
 
-	        foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
-	        {
-		        tr.enabled = false;
-			}
-		}
+            foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
+            {
+                tr.enabled = false;
+            }
+
+            if (IsExplosion)
+            {
+                var boom = EZ_PoolManager.Spawn(ExplosionPrefab, transform.position, Quaternion.identity);
+                boom.GetComponentInChildren<Damage>().DamageValue = _damageOfExplosion;
+            }
+        }
+
+        private float _damageOfExplosion = 1;
+
+        public void SetDamageOfExplosion(float damage)
+        {
+            _damageOfExplosion = damage;
+        }
 
         private void ReplaceImpactSound(GameObject other)
         {

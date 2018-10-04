@@ -397,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageValue: 0
+  IsEnemyDamage: 0
 --- !u!114 &114844765844241412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,6 +413,8 @@ MonoBehaviour:
   Trail: {fileID: 1093674060203738}
   Impact: {fileID: 1121886198620100}
   Rigidbody: {fileID: 0}
+  IsExplosion: 0
+  ExplosionPrefab: {fileID: 426390, guid: b185c1a9cf067374586d095111b15bd1, type: 2}
 --- !u!135 &135754707400027624
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -10466,7 +10469,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300004, guid: 70435c1630964997a704ca537d1a402e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10474,5 +10477,5 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0

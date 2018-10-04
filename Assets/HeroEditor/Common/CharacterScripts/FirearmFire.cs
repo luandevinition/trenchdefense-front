@@ -5,6 +5,7 @@ using Assets.HeroEditor.Common.Enums;
 using Assets.MilitaryHeroes.Scripts.Enums;
 using BattleStage.Domain;
 using EazyTools.SoundManager;
+using EZ_Pooling;
 using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -90,9 +91,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             Character.Firearm.AmmoShooted++;
             CreateBullet(Character.UnitStatus.Attack);
             FireMuzzlePlay();
-            if (!MyData.MyGameUser.GameSetting.EnableSFX)
+            if (MyData.MyGameUser.GameSetting.EnableSFX)
             {
-                SoundManager.PlaySound(Character.Firearm.Params.SoundFire, 0.5f);
+                GetComponent<AudioSource>().PlayOneShot(Character.Firearm.Params.SoundFire,MyData.MyGameUser.GameSetting.VolumeFloatValue* 0.5f);
             }
             
             var offset = -Character.Firearm.Params.Recoil * ArmR.parent.InverseTransformDirection(Character.Firearm.FireTransform.right);
@@ -180,8 +181,6 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         private void CreateBullet(float Damage = 1) // TODO: Preload and caching prefabs is recommended to improve game performance
         {
-            if (SceneManager.GetActiveScene().name.Contains("CharacterEditor")) return; // Don't create bullets in editor scene
-
             var iterations = Character.Firearm.Params.Type == FirearmType.Shotgun ? int.Parse(Character.Firearm.Params.MetaAsDictionary["Spread"]) : 1;
 
             for (var i = 0; i < iterations; i++)
@@ -195,7 +194,14 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");
                 bullet.GetComponent<Rigidbody>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right + spread)
                     * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
-                bullet.GetComponent<Damage>().DamageValue = Damage;
+                if (Character.Firearm.Params.Type != FirearmType.RocketLauncher)
+                {
+                    bullet.GetComponent<Damage>().DamageValue = Damage;
+                }
+                else
+                {
+                    bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage);
+                }
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;
 
                 foreach (var r in bullet.Renderers)

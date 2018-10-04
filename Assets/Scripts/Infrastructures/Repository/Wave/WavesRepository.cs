@@ -4,6 +4,7 @@ using Infrastructures.Http.Wave;
 using Interface.Http.Wave;
 using Interface.Repository.Wave;
 using UniRx;
+using Unit = BattleStage.Domain.Unit;
 
 namespace Infrastructures.Repository.Wave
 {
@@ -30,6 +31,16 @@ namespace Infrastructures.Repository.Wave
         public IObservable<List<Domain.Wave.Wave>> GetListWaves(int page)
         {
             return _waveHttp.GetListWaves(page);
+        }
+        
+        public IObservable<Unit> BeginWave(int wave)
+        {
+            return _waveHttp.BeginWave(wave);
+        }
+        
+        public IObservable<Unit> EndWave(int wave, int hp, int dropGoldOfWave)
+        {
+            return _waveHttp.EndWave(wave,hp,dropGoldOfWave);
         }
     }
 }

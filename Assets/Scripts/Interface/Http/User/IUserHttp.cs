@@ -1,5 +1,7 @@
-﻿using Domain.User;
+﻿using System.Collections.Generic;
+using Domain.User;
 using UniRx;
+using Unit = BattleStage.Domain.Unit;
 
 namespace Interface.Http.User
 {
@@ -10,5 +12,9 @@ namespace Interface.Http.User
         IObservable<GameUser> GetGameUserData();
 
         IObservable<bool> UpdateGameSetting(GameUser gameUser);
+
+        IObservable<Unit> GetCurrentCharacter();
+
+        IObservable<List<LeaderboardRecord>> GetLeaderboard();
     }
 }

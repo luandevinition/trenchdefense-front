@@ -3336,12 +3336,11 @@ MonoBehaviour:
   Animator: {fileID: 95076920843000736}
   _playerUnitStatus: {fileID: 114808599018445708}
   _joystick: {fileID: 0}
+  _joystickWeapon: {fileID: 0}
   _hpImage: {fileID: 0}
   SpriteCollection: {fileID: 0}
-  _SwitchWeaponButton: {fileID: 0}
   FirearmCollection: {fileID: 0}
   Character: {fileID: 0}
-  ClickPosition: {x: 0, y: 0, z: 0}
   CurrentCamera: {fileID: 0}
 --- !u!114 &114236680741511330
 MonoBehaviour:

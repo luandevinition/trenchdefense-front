@@ -1,7 +1,5 @@
 ﻿using Assets.HeroEditor.Common.Data;
-using EazyTools.SoundManager;
 using Facade;
-using HeroEditor.Common;
 using UnityEngine;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
@@ -49,10 +47,11 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 case "Pump": clip = Params.SoundPump; break;
                 default: return;
             }
-            if(MyData.MyGameUser.GameSetting.EnableSFX)
-                return;
+            if (MyData.MyGameUser.GameSetting.EnableSFX)
+            {
+                GetComponent<AudioSource>().PlayOneShot(clip, MyData.MyGameUser.GameSetting.VolumeFloatValue * 0.5f);
+            }
 
-            SoundManager.PlaySound(clip, 0.5f);
         }
     }
 }
