@@ -20452,8 +20452,8 @@ MonoBehaviour:
     LoadType: 0
     AutomaticFire: 1
     AutomaticLoad: 1
-    FireRateInMinute: 800
-    MagazineCapacity: 30
+    FireRateInMinute: 200
+    MagazineCapacity: 7
     Recoil: 0.025
     Accuracy: 0.95
     MuzzleVelocity: 1500
@@ -20568,8 +20568,8 @@ MonoBehaviour:
     LoadType: 0
     AutomaticFire: 0
     AutomaticLoad: 1
-    FireRateInMinute: 120
-    MagazineCapacity: 3
+    FireRateInMinute: 60
+    MagazineCapacity: 1
     Recoil: 0.05
     Accuracy: 0.95
     MuzzleVelocity: 1000
