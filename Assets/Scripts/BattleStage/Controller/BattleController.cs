@@ -66,13 +66,6 @@ namespace BattleStage.Controller
 
         public void InitData(IBattlePageViewModel viewModel, ISubject<int> selectWeaponIndex)
         {
-            /* Dummy Data remove when backend okie
-            Weapon weapon1= new Weapon(new WeaponID(1),"AR-25", "Pro" , 5 , 150, 450);
-            Weapon weapon2= new Weapon(new WeaponID(2),"AK-47" , "Basic", 15 , 150, 450);
-            Weapon weapon3= new Weapon(new WeaponID(3),"HellBlade","Pro" , 55 , 150, 450);
-            Weapon weapon4= new Weapon(new WeaponID(4),"RocketLauncher","Pro" , 50 , 150, 450);
-            */
-            
             timePlayedText.text = "00:00:00";
             killedZombiesText.text = "0";
             
@@ -128,7 +121,7 @@ namespace BattleStage.Controller
             var data = new BattleInitializeData(unit, _currentWave, unit.Weapons.ToList());
             _characterUnitStatus.InitCharacterData(data.Player , data.Weapons, _selectWeaponIndex);
 
-            viewModel.Weapons.ToReactiveCollection().ObserveCountChanged().Subscribe(_ =>
+            viewModel.Weapons.ObserveCountChanged().Subscribe(_ =>
             {
                 _characterUnitStatus.SetNewListWeapon(viewModel.Weapons.ToList());
             }).AddTo(this);

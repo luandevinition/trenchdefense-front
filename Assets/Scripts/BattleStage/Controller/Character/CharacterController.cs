@@ -24,12 +24,9 @@ namespace BattleStage.Controller.Character
         
         public Animator Animator;
 		
-        [SerializeField]
-        private BaseUnitStatus _playerUnitStatus;
-
         public float MovingSpeed
         {
-            get { return _playerUnitStatus.Speed; }
+            get { return Character.UnitStatus.Speed; }
         }
 	    
         [SerializeField]
@@ -92,20 +89,20 @@ namespace BattleStage.Controller.Character
                 Debug.LogError("Problem of Data Weapon !");
                 return;
             }
-            _playerUnitStatus.SetWeapon(weapon);
+            Character.UnitStatus.SetWeapon(weapon);
             SetFirearmParams(weapon.Name);
             EquipFirearms(weapon.Name, weapon.Collection);
             
             Weapon granade = null;
             if(unit.BaseGranedaID != null)
                 granade = weapons.FirstOrDefault(d => d.ID == unit.BaseGranedaID);
-            _playerUnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
-            _playerUnitStatus.CurrentHP.Subscribe(hpValue =>
+            Character.UnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
+            Character.UnitStatus.CurrentHP.Subscribe(hpValue =>
             {
-                _hpImage.fillAmount = hpValue/_playerUnitStatus.HP;
+                _hpImage.fillAmount = hpValue/Character.UnitStatus.HP;
             }).AddTo(this);
 
-            _playerUnitStatus.IsDie.Subscribe(isDie =>
+            Character.UnitStatus.IsDie.Subscribe(isDie =>
             {
                 if (isDie)
                 {
@@ -128,7 +125,7 @@ namespace BattleStage.Controller.Character
                     return;
                 }
                 
-                _playerUnitStatus.SetWeapon(weapon);
+                Character.UnitStatus.SetWeapon(weaponChange);
                 SetFirearmParams(weaponChange.Name);
                 EquipFirearms(weaponChange.Name, weaponChange.Collection);
             }).AddTo(this);
@@ -138,10 +135,10 @@ namespace BattleStage.Controller.Character
         
         public void Update () 
         {
-            if(_joystick == null || _playerUnitStatus == null || !_isInit)
+            if(_joystick == null || Character.UnitStatus == null || !_isInit)
                 return;
 
-            if (_playerUnitStatus.IsDie.Value)
+            if (Character.UnitStatus.IsDie.Value)
                 return;
             
             playerPosition = transform.position;
@@ -152,8 +149,8 @@ namespace BattleStage.Controller.Character
             // Play animation run when joystick pressing
             Animator.SetBool("Run", _joystick.Horizontal != 0 || _joystick.Vertical != 0);
 
-            moveVector.x = Mathf.Clamp(playerPosition.x + (_joystick.Horizontal * _playerUnitStatus.Speed * Time.deltaTime), -MAX_HORIZONTAL_VALUE, MAX_HORIZONTAL_VALUE);
-            moveVector.y = Mathf.Clamp(playerPosition.y + (_joystick.Vertical * _playerUnitStatus.Speed * Time.deltaTime), -MAX_VERTICAL_VALUE, MAX_VERTICAL_VALUE);
+            moveVector.x = Mathf.Clamp(playerPosition.x + (_joystick.Horizontal * MovingSpeed * Time.deltaTime), -MAX_HORIZONTAL_VALUE, MAX_HORIZONTAL_VALUE);
+            moveVector.y = Mathf.Clamp(playerPosition.y + (_joystick.Vertical * MovingSpeed * Time.deltaTime), -MAX_VERTICAL_VALUE, MAX_VERTICAL_VALUE);
             moveVector.z = 0;
             
             // For Moving the character
@@ -170,7 +167,7 @@ namespace BattleStage.Controller.Character
             if (other.tag.Equals("Weapon"))
             {
                 var damgeComponent = other.gameObject.GetComponent<Damage>();
-                if(_playerUnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
+                if(Character.UnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
                     return;
                 damgeValue = damgeComponent.DamageValue;
             }
@@ -182,13 +179,13 @@ namespace BattleStage.Controller.Character
                     StopCoroutine(getHitCoroutine);
                 StartCoroutine(DelayForHit());
                 damgeValue = other.gameObject.GetComponent<BaseUnitStatus>().Attack;
-                if(_playerUnitStatus.IsDie.Value)
+                if(Character.UnitStatus.IsDie.Value)
                     return;
             }
           
-            _playerUnitStatus.GetDamage(transform.position, damgeValue, new Vector3(0,45,0));
+            Character.UnitStatus.GetDamage(transform.position, damgeValue, new Vector3(0,45,0));
             
-            if (_playerUnitStatus.IsDie.Value)
+            if (Character.UnitStatus.IsDie.Value)
             {
                 Animator.SetBool("DieFront",true);
                 Animator.speed = 1f;
