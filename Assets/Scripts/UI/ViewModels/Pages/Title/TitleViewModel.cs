@@ -35,16 +35,26 @@ namespace UI.ViewModels.Pages.Title
 
 		public void SaveGameSetting(GameUser newGameUser)
 		{
+			
 			UserComponents.Instance.UpdateGameSetting(newGameUser).StartAsCoroutine(result =>
 			{
 				if (result)
 				{
-					_onCompleteSaveSetting.OnNext(newGameUser);				
+					UserComponents.Instance.GetLeaderboard().StartAsCoroutine(listLeaderboard =>
+					{
+						_listLeaderboard = listLeaderboard;
+						_onCompleteSaveSetting.OnNext(newGameUser);			
+					},  ex =>
+					{
+						Debug.LogError("Can't get Leaderboard");
+					});
 				}
 			},  ex =>
 			{
 				Debug.LogError("Can't update game setting");
 			});
+			
+			
 		}
 
 		private readonly Subject<GameUser> _onCompleteSaveSetting = new Subject<GameUser>();

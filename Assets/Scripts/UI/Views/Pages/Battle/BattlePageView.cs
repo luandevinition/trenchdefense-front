@@ -65,7 +65,7 @@ namespace UI.Views.Pages.Battle
 		
 		void OnApplicationPause(bool pauseStatus)
 		{
-			if (pauseStatus && ((int)Time.timeScale) != 0)
+			if (pauseStatus && Mathf.RoundToInt(Time.timeScale) == 1)
 			{
 				Time.timeScale = 0f;
 				_pauseSubPageGameObject.SetActive(true);

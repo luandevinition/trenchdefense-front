@@ -94,7 +94,7 @@ namespace BattleStage.Controller
             timePlayed.AsObservable().Subscribe(num =>
             {
                 var span = TimeSpan.FromSeconds(num);
-                string displayString = string.Format("{0}:{1}:{2}", span.Hours, span.Minutes, span.Seconds);
+                string displayString = string.Format("{0:00}:{1:00}:{2:00}", span.Hours, span.Minutes, span.Seconds);
                 timePlayedText.text = displayString;
             }).AddTo(this);
             
