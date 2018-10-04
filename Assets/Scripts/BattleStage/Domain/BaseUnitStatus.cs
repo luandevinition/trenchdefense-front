@@ -59,6 +59,11 @@ namespace BattleStage.Domain
         private Weapon _grenadeEquiped;
 
         private ReactiveProperty<float> _currentHP;
+        
+        public int CurrentHPFloat
+        {
+            get { return (int)_currentHP.Value; }
+        }
 
         public IObservable<float> CurrentHP
         {

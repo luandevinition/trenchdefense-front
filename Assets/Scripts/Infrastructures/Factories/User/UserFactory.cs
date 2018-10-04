@@ -32,9 +32,9 @@ namespace Infrastructures.Factories.User
         }
         
         
-        public static List<LeaderboardRecord> Make(App.Proto.Character dto)
+        public static LeaderboardRecord Make(App.Proto.LeaderBoard dto)
         {
-            return new List<LeaderboardRecord>(){new LeaderboardRecord("name",1,2)};
+            return new LeaderboardRecord(dto.user.name,0,dto.wave.name);
         }
     }
 }

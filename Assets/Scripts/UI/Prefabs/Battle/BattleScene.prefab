@@ -19372,7 +19372,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 95646018272932160}
-  _playerUnitStatus: {fileID: 114411198345368026}
   _joystick: {fileID: 114464694294818422}
   _joystickWeapon: {fileID: 114550848847704354}
   _hpImage: {fileID: 114035504225778938}

@@ -1,4 +1,5 @@
-﻿using Domain.User;
+﻿using System.Collections.Generic;
+using Domain.User;
 using UniRx;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace UI.ViewModels.Pages.Title
 		void SaveGameSetting(GameUser newGameUser);
 
 		IObservable<GameUser> OnCompleteSaveSetting();
-		
-		
+
+		List<LeaderboardRecord> ListLeaderboard();
 	}
 }

@@ -3334,7 +3334,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 95076920843000736}
-  _playerUnitStatus: {fileID: 114808599018445708}
   _joystick: {fileID: 0}
   _joystickWeapon: {fileID: 0}
   _hpImage: {fileID: 0}

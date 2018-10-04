@@ -23,7 +23,7 @@ namespace Infrastructures.Http.User
 		
         private const string API_CURRENT_CHARACTER = "/characters/profile";
         
-        private const string API_GET_LEADERBOARD = "/characters/leaderboard";
+        private const string API_GET_LEADERBOARD = "/match/leader_board";
         
         private readonly IApiClient _apiClient;
 	
@@ -116,7 +116,7 @@ namespace Infrastructures.Http.User
                 return new List<LeaderboardRecord>();
             }
 
-            return protobufs.Cast<App.Proto.Character>().Select(UserFactory.Make).First();
+            return protobufs.Cast<App.Proto.LeaderBoard>().Select(UserFactory.Make).ToList();
         }
     }
 }

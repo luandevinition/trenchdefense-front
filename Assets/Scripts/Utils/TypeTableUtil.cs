@@ -26,6 +26,7 @@ namespace Utils
 				case "App.Proto.Error": return 2133813781; // 7f2f6a15
 				case "App.Proto.BeginMatchParameter": return 3623522443; // d7fa908b
 				case "App.Proto.EndMatchParameter": return 2294637224; // 88c562a8
+				case "App.Proto.LeaderBoard": return 2860697096; // aa82c608
 				case "App.Proto.ProtobufMessage": return 3854281208; // e5bba9f8
 				case "App.Proto.ProtobufMessages": return 4218599789; // fb72b96d
 				case "App.Proto.UpdateSettingParameter": return 1287612623; // 4cbf68cf
@@ -58,6 +59,7 @@ namespace Utils
 				case 2133813781: return new App.Proto.Error(); //7f2f6a15
 				case 3623522443: return new App.Proto.BeginMatchParameter(); //d7fa908b
 				case 2294637224: return new App.Proto.EndMatchParameter(); //88c562a8
+				case 2860697096: return new App.Proto.LeaderBoard(); //aa82c608
 				case 3854281208: return new App.Proto.ProtobufMessage(); //e5bba9f8
 				case 4218599789: return new App.Proto.ProtobufMessages(); //fb72b96d
 				case 1287612623: return new App.Proto.UpdateSettingParameter(); //4cbf68cf

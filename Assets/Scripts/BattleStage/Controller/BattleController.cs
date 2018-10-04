@@ -66,13 +66,6 @@ namespace BattleStage.Controller
 
         public void InitData(IBattlePageViewModel viewModel, ISubject<int> selectWeaponIndex)
         {
-            /* Dummy Data remove when backend okie
-            Weapon weapon1= new Weapon(new WeaponID(1),"AR-25", "Pro" , 5 , 150, 450);
-            Weapon weapon2= new Weapon(new WeaponID(2),"AK-47" , "Basic", 15 , 150, 450);
-            Weapon weapon3= new Weapon(new WeaponID(3),"HellBlade","Pro" , 55 , 150, 450);
-            Weapon weapon4= new Weapon(new WeaponID(4),"RocketLauncher","Pro" , 50 , 150, 450);
-            */
-            
             timePlayedText.text = "00:00:00";
             killedZombiesText.text = "0";
             
@@ -101,7 +94,7 @@ namespace BattleStage.Controller
             timePlayed.AsObservable().Subscribe(num =>
             {
                 var span = TimeSpan.FromSeconds(num);
-                string displayString = string.Format("{0}:{1}:{2}", span.Hours, span.Minutes, span.Seconds);
+                string displayString = string.Format("{0:00}:{1:00}:{2:00}", span.Hours, span.Minutes, span.Seconds);
                 timePlayedText.text = displayString;
             }).AddTo(this);
             
@@ -112,7 +105,7 @@ namespace BattleStage.Controller
                 {
                     Time.timeScale = 0f;
                     _gameObjetcNewWaveUI.SetActive(true);
-                    StartCoroutine(viewModel.NextWave(currentWave));
+                    StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
                 }
             }).AddTo(this);
 
@@ -128,13 +121,14 @@ namespace BattleStage.Controller
             var data = new BattleInitializeData(unit, _currentWave, unit.Weapons.ToList());
             _characterUnitStatus.InitCharacterData(data.Player , data.Weapons, _selectWeaponIndex);
 
-            viewModel.Weapons.ToReactiveCollection().ObserveCountChanged().Subscribe(_ =>
+            viewModel.Weapons.ObserveCountChanged().Subscribe(_ =>
             {
                 _characterUnitStatus.SetNewListWeapon(viewModel.Weapons.ToList());
             }).AddTo(this);
            
             _characterUnitStatus.ShowRetryUI.Subscribe(_ =>
             {
+                StartCoroutine(viewModel.LoseWave(currentWave, 0));
                 _gameObjetcManagerPool.transform.DestroyChildren();
                 _uIRetry.SetActive(true);
             }).AddTo(this);

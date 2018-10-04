@@ -7,14 +7,14 @@ namespace Domain.User
     {
         public string UserName;
         public int rank;
-        public int score;
+        public string result;
 
-        public LeaderboardRecord(string userName, int rank, int score)
+        public LeaderboardRecord(string userName, int rank, string result)
         {
             if (userName == null) throw new ArgumentNullException("userName");
             UserName = userName;
             this.rank = rank;
-            this.score = score;
+            this.result = result;
         }
     }
 }

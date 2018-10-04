@@ -22,10 +22,10 @@ namespace UI.Views.Parts
         /// <param name="rank"></param>
         /// <param name="score"></param>
         /// <param name="username"></param>
-        public void InitView(int rank, int score, string username)
+        public void InitView(int rank, string score, string username)
         {
             TextName.text = username;
-            TextScore.text = String.Format(SCORE_FORMAT,score);
+            TextScore.text = score;
 
             TextRanking.text = String.Format(RANK_FORMAT, rank);
         }

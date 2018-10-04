@@ -1,4 +1,5 @@
-﻿using Components;
+﻿using System.Collections.Generic;
+using Components;
 using Domain;
 using Domain.User;
 using Facade;
@@ -14,9 +15,12 @@ namespace UI.ViewModels.Pages.Title
 	{
 		public GameUser GameUserData { get; private set; }
 
-		public TitleViewModel(GameUser gameUser)
+		public List<LeaderboardRecord> _listLeaderboard { get; private set; }
+		
+		public TitleViewModel(GameUser gameUser, List<LeaderboardRecord> listLeaderboard)
 		{
 			GameUserData = gameUser;
+			_listLeaderboard = listLeaderboard;
 		}
 
 		public GameUser GetGameUser()
@@ -31,16 +35,26 @@ namespace UI.ViewModels.Pages.Title
 
 		public void SaveGameSetting(GameUser newGameUser)
 		{
+			
 			UserComponents.Instance.UpdateGameSetting(newGameUser).StartAsCoroutine(result =>
 			{
 				if (result)
 				{
-					_onCompleteSaveSetting.OnNext(newGameUser);				
+					UserComponents.Instance.GetLeaderboard().StartAsCoroutine(listLeaderboard =>
+					{
+						_listLeaderboard = listLeaderboard;
+						_onCompleteSaveSetting.OnNext(newGameUser);			
+					},  ex =>
+					{
+						Debug.LogError("Can't get Leaderboard");
+					});
 				}
 			},  ex =>
 			{
 				Debug.LogError("Can't update game setting");
 			});
+			
+			
 		}
 
 		private readonly Subject<GameUser> _onCompleteSaveSetting = new Subject<GameUser>();
@@ -48,6 +62,11 @@ namespace UI.ViewModels.Pages.Title
 		public IObservable<GameUser> OnCompleteSaveSetting()
 		{
 			return _onCompleteSaveSetting.AsObservable();
+		}
+
+		public List<LeaderboardRecord> ListLeaderboard()
+		{
+			return _listLeaderboard;
 		}
 	}
 }

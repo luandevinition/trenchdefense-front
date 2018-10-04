@@ -30,6 +30,8 @@ namespace UI.Views.Pages.Battle
 		[SerializeField]
 		private SwitchWeaponView _switchWeaponView;
 
+		private bool isOpenSwitchWeapon = false;
+
 		private readonly Subject<int> _selectWeaponIndex= new Subject<int>();
 		
 		public void Bind(IBattlePageViewModel viewModel)
@@ -38,7 +40,9 @@ namespace UI.Views.Pages.Battle
 
 			BattleController.InitData(viewModel, _selectWeaponIndex);
 
-			viewModel.Weapons.ToReactiveCollection().ObserveCountChanged(true).Subscribe(newCount =>
+			_switchWeaponView.ShowNumberOfWeaponEnabled(viewModel.Weapons.Count);
+			
+			viewModel.Weapons.ObserveCountChanged().Subscribe(newCount =>
 			{
 				_switchWeaponView.ShowNumberOfWeaponEnabled(newCount);
 			}).AddTo(this);
@@ -51,13 +55,17 @@ namespace UI.Views.Pages.Battle
 			
 			_SwitchWeaponButton.OnClickAsObservable().Subscribe(_ =>
 			{
-				_switchPartGameObject.SetActive(true);
+				if (isOpenSwitchWeapon)
+					isOpenSwitchWeapon = false;
+				else
+					isOpenSwitchWeapon = true;
+				_switchPartGameObject.SetActive(isOpenSwitchWeapon);
 			}).AddTo(this);
 		}
 		
 		void OnApplicationPause(bool pauseStatus)
 		{
-			if (pauseStatus && ((int)Time.timeScale) != 0)
+			if (pauseStatus && Mathf.RoundToInt(Time.timeScale) == 1)
 			{
 				Time.timeScale = 0f;
 				_pauseSubPageGameObject.SetActive(true);

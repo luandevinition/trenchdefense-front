@@ -3387,10 +3387,9 @@ MonoBehaviour:
   _enemyStatus: {fileID: 114099216225017144}
   _weaponDamage: {fileID: 0}
   Animator: {fileID: 95069110329460196}
-  _bulletGameObject: {fileID: 1681781652526772, guid: fa14c7ee348fa479eb839c2084e2d064,
-    type: 2}
   _audioThrowPosion: {fileID: 8300000, guid: 3452cf6db04c440f8186524519d1c40a, type: 3}
-  _capsuleCollider: {fileID: 65489485564280544}
+  _boxsuleCollider: {fileID: 65489485564280544}
+  _capsuleCollider: {fileID: 136238696828345718}
 --- !u!114 &114464383019079690
 MonoBehaviour:
   m_ObjectHideFlags: 1
