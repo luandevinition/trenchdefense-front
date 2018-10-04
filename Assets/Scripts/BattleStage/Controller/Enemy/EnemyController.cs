@@ -42,12 +42,15 @@ namespace BattleStage.Controller.Enemy
 		private bool _isReachedToTarget;
 
 		private float _rangeAttack = 300f;
+
+		private ISubject<int> _justKillOneZombie;
 		
-		public void InitData(Transform followedTarget)
+		public void InitData(Transform followedTarget, ISubject<int> justKillOneZombie)
 		{
 			_followedTarget = followedTarget;
 
 			_rangeAttack = UnityEngine.Random.Range(40, 50);
+			_justKillOneZombie = justKillOneZombie;
 				 
 			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
 			{
@@ -117,6 +120,7 @@ namespace BattleStage.Controller.Enemy
 			
 			if (_enemyStatus.IsDie.Value)
 			{
+				_justKillOneZombie.OnNext(1);
 			    Animator.speed = 1f;
 				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);

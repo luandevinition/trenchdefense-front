@@ -41,5 +41,10 @@ namespace Infrastructures.Repository.User
         {
             return _userHttp.UpdateGameSetting(gameUser);
         }
+
+        public IObservable<BattleStage.Domain.Unit> GetCurrentCharacter()
+        {
+            return _userHttp.GetCurrentCharacter();
+        }
     }
 }

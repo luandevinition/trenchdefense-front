@@ -2,6 +2,7 @@
 using Infrastructures.Repository.User;
 using Interface.Repository.User;
 using UniRx;
+using Unit = BattleStage.Domain.Unit;
 
 namespace Components
 {
@@ -40,6 +41,11 @@ namespace Components
         public IObservable<bool> UpdateGameSetting(GameUser gameUser)
         {
             return _repository.UpdateGameSetting(gameUser);
+        }
+        
+        public IObservable<Unit> GetCurrentCharacter()
+        {
+            return _repository.GetCurrentCharacter();
         }
     }
 }

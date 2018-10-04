@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 
 namespace BattleStage.Domain
 {
@@ -18,10 +19,12 @@ namespace BattleStage.Domain
         
         public ResourceID ResourceID { get; private set; }
         
-        public WeaponID BaseWeaponID { get; private set; }
+        public WeaponID  BaseWeaponID { get; private set; }
         
         public WeaponID BaseGranedaID { get; private set; }
 
+        public Weapon[] Weapons { get; private set; }
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -33,14 +36,16 @@ namespace BattleStage.Domain
         /// <param name="resourceId"></param>
         /// <param name="baseWeaponId"></param>
         /// <param name="baseGranedaId"></param>
+        /// <param name="weapons"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public Unit(UnitID id, string name, int attack, int hp, int speed, ResourceID resourceId, WeaponID baseWeaponId,
-            WeaponID baseGranedaId)
+            WeaponID baseGranedaId, Weapon[] weapons)
         {
             if (id == null) throw new ArgumentNullException("id");
             if (name == null) throw new ArgumentNullException("name");
             if (resourceId == null) throw new ArgumentNullException("resourceId");
             if (baseWeaponId == null) throw new ArgumentNullException("baseWeaponId");
+            if (weapons == null) throw new ArgumentNullException("weapons");
             
             ID = id;
             Name = name;
@@ -50,6 +55,7 @@ namespace BattleStage.Domain
             ResourceID = resourceId;
             BaseWeaponID = baseWeaponId;
             BaseGranedaID = baseGranedaId;
+            Weapons = weapons;
         }
     }
 }

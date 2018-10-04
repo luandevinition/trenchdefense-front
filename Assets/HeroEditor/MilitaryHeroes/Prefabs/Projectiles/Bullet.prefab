@@ -413,6 +413,8 @@ MonoBehaviour:
   Trail: {fileID: 1093674060203738}
   Impact: {fileID: 1121886198620100}
   Rigidbody: {fileID: 0}
+  IsExplosion: 0
+  ExplosionPrefab: {fileID: 426390, guid: b185c1a9cf067374586d095111b15bd1, type: 2}
 --- !u!135 &135754707400027624
 SphereCollider:
   m_ObjectHideFlags: 1

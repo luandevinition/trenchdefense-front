@@ -16,6 +16,22 @@ namespace Domain.Wave
         
         public Dictionary<int, List<Zombie>> WavezsZombies;
 
+        public int NumberZombiesOfWave
+        {
+            get
+            {
+                if (WavezsZombies == null)
+                    return 0;
+
+                int countZombie = 0;
+                foreach (var zombiesOfTime in WavezsZombies)
+                {
+                    countZombie += zombiesOfTime.Value.Count;
+                }
+                return countZombie;
+            }
+        }
+
         public Wave(WaveID id, int waveNumber, string name, string resourceId, Dictionary<int, List<Zombie>> wavezsZombies)
         {
             if (id == null) throw new ArgumentNullException("id");

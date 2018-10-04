@@ -8,6 +8,8 @@ using Interface.Http.User;
 using Program.Scripts.Components.Communication;
 using ProtoBuf;
 using UniRx;
+using BattleStage.Domain;
+using Unit = BattleStage.Domain.Unit;
 
 namespace Infrastructures.Http.User
 {
@@ -19,6 +21,7 @@ namespace Infrastructures.Http.User
 		
         private const string API_UPDATE_GAME_USER_SETTING = "/user/setting";
 		
+        private const string API_CURRENT_CHARACTER = "/characters/profile";
         
         private readonly IApiClient _apiClient;
 	
@@ -80,6 +83,21 @@ namespace Infrastructures.Http.User
                 .Select(_=>true)
                 .First();
         }
+
+        public IObservable<Unit> GetCurrentCharacter()
+        {
+            return _apiClient.Get(API_CURRENT_CHARACTER)
+                .Select(MakeCharacterByProtobufs)
+                .First();
+        }
         
+        private Unit MakeCharacterByProtobufs(IList<IExtensible> protobufs)
+        {
+            if (protobufs.Count < 1) {
+                return null;
+            }
+
+            return protobufs.Cast<App.Proto.CharacterStatus>().Select(UserFactory.Make).FirstOrDefault();
+        }
     }
 }

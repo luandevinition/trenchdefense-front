@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BattleStage.Domain;
 using EZ_Pooling;
 using UnityEngine;
 
@@ -15,37 +16,23 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public GameObject Impact;
 	    public Rigidbody Rigidbody;
 
-        IEnumerator DespawnedAfter(float second)
-        {
-            yield return  new WaitForSeconds(second);
-            Bang();
-        }
+        public bool IsExplosion;
+        public Transform ExplosionPrefab;
         
-             
-        void OnSpawned()
-        {
-            
-            StartCoroutine(DespawnedAfter(3));
-            Impact.SetActive(false);
-            foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
-            {
-                ps.Play();
-            }
 
-            foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
+        public void Start()
+        {
+            Destroy(gameObject, IsExplosion ? 3f : 2f);
+        }
+
+        public void Update()
+        {
+            if (Rigidbody != null && Rigidbody.useGravity)
             {
-                tr.enabled = true;
+                transform.right = Rigidbody.velocity.normalized;
             }
         }
 
-	    public void Update()
-	    {
-		    if (Rigidbody != null && Rigidbody.useGravity)
-		    {
-			    transform.right = Rigidbody.velocity.normalized;
-		    }
-	    }
-        
         public void OnTriggerEnter(Collider other)
         {
             Bang(other.gameObject);
@@ -55,9 +42,16 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         {
             Bang(other.gameObject);
         }
-        
-        private void Bang()
+
+        private void Bang(GameObject other)
         {
+            ReplaceImpactSound(other);
+            Impact.SetActive(true);
+            Destroy(GetComponent<SpriteRenderer>());
+            Destroy(GetComponent<Rigidbody>());
+            Destroy(GetComponent<Collider>());
+            Destroy(gameObject, 1);
+
             foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
             {
                 ps.Stop();
@@ -67,28 +61,20 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             {
                 tr.enabled = false;
             }
-            
-            EZ_PoolManager.Despawn(gameObject.transform);
 
+            if (IsExplosion)
+            {
+                var boom = EZ_PoolManager.Spawn(ExplosionPrefab, transform.position, Quaternion.identity);
+                boom.GetComponentInChildren<Damage>().DamageValue = _damageOfExplosion;
+            }
         }
 
-        private void Bang(GameObject other)
+        private float _damageOfExplosion = 1;
+
+        public void SetDamageOfExplosion(float damage)
         {
-            ReplaceImpactSound(other);
-            Impact.SetActive(true);
-
-            foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
-            {
-                ps.Stop();
-            }
-
-	        foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
-	        {
-		        tr.enabled = false;
-			}
-            
-            EZ_PoolManager.Despawn(gameObject.transform);
-		}
+            _damageOfExplosion = damage;
+        }
 
         private void ReplaceImpactSound(GameObject other)
         {

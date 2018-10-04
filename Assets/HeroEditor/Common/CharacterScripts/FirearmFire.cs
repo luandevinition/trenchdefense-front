@@ -181,24 +181,27 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         private void CreateBullet(float Damage = 1) // TODO: Preload and caching prefabs is recommended to improve game performance
         {
-            if (SceneManager.GetActiveScene().name.Contains("CharacterEditor")) return; // Don't create bullets in editor scene
-
             var iterations = Character.Firearm.Params.Type == FirearmType.Shotgun ? int.Parse(Character.Firearm.Params.MetaAsDictionary["Spread"]) : 1;
 
             for (var i = 0; i < iterations; i++)
             {
-                var bullet = EZ_PoolManager
-                    .Spawn(Character.Firearm.Params.ProjectilePrefab.transform,
-                        Character.Firearm.FireTransform.position, Quaternion.identity).GetComponent<Projectile>();
-                var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) *
-                             (1 - Character.Firearm.Params.Accuracy);
+                var bullet = Instantiate(Character.Firearm.Params.ProjectilePrefab, Character.Firearm.FireTransform);
+                var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
 
+                bullet.transform.localPosition = Vector3.zero;
                 bullet.transform.localRotation = Quaternion.identity;
                 bullet.transform.SetParent(null);
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");
                 bullet.GetComponent<Rigidbody>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right + spread)
                     * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
-                bullet.GetComponent<Damage>().DamageValue = Damage;
+                if (Character.Firearm.Params.Type != FirearmType.RocketLauncher)
+                {
+                    bullet.GetComponent<Damage>().DamageValue = Damage;
+                }
+                else
+                {
+                    bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage);
+                }
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;
 
                 foreach (var r in bullet.Renderers)

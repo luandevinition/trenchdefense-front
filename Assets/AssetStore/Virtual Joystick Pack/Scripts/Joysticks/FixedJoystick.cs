@@ -6,13 +6,15 @@ public class FixedJoystick : Joystick
     [Header("Fixed Joystick")]
     Vector2 joystickPosition = Vector2.zero;
 
-    private Camera _cam;
+    [SerializeField]
+    private bool _isKeepValue;
     
+    /// <summary>
+    /// Set Caemra 
+    /// </summary>
+    /// <param name="camera"></param>
     public override void SetCamera(Camera camera)
     {
-        _cam = camera;
-        joystickPosition = RectTransformUtility.WorldToScreenPoint(_cam, background.position);   
-        
         joystickPosition = background.position;   
     }
 
@@ -30,7 +32,10 @@ public class FixedJoystick : Joystick
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        inputVector = Vector2.zero;
+        if (!_isKeepValue)
+        {
+            inputVector = Vector2.zero;
+        }
         handle.anchoredPosition = Vector2.zero;
     }
 }
