@@ -7,6 +7,7 @@ using UI.ViewModels.Pages.Title;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Vexe.Runtime.Extensions;
 
 namespace UI.Views.Pages.Title
 {
@@ -39,6 +40,9 @@ namespace UI.Views.Pages.Title
         
         [SerializeField] private Button _saveSettingButton;
         [SerializeField] private Button _saveAccountButton;
+        
+        [SerializeField] private Transform _girdLayoutTransform;
+        [SerializeField] private GameObject leaderBoardItemPrefab;
         
         [SerializeField]
         private AudioClip _backgroundMusic;
@@ -176,6 +180,36 @@ namespace UI.Views.Pages.Title
                         seqDisplayGroupSetting.OnComplete(()=>{
                             _currentCanvasGroup.gameObject.SetActive(false);
                             _currentCanvasGroup = _accountGroup;
+                            isCompleteMoveMenu = true;
+                        });
+                    });
+                }
+            }).AddTo(this);
+            
+            // For Leaderbaord Button.
+            _leaderboardButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                if (isCompleteMoveMenu)
+                {
+                    _isShowMenu.Value = false;
+                    isCompleteMoveMenu = false;
+                    Sequence seqScaleButtonLeaderboard = DOTween.Sequence();
+                    seqScaleButtonLeaderboard.Append(_leaderboardButton.transform.DOScale(1.2f, 0.02f));
+                    seqScaleButtonLeaderboard.Append(_leaderboardButton.transform.DOScale(1f, 0.02f));
+                    seqScaleButtonLeaderboard.OnComplete(() =>
+                    {
+                        _leaderboardGroup.gameObject.SetActive(true);
+                        Sequence seqDisplayGroupSetting = DOTween.Sequence();
+                        seqDisplayGroupSetting.Append(_currentCanvasGroup.transform.DOScale(0f, 0.1f));
+                        seqDisplayGroupSetting.Append(_leaderboardGroup.transform.DOScale(1f, 0.1f));
+                        seqDisplayGroupSetting.OnComplete(()=>{
+                            _currentCanvasGroup.gameObject.SetActive(false);
+                            _currentCanvasGroup = _leaderboardGroup;
+                            _girdLayoutTransform.DestroyChildren();
+                            for (int i = 0; i < 10; i++)
+                            {
+                                Instantiate(leaderBoardItemPrefab, _girdLayoutTransform);
+                            }
                             isCompleteMoveMenu = true;
                         });
                     });

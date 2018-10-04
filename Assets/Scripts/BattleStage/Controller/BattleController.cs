@@ -72,24 +72,11 @@ namespace BattleStage.Controller
             Weapon weapon3= new Weapon(new WeaponID(3),"HellBlade","Pro" , 55 , 150, 450);
             Weapon weapon4= new Weapon(new WeaponID(4),"RocketLauncher","Pro" , 50 , 150, 450);
             */
-            _selectWeaponIndex = selectWeaponIndex;
-
-            killedZombies.AsObservable().Subscribe(num =>
-            {
-                killedZombiesText.text = num.ToString();
-                if (num >= _currentWaveData.NumberZombiesOfWave)
-                {
-                    Time.timeScale = 0f;
-                    _gameObjetcNewWaveUI.SetActive(true);
-                    viewModel.NextWave(currentWave);
-                }
-            }).AddTo(this);
             
-            timePlayed.AsObservable().Subscribe(num =>
-            {
-                timePlayedText.text = num.ToString("HH:mm:ss");
-            }).AddTo(this);
-
+            timePlayedText.text = "00:00:00";
+            killedZombiesText.text = "0";
+            
+            _selectWeaponIndex = selectWeaponIndex;
 
             justKillOneZombie.AsObservable().Subscribe(_ =>
             {
@@ -103,6 +90,7 @@ namespace BattleStage.Controller
                 _gameObjetcNewWaveUI.SetActive(false);
                 currentSecondCounter = 0;
                 _killedZombies = 0;
+                killedZombies.OnNext(_killedZombies);
                 _currentWaveData = newWaveData;
                 
                 totalZombiesText.text = _currentWaveData.NumberZombiesOfWave.ToString();
@@ -110,6 +98,24 @@ namespace BattleStage.Controller
             
             Initialize(viewModel);
             
+            timePlayed.AsObservable().Subscribe(num =>
+            {
+                var span = TimeSpan.FromSeconds(num);
+                string displayString = string.Format("{0}:{1}:{2}", span.Hours, span.Minutes, span.Seconds);
+                timePlayedText.text = displayString;
+            }).AddTo(this);
+            
+            killedZombies.AsObservable().Subscribe(num =>
+            {
+                killedZombiesText.text = num.ToString();
+                if (num >= _currentWaveData.NumberZombiesOfWave)
+                {
+                    Time.timeScale = 0f;
+                    _gameObjetcNewWaveUI.SetActive(true);
+                    viewModel.NextWave(currentWave);
+                }
+            }).AddTo(this);
+
             
         }
         

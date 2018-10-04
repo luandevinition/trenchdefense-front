@@ -36,6 +36,7 @@ namespace UI.Views.Parts
         public void SelectButton(int indexButton)
         {
             _selectWeaponIndex.OnNext(indexButton);
+            gameObject.SetActive(false);
         }
     }
 }

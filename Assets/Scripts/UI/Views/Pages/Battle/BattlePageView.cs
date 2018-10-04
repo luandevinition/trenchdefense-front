@@ -49,7 +49,7 @@ namespace UI.Views.Pages.Battle
 				_pauseSubPageGameObject.SetActive(true);
 			}).AddTo(this);
 			
-			_pauseButton.OnClickAsObservable().Subscribe(_ =>
+			_SwitchWeaponButton.OnClickAsObservable().Subscribe(_ =>
 			{
 				_switchPartGameObject.SetActive(true);
 			}).AddTo(this);

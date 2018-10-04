@@ -34,7 +34,7 @@ namespace UI.PageTransitions.Battle
                 Debug.LogError("Can't get Waves Data " + ex.ToString());
             });
             
-            yield return WavesComponents.Instance.BeginWave(THE_FIRST_PAGE).StartAsCoroutine(unit =>
+            yield return WavesComponents.Instance.BeginWave(1).StartAsCoroutine(unit =>
             {
                 _unit = unit;
             },  ex =>

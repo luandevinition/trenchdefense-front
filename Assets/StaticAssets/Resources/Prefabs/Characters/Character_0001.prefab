@@ -3339,7 +3339,6 @@ MonoBehaviour:
   _joystickWeapon: {fileID: 0}
   _hpImage: {fileID: 0}
   SpriteCollection: {fileID: 0}
-  _SwitchWeaponButton: {fileID: 0}
   FirearmCollection: {fileID: 0}
   Character: {fileID: 0}
   CurrentCamera: {fileID: 0}
