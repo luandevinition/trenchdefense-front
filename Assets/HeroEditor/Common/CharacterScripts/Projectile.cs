@@ -18,11 +18,23 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         public bool IsExplosion;
         public Transform ExplosionPrefab;
-        
+
+        public bool IsGrenade;
 
         public void Start()
         {
-            Destroy(gameObject, IsExplosion ? 3f : 2f);
+            if(!IsGrenade)
+                Destroy(gameObject, IsExplosion ? 3f : 2f);
+            else
+            {
+                StartCoroutine(ExplosionByTime(0.3f));
+            }
+        }
+
+        IEnumerator ExplosionByTime(float existTime)
+        {
+            yield return new WaitForSeconds(existTime);
+            Bang(gameObject);
         }
 
         public void Update()

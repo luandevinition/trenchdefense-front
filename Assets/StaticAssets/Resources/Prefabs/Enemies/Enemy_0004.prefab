@@ -720,7 +720,6 @@ GameObject:
   - component: {fileID: 136437205135064038}
   - component: {fileID: 82422904696669886}
   - component: {fileID: 114629415604020608}
-  - component: {fileID: 65909644567403186}
   m_Layer: 0
   m_Name: Enemy_0004
   m_TagString: Enemy
@@ -1539,8 +1538,8 @@ GameObject:
   - component: {fileID: 212509115987110932}
   - component: {fileID: 114887742937587040}
   - component: {fileID: 54802791283086082}
-  - component: {fileID: 65038745973473072}
   - component: {fileID: 114591788997929312}
+  - component: {fileID: 136249251443292560}
   m_Layer: 0
   m_Name: MeleeWeapon
   m_TagString: Weapon
@@ -2980,7 +2979,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!54 &54802791283086082
 Rigidbody:
@@ -2997,30 +2996,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &65038745973473072
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1937822127897038}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: -0.4, y: 1.77, z: 0.2}
-  m_Center: {x: 0, y: 0.59, z: 0}
---- !u!65 &65909644567403186
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1405963304453280}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 50, y: 20, z: 1}
-  m_Center: {x: 0, y: 40, z: 0}
 --- !u!82 &82230181097553292
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3329,6 +3304,8 @@ MonoBehaviour:
   ArmR: {fileID: 4344226237247182}
   ReloadButton: 114
   _fireButtonView: {fileID: 0}
+  _throwSuppliesButtonView: {fileID: 0}
+  _grenadeTranformPrefab: {fileID: 0}
   _characterController: {fileID: 0}
   _isPlayer: 0
 --- !u!114 &114336893666362304
@@ -3765,8 +3742,21 @@ MonoBehaviour:
   _weaponDamage: {fileID: 114591788997929312}
   Animator: {fileID: 95709432867042478}
   _audioThrowPosion: {fileID: 8300000, guid: 3452cf6db04c440f8186524519d1c40a, type: 3}
-  _boxsuleCollider: {fileID: 65909644567403186}
+  _boxsuleCollider: {fileID: 0}
   _capsuleCollider: {fileID: 136437205135064038}
+--- !u!136 &136249251443292560
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1937822127897038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.22
+  m_Height: 1.71
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.58, z: 0}
 --- !u!136 &136437205135064038
 CapsuleCollider:
   m_ObjectHideFlags: 1

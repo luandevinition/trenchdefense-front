@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using HeroEditor.Common.Enums;
 using UI.Views.Parts.Buttons;
 using UnityEngine;
@@ -23,10 +24,18 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         private FireButtonView _fireButtonView;
 
         [SerializeField]
+        private FireButtonView _throwSuppliesButtonView;
+        
+        [SerializeField]
+        private Transform _grenadeTranformPrefab;
+        
+        [SerializeField]
         private CustomCharacterController _characterController;
         
         [SerializeField]
         private bool _isPlayer = false;
+
+        private bool _isThrowing = false;
 
         public bool IsPlayer
         {
@@ -65,13 +74,21 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     Character.Firearm.Fire.FireButtonUp = !_fireButtonView.IsButtonDown;
                     Character.Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
                     break;
+                    /*
 	            case WeaponType.Supplies:
 		            if (_fireButtonView.IsButtonDown)
 		            {
 			            Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly
 		            }
-		            break;
+		            break;*/
 			}
+
+            if (_throwSuppliesButtonView.IsButtonDown && _isThrowing)
+            {
+                Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly
+                
+                ThrowGrenade(500);
+            }
         }
 
         /// <summary>
@@ -102,14 +119,46 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             RotateArm(arm, weapon, _isPlayer ? (_characterController.JoystickWeapon.Vertical + 0.5f) : DEFAULT_VECTOR_ANGLE.z, 0, MAX_ANGLE_ALLOW);
         }
 
-        //[SerializeField] private Vector2 testPosition = Vector2.down;
-
         /// <summary>
         /// Selected arm to position (world space) rotation, with limits.
         /// </summary>
         public void RotateArm(Transform arm, Transform weapon, float weight, float angleMin, float angleMax) // TODO: Very hard to understand logic
         {
             arm.transform.localEulerAngles = new Vector3(0, 0, Mathf.Clamp(weight * angleMax , 0 , MAX_ANGLE_ALLOW) );
+        }
+        
+        /// <summary>
+        /// Selected arm to position (world space) rotation, with limits.
+        /// </summary>
+        public float RotateArmDegress(float weight, float angleMax) 
+        {
+            return Mathf.Clamp(weight * angleMax , 0 , MAX_ANGLE_ALLOW);
+        }
+        
+        
+        private void ThrowGrenade(float Damage = 1)
+        {
+            _isThrowing = true;
+            var bullet = Instantiate(_grenadeTranformPrefab, Character.Firearm.FireTransform);
+
+            bullet.transform.localPosition = Vector3.zero;
+            bullet.transform.localRotation = Quaternion.identity;
+            bullet.transform.SetParent(null);
+            
+            bullet.GetComponent<Rigidbody>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right )
+                * Mathf.Sign(Character.transform.lossyScale.x) ;
+            
+            
+            bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage);
+            bullet.gameObject.layer = 31; 
+
+            StartCoroutine(reloadGrenade(1f));
+        }
+
+        IEnumerator reloadGrenade(float delayTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            _isThrowing = false;
         }
     }
 }

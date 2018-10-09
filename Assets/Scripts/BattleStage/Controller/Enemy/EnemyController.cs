@@ -125,7 +125,7 @@ namespace BattleStage.Controller.Enemy
 				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);
 				_capsuleCollider.enabled = false;
-				_boxsuleCollider.enabled = false;
+				//_boxsuleCollider.enabled = false;
 				DestroyObject(this.gameObject,3f);
 			}
 		}

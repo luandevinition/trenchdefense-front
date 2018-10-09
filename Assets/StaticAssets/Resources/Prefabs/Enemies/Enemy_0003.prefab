@@ -623,7 +623,6 @@ GameObject:
   - component: {fileID: 54889754835032704}
   - component: {fileID: 136238696828345718}
   - component: {fileID: 82897215245817398}
-  - component: {fileID: 65489485564280544}
   m_Layer: 0
   m_Name: Enemy_0003
   m_TagString: Enemy
@@ -2976,20 +2975,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 120
   m_CollisionDetection: 0
---- !u!65 &65489485564280544
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1353584582861668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 50, y: 20, z: 1}
-  m_Center: {x: 0, y: 40, z: 0}
 --- !u!82 &82033086788488682
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3388,7 +3375,7 @@ MonoBehaviour:
   _weaponDamage: {fileID: 0}
   Animator: {fileID: 95069110329460196}
   _audioThrowPosion: {fileID: 8300000, guid: 3452cf6db04c440f8186524519d1c40a, type: 3}
-  _boxsuleCollider: {fileID: 65489485564280544}
+  _boxsuleCollider: {fileID: 0}
   _capsuleCollider: {fileID: 136238696828345718}
 --- !u!114 &114464383019079690
 MonoBehaviour:
@@ -3430,6 +3417,8 @@ MonoBehaviour:
   ArmR: {fileID: 4419355807141990}
   ReloadButton: 114
   _fireButtonView: {fileID: 0}
+  _throwSuppliesButtonView: {fileID: 0}
+  _grenadeTranformPrefab: {fileID: 0}
   _characterController: {fileID: 0}
   _isPlayer: 0
 --- !u!114 &114706321197930944
