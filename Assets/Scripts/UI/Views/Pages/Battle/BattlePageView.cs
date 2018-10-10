@@ -40,11 +40,11 @@ namespace UI.Views.Pages.Battle
 
 			BattleController.InitData(viewModel, _selectWeaponIndex);
 
-			_switchWeaponView.ShowNumberOfWeaponEnabled(viewModel.Weapons.Count);
-			
-			viewModel.Weapons.ObserveCountChanged().Subscribe(newCount =>
+			_switchWeaponView.ShowNumberOfWeaponEnabled(viewModel.Weapons.ToList());
+
+			viewModel.Weapons.ObserveEveryValueChanged(data => data.ToList()).Subscribe(weapons =>
 			{
-				_switchWeaponView.ShowNumberOfWeaponEnabled(newCount);
+				_switchWeaponView.ShowNumberOfWeaponEnabled(weapons);
 			}).AddTo(this);
 			
 			_pauseButton.OnClickAsObservable().Subscribe(_ =>

@@ -7,6 +7,7 @@ using Domain.Wave;
 using EazyTools.SoundManager;
 using Facade;
 using UI.ViewModels.Pages.Battle;
+using UI.Views.Parts.Buttons;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +43,9 @@ namespace BattleStage.Controller
         
         [SerializeField]
         private GameObject _gameObjetcNewWaveUI;
+        
+        [SerializeField]
+        private FireButtonView _throwSuppliesButtonView;
 
         private int currentWave = 1;
         private Wave _currentWave;
@@ -75,6 +79,11 @@ namespace BattleStage.Controller
             {
                 _killedZombies++;
                 killedZombies.OnNext(_killedZombies);
+            }).AddTo(this);
+
+            viewModel.EnableGrenadeButtonObservable.Subscribe(grenade =>
+            {
+                _throwSuppliesButtonView.gameObject.SetActive(grenade != null);
             }).AddTo(this);
             
             viewModel.NextWaveObservable.Subscribe(newWaveData =>

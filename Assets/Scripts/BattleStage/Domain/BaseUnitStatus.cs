@@ -56,7 +56,17 @@ namespace BattleStage.Domain
 
         private Weapon _weaponEquiped;
         
+        public Weapon WeaponEquiped
+        {
+            get { return _weaponEquiped; }
+        }
+
         private Weapon _grenadeEquiped;
+        
+        public Weapon GrenadeEquiped
+        {
+            get { return _grenadeEquiped; }
+        }
 
         private ReactiveProperty<float> _currentHP;
         

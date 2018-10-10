@@ -1,4 +1,8 @@
-﻿using UniRx;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BattleStage.Domain;
+using UI.Views.Parts.Buttons;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +10,7 @@ namespace UI.Views.Parts
 {
     public class SwitchWeaponView : MonoBehaviour
     {
-        public Button[] ButtonWeapon;
+        public SelectWeaponButton[] ButtonWeapon;
 
         public Image[] ImageButtonBackground;
 
@@ -20,11 +24,11 @@ namespace UI.Views.Parts
             }
         }
 
-        public void ShowNumberOfWeaponEnabled(int count)
+        public void ShowNumberOfWeaponEnabled(List<Weapon> weapons)
         {
-            for (int i = 0; i < Mathf.Min(ButtonWeapon.Length,count); i++)
+            foreach (var buttonScript in ButtonWeapon)
             {
-                ButtonWeapon[i].interactable = true;
+                buttonScript.Button.interactable = weapons.Any(d => d.ID.Value == buttonScript.WeaponID);
             }
         }
 

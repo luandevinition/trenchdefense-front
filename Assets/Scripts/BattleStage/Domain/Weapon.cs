@@ -16,16 +16,27 @@ namespace BattleStage.Domain
         
         public int ReloadSpeed { get; private set; }
 
-        public Weapon(WeaponID id, string name, string collection, int attack, int shootSpeed, int reloadSpeed)
+        public int MagCapacity { get; private set; }
+
+        public int Range { get; private set; }
+        
+        public bool ThrowAble { get; private set; }
+
+        public Weapon(WeaponID id, string name, string collection, int attack, int shootSpeed, int reloadSpeed,
+            int magCapacity, int range, bool throwAble)
         {
             if (id == null) throw new ArgumentNullException("id");
-            
+            if (name == null) throw new ArgumentNullException("name");
+            if (collection == null) throw new ArgumentNullException("collection");
             ID = id;
             Name = name;
             Collection = collection;
             Attack = attack;
             ShootSpeed = shootSpeed;
             ReloadSpeed = reloadSpeed;
+            MagCapacity = magCapacity;
+            Range = range;
+            ThrowAble = throwAble;
         }
     }
 }

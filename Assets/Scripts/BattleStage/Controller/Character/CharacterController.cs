@@ -75,6 +75,8 @@ namespace BattleStage.Controller.Character
         public void SetNewListWeapon(List<Weapon> weapons)
         {
             _weapons = weapons;
+            Character.UnitStatus.SetGranade(weapons.FirstOrDefault(d=>d.ThrowAble));
+            
         }
 
         public void InitCharacterData(Unit unit, List<Weapon> weapons, ISubject<int> indexOfButtonClick)
@@ -90,12 +92,10 @@ namespace BattleStage.Controller.Character
                 return;
             }
             Character.UnitStatus.SetWeapon(weapon);
-            SetFirearmParams(weapon.Name);
+            SetFirearmParams(weapon.Name,  weapon.ShootSpeed, weapon.MagCapacity);
             EquipFirearms(weapon.Name, weapon.Collection);
             
-            Weapon granade = null;
-            if(unit.BaseGranedaID != null)
-                granade = weapons.FirstOrDefault(d => d.ID == unit.BaseGranedaID);
+            Weapon granade = weapons.FirstOrDefault(d=>d.ThrowAble);
             Character.UnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
             Character.UnitStatus.CurrentHP.Subscribe(hpValue =>
             {
@@ -113,12 +113,7 @@ namespace BattleStage.Controller.Character
 
             indexOfButtonClick.Subscribe(currentButtonClick =>
             {
-                if (currentButtonClick >= _weapons.Count)
-                {
-                    return;
-                }
-                
-                var weaponChange = _weapons[currentButtonClick];
+                var weaponChange = _weapons.FirstOrDefault(d=>d.ID.Value == currentButtonClick);
                 if (weaponChange == null)
                 {
                     Debug.LogError("Problem of Data Weapon !");
@@ -126,7 +121,7 @@ namespace BattleStage.Controller.Character
                 }
                 
                 Character.UnitStatus.SetWeapon(weaponChange);
-                SetFirearmParams(weaponChange.Name);
+                SetFirearmParams(weaponChange.Name, weaponChange.ShootSpeed, weaponChange.MagCapacity);
                 EquipFirearms(weaponChange.Name, weaponChange.Collection);
             }).AddTo(this);
             
@@ -198,7 +193,7 @@ namespace BattleStage.Controller.Character
             _canGetDamageByHit = true;
         }
         
-        protected void SetFirearmParams(string weaponName)
+        protected void SetFirearmParams(string weaponName, int speed, int capicity)
         {
             if (FirearmCollection.Firearms.Count(i => i.Name == weaponName) != 1) throw new Exception("Please check firearms params for: " + weaponName);
 
@@ -207,6 +202,10 @@ namespace BattleStage.Controller.Character
             
             
             ((CharacterHM) Character).Firearm.Params = FirearmCollection.Firearms.Single(i => i.Name == weaponName);
+
+            ((CharacterHM) Character).Firearm.Params.FireRateInMinute = speed;
+            ((CharacterHM) Character).Firearm.Params.MagazineCapacity = capicity;
+            
         }
         
         public void EquipFirearms(string sname, string collection)

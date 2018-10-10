@@ -89,7 +89,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             _fireTime = Time.time;
 
             Character.Firearm.AmmoShooted++;
-            CreateBullet(Character.UnitStatus.Attack);
+            CreateBullet(Character.UnitStatus.Attack, Character.UnitStatus.WeaponEquiped.Range);
             FireMuzzlePlay();
             if (MyData.MyGameUser.GameSetting.EnableSFX)
             {
@@ -179,7 +179,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             }
         }
 
-        private void CreateBullet(float Damage = 1) // TODO: Preload and caching prefabs is recommended to improve game performance
+        private void CreateBullet(float Damage = 1, float range = 1) // TODO: Preload and caching prefabs is recommended to improve game performance
         {
             var iterations = Character.Firearm.Params.Type == FirearmType.Shotgun ? int.Parse(Character.Firearm.Params.MetaAsDictionary["Spread"]) : 1;
 
@@ -200,7 +200,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 }
                 else
                 {
-                    bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage);
+                    bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage, range);
                 }
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;
 

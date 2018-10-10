@@ -83,11 +83,11 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 		            break;*/
 			}
 
-            if (_throwSuppliesButtonView.IsButtonDown && _isThrowing)
+            if (_throwSuppliesButtonView.IsButtonDown && !_isThrowing)
             {
                 Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly
                 
-                ThrowGrenade(500);
+                ThrowGrenade(Character.UnitStatus.GrenadeEquiped.Attack,Character.UnitStatus.GrenadeEquiped.Range);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         }
         
         
-        private void ThrowGrenade(float Damage = 1)
+        private void ThrowGrenade(float Damage = 1, float range = 1)
         {
             _isThrowing = true;
             var bullet = Instantiate(_grenadeTranformPrefab, Character.Firearm.FireTransform);
@@ -149,7 +149,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 * Mathf.Sign(Character.transform.lossyScale.x) ;
             
             
-            bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage);
+            bullet.GetComponent<Projectile>().SetDamageOfExplosion(Damage, range);
             bullet.gameObject.layer = 31; 
 
             StartCoroutine(reloadGrenade(1f));

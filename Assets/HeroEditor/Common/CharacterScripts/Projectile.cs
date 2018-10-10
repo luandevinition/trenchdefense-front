@@ -78,14 +78,16 @@ namespace Assets.HeroEditor.Common.CharacterScripts
             {
                 var boom = EZ_PoolManager.Spawn(ExplosionPrefab, transform.position, Quaternion.identity);
                 boom.GetComponentInChildren<Damage>().DamageValue = _damageOfExplosion;
+                boom.localScale *= _rangeOfExplosion;
             }
         }
 
         private float _damageOfExplosion = 1;
-
-        public void SetDamageOfExplosion(float damage)
+        private float _rangeOfExplosion = 1;
+        public void SetDamageOfExplosion(float damage, float range)
         {
             _damageOfExplosion = damage;
+            _rangeOfExplosion = (1f + range/100f);
         }
 
         private void ReplaceImpactSound(GameObject other)
