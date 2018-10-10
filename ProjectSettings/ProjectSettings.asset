@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
-  targetDevice: 1
+  targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: iDev Ltd
@@ -127,7 +127,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 10.0
+  bundleVersion: 11.0
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -155,7 +155,8 @@ PlayerSettings:
     Android: com.idev.trenchdefense
     Standalone: com.idev.trenchdefense
     iOS: com.idev.trenchdefense.thanh
-  buildNumber: {}
+  buildNumber:
+    iOS: 5
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0

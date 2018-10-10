@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45078862, g: 0.81038654, b: 0.88333535, a: 1}
+  m_Color: {r: 0.87236845, g: 0.15279645, b: 0.2503516, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -322,6 +322,10 @@ MonoBehaviour:
   TextRanking: {fileID: 114126550780091946}
   TextName: {fileID: 114422395979900770}
   TextScore: {fileID: 114608343049314050}
+  Colors:
+  - {r: 0.87236845, g: 0.15279645, b: 0.2503516, a: 1}
+  - {r: 0.88440424, g: 0.8740237, b: 0.11589702, a: 1}
+  - {r: 0.45078862, g: 0.81038654, b: 0.88333535, a: 1}
 --- !u!222 &222135978320957392
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -401,7 +405,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058815397114176}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

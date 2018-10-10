@@ -397,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondsForDestroy: 0.7
+  DefaultScale: 50
 --- !u!114 &114971124074165096
 MonoBehaviour:
   m_ObjectHideFlags: 1

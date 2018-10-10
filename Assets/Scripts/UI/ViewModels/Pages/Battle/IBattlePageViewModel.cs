@@ -20,5 +20,7 @@ namespace UI.ViewModels.Pages.Battle
         IEnumerator LoseWave(int currentWave, int hp = 0);
         
         IObservable<Wave> NextWaveObservable { get; }
+        
+        IObservable<Weapon> EnableGrenadeButtonObservable { get; }
     }
 }

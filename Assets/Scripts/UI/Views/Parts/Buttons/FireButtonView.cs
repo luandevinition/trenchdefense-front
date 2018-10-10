@@ -5,7 +5,6 @@ namespace UI.Views.Parts.Buttons
 {
 	public class FireButtonView : MonoBehaviour , IPointerUpHandler, IPointerDownHandler
 	{
-
 		private bool _isButtonDown;
 
 		public bool IsButtonDown

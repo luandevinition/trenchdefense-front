@@ -10,6 +10,7 @@ public class basic_object : MonoBehaviour
             GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
+  
     void OnDespawned()
     {
         //this method will be called when an object is despawned by the pool manager

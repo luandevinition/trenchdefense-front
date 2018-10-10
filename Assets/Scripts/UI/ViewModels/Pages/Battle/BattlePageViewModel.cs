@@ -38,9 +38,17 @@ namespace UI.ViewModels.Pages.Battle
         public IObservable<Wave> NextWaveObservable
         {
             get { return _nextWaveObservable.AsObservable(); }
-        }
+        }        
 
         private readonly Subject<Wave> _nextWaveObservable = new Subject<Wave>();
+        
+        
+        public IObservable<Weapon> EnableGrenadeButtonObservable
+        {
+            get { return _enableGrenadeButtonObservable.AsObservable(); }
+        }        
+
+        private readonly Subject<Weapon> _enableGrenadeButtonObservable = new Subject<Weapon>();
         
         private int currentPage = 1;
         
@@ -49,17 +57,21 @@ namespace UI.ViewModels.Pages.Battle
             _waves=new ReactiveCollection<Wave>(waves);
             _unit = new ReactiveProperty<Unit>(unit);
             _weapons = new ReactiveCollection<Weapon>(unit.Weapons);
+            
+            _enableGrenadeButtonObservable.OnNext(_weapons.FirstOrDefault(d=>d.ThrowAble));
         }
 
         public void AddMoreWeapon(List<Weapon> listNewWeapon)
         {
             foreach (var wp in listNewWeapon)
             {
-                if (Weapons.All(d => d.ID != wp.ID))
+                if (_weapons.All(d => d.ID != wp.ID))
                 {
-                    Weapons.Add(wp);
+                    _weapons.Add(wp);
                 }
             }
+            
+            _enableGrenadeButtonObservable.OnNext(_weapons.FirstOrDefault(d=>d.ThrowAble));
         }
 
         public IEnumerator LoseWave(int currentWave, int hp = 0)
