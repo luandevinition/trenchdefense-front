@@ -8,6 +8,7 @@ using BattleStage.Domain;
 using EZ_Pooling;
 using HeroEditor.Common;
 using HeroEditor.Common.Enums;
+using UI.Views.Parts;
 using UnityEngine;
 using UniRx;
 using UnityEngine.SceneManagement;
@@ -71,17 +72,39 @@ namespace BattleStage.Controller.Character
 
         private bool _isInit;
         private List<Weapon> _weapons;
+        
+        
+        //Store Ammo , Grenade
+        public List<Item> ItemsCollection;
 
+        private readonly Subject<int> _amountOfAmmoSubject = new Subject<int>();
+
+        public UniRx.IObservable<int> AmountOfAmmoSubject
+        {
+            get { return _amountOfAmmoSubject.AsObservable(); }    
+        }
+        
         public void SetNewListWeapon(List<Weapon> weapons)
         {
             _weapons = weapons;
             Character.UnitStatus.SetGranade(weapons.FirstOrDefault(d=>d.ThrowAble));
-            
         }
 
-        public void InitCharacterData(Unit unit, List<Weapon> weapons, ISubject<int> indexOfButtonClick)
+        public bool StillCanFire()
+        {
+            var weapon = Character.UnitStatus.WeaponEquiped;
+            var ammoCount = ItemsCollection.First(d => (int) d.Type == (int) weapon.Type).Count;
+            if (ammoCount > 0)
+                return true;
+            return false;
+        }
+
+        public void InitCharacterData(Unit unit, List<Weapon> weapons, ISubject<int> indexOfButtonClick, List<Item> initItemCollection)
         {
             CurrentCamera = GameObject.Find("BattleCameraFollow").GetComponent<Camera>();
+
+            ItemsCollection = initItemCollection;
+            
             _weapons = weapons;
             _joystick.SetCamera(CurrentCamera);
             _joystickWeapon.SetCamera(CurrentCamera);
@@ -92,6 +115,13 @@ namespace BattleStage.Controller.Character
                 return;
             }
             Character.UnitStatus.SetWeapon(weapon);
+            
+            var itemD = ItemsCollection.FirstOrDefault(d => (int) d.Type == (int) weapon.Type);
+            if (itemD != null)
+            {
+                _amountOfAmmoSubject.OnNext(itemD.Count);
+            }
+            
             SetFirearmParams(weapon.Name,  weapon.ShootSpeed, weapon.MagCapacity);
             EquipFirearms(weapon.Name, weapon.Collection);
             
@@ -121,8 +151,25 @@ namespace BattleStage.Controller.Character
                 }
                 
                 Character.UnitStatus.SetWeapon(weaponChange);
+                var itemZ = ItemsCollection.FirstOrDefault(d => (int) d.Type == (int) weaponChange.Type);
+                if (itemZ != null)
+                {
+                    _amountOfAmmoSubject.OnNext(itemZ.Count);
+                }
+                
                 SetFirearmParams(weaponChange.Name, weaponChange.ShootSpeed, weaponChange.MagCapacity);
                 EquipFirearms(weaponChange.Name, weaponChange.Collection);
+            }).AddTo(this);
+
+
+            Character.Firearm.Fire.AmountOfAmmoDecreaseSubject.Subscribe(type =>
+            {
+                var item = ItemsCollection.FirstOrDefault(d => d.Type == type);
+                if (item != null)
+                {
+                    item.Count--;
+                }
+                _amountOfAmmoSubject.OnNext(ItemsCollection.First(d=>(int)d.Type == (int) type ).Count);
             }).AddTo(this);
             
             _isInit = true;
@@ -158,6 +205,41 @@ namespace BattleStage.Controller.Character
         
         public void OnTriggerEnter(Collider other)
         {
+
+            if (other.tag.Equals("Item"))
+            {
+                var item = other.gameObject.GetComponent<DropItemView>().DropItemData;
+                switch (item.Type)
+                {
+                    case ItemType.HP:
+                        Character.UnitStatus.Heal(item.Count);
+                        break;
+                    case ItemType.SPEED:
+                        Character.UnitStatus.BuffSpeed(item.Count,10);
+                        break;
+                    default :
+                        var type = item.Type;
+                            
+                        var itemKeep = ItemsCollection.FirstOrDefault(d => d.Type == type);
+                        if (itemKeep != null)
+                        {
+                            itemKeep.Count+= item.Count;
+                        }
+                        
+                        var weaponEquiped = Character.UnitStatus.WeaponEquiped;
+                        if (weaponEquiped.Type == type)
+                        {
+                            _amountOfAmmoSubject.OnNext(itemKeep.Count);
+                        }
+                     
+                        break;
+                }
+                
+                
+                EZ_PoolManager.Despawn(other.transform);
+                return;
+            }
+            
             float damgeValue = 0;
             if (other.tag.Equals("Weapon"))
             {
@@ -165,6 +247,8 @@ namespace BattleStage.Controller.Character
                 if(Character.UnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
                     return;
                 damgeValue = damgeComponent.DamageValue;
+                
+                return;
             }
 
             if (other.tag.Equals("Enemy") && _canGetDamageByHit)

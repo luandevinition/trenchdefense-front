@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using HeroEditor.Common.Enums;
 using UI.Views.Parts.Buttons;
 using UnityEngine;
@@ -69,8 +70,8 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     break;
                 case WeaponType.Firearms1H:
                 case WeaponType.Firearms2H:
-                    Character.Firearm.Fire.FireButtonDown = _fireButtonView.IsButtonDown;
-                    Character.Firearm.Fire.FireButtonPressed = _fireButtonView.IsButtonDown;
+                    Character.Firearm.Fire.FireButtonDown = _fireButtonView.IsButtonDown && _characterController.StillCanFire();
+                    Character.Firearm.Fire.FireButtonPressed = _fireButtonView.IsButtonDown && _characterController.StillCanFire();
                     Character.Firearm.Fire.FireButtonUp = !_fireButtonView.IsButtonDown;
                     Character.Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
                     break;
@@ -83,7 +84,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 		            break;*/
 			}
 
-            if (_throwSuppliesButtonView.IsButtonDown && !_isThrowing)
+            if (_throwSuppliesButtonView.IsButtonDown && !_isThrowing && Character.UnitStatus.GrenadeEquiped != null)
             {
                 Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly
                 

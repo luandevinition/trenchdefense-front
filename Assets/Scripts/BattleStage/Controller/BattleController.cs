@@ -5,8 +5,10 @@ using BattleStage.Controller.Enemy;
 using BattleStage.Domain;
 using Domain.Wave;
 using EazyTools.SoundManager;
+using EZ_Pooling;
 using Facade;
 using UI.ViewModels.Pages.Battle;
+using UI.Views.Parts;
 using UI.Views.Parts.Buttons;
 using UniRx;
 using UnityEngine;
@@ -52,11 +54,17 @@ namespace BattleStage.Controller
 
         private ISubject<int> _selectWeaponIndex;
 
-
         public Text totalZombiesText;
         public Text killedZombiesText;
 
         public Text timePlayedText;
+
+        public Text _ammoCountText;
+        
+        private int _totalGold = 0;
+
+        [SerializeField]
+        public ItemData[] ItemDatas;
         
         private readonly Subject<int> killedZombies = new Subject<int>();
         
@@ -66,17 +74,32 @@ namespace BattleStage.Controller
 
         private int _killedZombies = 0;
         
-        private readonly Subject<int> justKillOneZombie = new Subject<int>();
+        private readonly Subject<EnemyController> justKillOneZombie = new Subject<EnemyController>();
 
         public void InitData(IBattlePageViewModel viewModel, ISubject<int> selectWeaponIndex)
         {
             timePlayedText.text = "00:00:00";
             killedZombiesText.text = "0";
+            _ammoCountText.text = "0";
             
             _selectWeaponIndex = selectWeaponIndex;
 
-            justKillOneZombie.AsObservable().Subscribe(_ =>
+            justKillOneZombie.AsObservable().Subscribe(enemy =>
             {
+                var dropItemOfZombie = enemy.ItemWillDrop;
+                if (dropItemOfZombie != null)
+                {
+                    var firstOrDefault = ItemDatas.FirstOrDefault(d => d.ItemType == dropItemOfZombie.Type);
+                    if (firstOrDefault != null)
+                    {
+                        var dropItemPrefabs = firstOrDefault
+                            .itemPrefabs;
+                        var dropView = EZ_PoolManager.Spawn(dropItemPrefabs, enemy.transform.position, Quaternion.identity).GetComponent<DropItemView>();
+                        dropView.Bind(dropItemOfZombie);
+                    }
+                }
+                _totalGold += enemy.ZombieData.GoldDropCount;
+                
                 _killedZombies++;
                 killedZombies.OnNext(_killedZombies);
             }).AddTo(this);
@@ -117,7 +140,6 @@ namespace BattleStage.Controller
                     StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
                 }
             }).AddTo(this);
-
             
         }
         
@@ -128,13 +150,24 @@ namespace BattleStage.Controller
             var unit = viewModel.Unit.Value;
             _currentWave = waves.First();
             var data = new BattleInitializeData(unit, _currentWave, unit.Weapons.ToList());
-            _characterUnitStatus.InitCharacterData(data.Player , data.Weapons, _selectWeaponIndex);
+            
+            List<Item> initItemsCollection = new List<Item>();
+            initItemsCollection.Add(new Item(2,"AMMO308",ItemType.AMMO308, 20,"2"));
+            initItemsCollection.Add(new Item(3,"AMMO10",ItemType.AMMO10MM, 60,"3"));
+            initItemsCollection.Add(new Item(5,"ROCKET",ItemType.ROCKET, 3,"5"));
+           
+            _characterUnitStatus.AmountOfAmmoSubject.Subscribe(ammonCount =>
+            {
+                _ammoCountText.text = ammonCount.ToString();
+            }).AddTo(this);
+            
+            _characterUnitStatus.InitCharacterData(data.Player , data.Weapons, _selectWeaponIndex,initItemsCollection);
 
             viewModel.Weapons.ObserveCountChanged().Subscribe(_ =>
             {
                 _characterUnitStatus.SetNewListWeapon(viewModel.Weapons.ToList());
             }).AddTo(this);
-           
+
             _characterUnitStatus.ShowRetryUI.Subscribe(_ =>
             {
                 StartCoroutine(viewModel.LoseWave(currentWave, 0));
@@ -163,9 +196,8 @@ namespace BattleStage.Controller
                             enemyObject.transform.SetParent(_gameObjetcManagerPool.transform);
                             var enemyController = enemyObject.GetComponent<EnemyController>();
                             
-                            enemyController.InitData(_characterUnitStatus.transform, justKillOneZombie);
-                            enemyController.GetEnemyStatus().SetBaseUnitStatus(zombie.HP, zombie.Attack,
-                                zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
+                            enemyController.InitData(_characterUnitStatus.transform, justKillOneZombie, zombie);
+                      
                         }
                     }
                 }
@@ -175,6 +207,13 @@ namespace BattleStage.Controller
             });
 
         }
+    }
+
+    [Serializable]
+    public class ItemData
+    {
+        public ItemType ItemType;
+        public Transform itemPrefabs;
     }
 }
 

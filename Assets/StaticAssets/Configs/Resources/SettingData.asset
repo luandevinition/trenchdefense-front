@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be5aa8743a75468fa18d951e1c62222, type: 3}
   m_Name: SettingData
   m_EditorClassIdentifier: 
-  url: http://trenchdefense.com/api
+  url: http://217.69.11.49/api
   keepUsingOldToken: 1
   imei: 

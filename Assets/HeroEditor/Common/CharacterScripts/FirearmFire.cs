@@ -10,6 +10,8 @@ using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Facade;
+using UniRx;
+using Unit = UniRx.Unit;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
 {
@@ -38,6 +40,15 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         [HideInInspector] public bool FireButtonPressed;
         [HideInInspector] public bool FireButtonUp;
 
+        
+        private readonly Subject<ItemType> _amountOfAmmodecreaseSubject = new Subject<ItemType>();
+
+        public UniRx.IObservable<ItemType> AmountOfAmmoDecreaseSubject
+        {
+            get { return _amountOfAmmodecreaseSubject.AsObservable(); }    
+        }
+        
+        
         public void Start()
         {
             _origins = new Dictionary<Transform, Vector3> { { ArmR, ArmR.localPosition } };
@@ -90,6 +101,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
             Character.Firearm.AmmoShooted++;
             CreateBullet(Character.UnitStatus.Attack, Character.UnitStatus.WeaponEquiped.Range);
+            _amountOfAmmodecreaseSubject.OnNext(Character.UnitStatus.WeaponEquiped.Type);
             FireMuzzlePlay();
             if (MyData.MyGameUser.GameSetting.EnableSFX)
             {

@@ -47,11 +47,15 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         public void OnTriggerEnter(Collider other)
         {
+            if(other.tag.Equals("Item")) return;
+            
             Bang(other.gameObject);
         }
 
         public void OnCollisionEnter(Collision other)
         {
+            if(other.gameObject.tag.Equals("Item")) return;
+            
             Bang(other.gameObject);
         }
 

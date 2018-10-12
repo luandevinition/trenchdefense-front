@@ -25,6 +25,8 @@ namespace BattleStage.Domain
 
         public int TimeSpawn { get; private set; }
         
+        public List<DropItem> DropItem { get; private set; }
+         
         /// <summary>
         /// Constructor
         /// </summary>
@@ -37,9 +39,10 @@ namespace BattleStage.Domain
         /// <param name="resourceId"></param>
         /// <param name="position"></param>
         /// <param name="timeSpawn"></param>
+        /// <param name="dropItems"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public Zombie(ZombieID id, string name, int attack, int hp, int speed, int goldDropCount, ResourceID resourceId
-            , int position, int timeSpawn)
+            , int position, int timeSpawn, List<DropItem> dropItems = null)
         {
             if (id == null) throw new ArgumentNullException("id");
             if (name == null) throw new ArgumentNullException("name");
@@ -54,6 +57,24 @@ namespace BattleStage.Domain
             ResourceID = resourceId;
             Position = position;
             TimeSpawn = timeSpawn;
+            DropItem = dropItems;
+        }
+
+        public Item GetDropItem()
+        {
+            if (DropItem == null) return null;
+
+            Item result = null;
+            foreach (var dItem in DropItem)
+            {
+                float rd = UnityEngine.Random.Range(0, 1f);
+                if (rd <= dItem.RateDrop)
+                {
+                    result = dItem.ItemOfZombie;
+                    break;
+                }
+            }
+            return result;
         }
     
     }
