@@ -3184,6 +3184,8 @@ MonoBehaviour:
   ArmR: {fileID: 4285160315435988}
   ReloadButton: 114
   _fireButtonView: {fileID: 0}
+  _throwSuppliesButtonView: {fileID: 0}
+  _grenadeTranformPrefab: {fileID: 0}
   _characterController: {fileID: 0}
   _isPlayer: 0
 --- !u!114 &114463461891502388

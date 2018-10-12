@@ -21,8 +21,10 @@ namespace BattleStage.Domain
         public int Range { get; private set; }
         
         public bool ThrowAble { get; private set; }
+        
+        public ItemType Type { get; private set; }
 
-        public Weapon(WeaponID id, string name, string collection, int attack, int shootSpeed, int reloadSpeed,
+        public Weapon(WeaponID id, ItemType type, string name, string collection, int attack, int shootSpeed, int reloadSpeed,
             int magCapacity, int range, bool throwAble)
         {
             if (id == null) throw new ArgumentNullException("id");
@@ -37,6 +39,7 @@ namespace BattleStage.Domain
             MagCapacity = magCapacity;
             Range = range;
             ThrowAble = throwAble;
+            Type = type;
         }
     }
 }

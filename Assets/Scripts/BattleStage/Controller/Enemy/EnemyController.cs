@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Assets.HeroEditor.Common.CharacterScripts;
 using BattleStage.Domain;
 using EazyTools.SoundManager;
@@ -43,11 +44,20 @@ namespace BattleStage.Controller.Enemy
 
 		private float _rangeAttack = 300f;
 
-		private ISubject<int> _justKillOneZombie;
-		
-		public void InitData(Transform followedTarget, ISubject<int> justKillOneZombie)
+		private ISubject<EnemyController> _justKillOneZombie;
+
+		public Zombie ZombieData;
+
+		public Item ItemWillDrop;
+
+		public void InitData(Transform followedTarget, ISubject<EnemyController> justKillOneZombie, Zombie zombie)
 		{
 			_followedTarget = followedTarget;
+
+			ZombieData = zombie;
+			
+			_enemyStatus.SetBaseUnitStatus(zombie.HP, zombie.Attack,
+				zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
 
 			_rangeAttack = UnityEngine.Random.Range(40, 50);
 			_justKillOneZombie = justKillOneZombie;
@@ -62,6 +72,8 @@ namespace BattleStage.Controller.Enemy
 				GetComponent<AudioSource>().PlayOneShot(_audioThrowPosion, MyData.MyGameUser.GameSetting.VolumeFloatValue*0.5f);
 			
 			}).AddTo(this);
+
+			ItemWillDrop = zombie.GetDropItem();
 		}
 		
 		void Update()
@@ -120,12 +132,12 @@ namespace BattleStage.Controller.Enemy
 			
 			if (_enemyStatus.IsDie.Value)
 			{
-				_justKillOneZombie.OnNext(1);
+				_justKillOneZombie.OnNext(this);
+				
 			    Animator.speed = 1f;
 				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);
 				_capsuleCollider.enabled = false;
-				//_boxsuleCollider.enabled = false;
 				DestroyObject(this.gameObject,3f);
 			}
 		}

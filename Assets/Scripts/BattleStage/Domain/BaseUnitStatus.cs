@@ -1,4 +1,5 @@
-﻿using EZ_Pooling;
+﻿using System.Collections;
+using EZ_Pooling;
 using UniRx;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace BattleStage.Domain
         
         public float Speed
         {
-            get { return _baseSpeed + (_levelSpeed * _percentSpeedByLevel * _baseSpeed) * Random.Range(0.85f, 1.15f); }
+            get { return _baseSpeed + _tempSpeed + (_levelSpeed * _percentSpeedByLevel * _baseSpeed) * Random.Range(0.85f, 1.15f); }
         }
 
         public int GoldDroupCount
@@ -80,10 +81,15 @@ namespace BattleStage.Domain
             get { return _currentHP.AsObservable(); }
         }
 
+        private float _tempSpeed = 0;
+        
         [SerializeField]
         private GameObject _bloodGameObjectAnimation;
 
         public ReactiveProperty<bool> IsDie;
+
+
+        private Coroutine _speedCoroutine;
         
         public void SetBaseUnitStatus(int baseHp, int baseAttack, int baseSpeed, ResourceID resourceId, Weapon weapon = null,
             Weapon granade = null, int goldDropCount = 0, int levelHp = 1, int levelAttack = 1, int levelSpeed = 1,
@@ -121,6 +127,31 @@ namespace BattleStage.Domain
                 _currentHP.Value = 0;
                 IsDie.Value = true;
             }
+        }
+        
+        public void Heal(float damage)
+        {
+            _currentHP.Value += damage;
+            if (_currentHP.Value >= HP)
+            {
+                _currentHP.Value = HP;
+            }
+        }
+
+        public void BuffSpeed(int speedValue, float time)
+        {
+            _tempSpeed = speedValue;
+            if (_speedCoroutine != null)
+            {
+                StopCoroutine(_speedCoroutine);
+            }
+            _speedCoroutine = StartCoroutine(ResetSpeedithTime(time));
+        }
+
+        IEnumerator ResetSpeedithTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _tempSpeed = 0;
         }
         
         public void SetWeapon(Weapon weapon)
