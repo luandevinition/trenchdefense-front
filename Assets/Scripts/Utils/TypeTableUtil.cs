@@ -79,7 +79,7 @@ namespace Utils
 				case 1225470534: return new App.Proto.Zombie(); //490b3246
 
 			}
-			throw new Exception("unknown type id");
+			throw new Exception("unknown type id : " + typeId);
 		}
 	}
 }

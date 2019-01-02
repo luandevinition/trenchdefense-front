@@ -70,6 +70,7 @@ namespace Components.Communication
         public UniRx.IObservable<List<IExtensible>> Get(string path, HttpStatusCode[] throughCodes = null)
         {
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
+            Debug.Log("Get url path : " + _baseUri + path);
             return Wrap(ObservableProtobufWebRequest.GetAndGetProtobufs(_baseUri + path, header));
         }                
         
@@ -80,6 +81,9 @@ namespace Components.Communication
         public UniRx.IObservable<string> GetJson(string path)
         {
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/json"}};
+            
+            Debug.Log("GetJson url path : " + _baseUri + path);
+            
             return ObservableJsonWebRequest.Get(_baseUri + path, header);
         }
 
@@ -92,6 +96,9 @@ namespace Components.Communication
         public UniRx.IObservable<List<IExtensible>> Get(string path, List<IExtensible> models, HttpStatusCode[] throughCodes = null)
         {
             var payload = ProtobufConverter.SerializeModels (models);
+            
+            Debug.Log("Get url path with models : " + _baseUri + path);
+            
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
             return Wrap(ObservableProtobufWebRequest.GetAndGetProtobufs(_baseUri + path + "?body=" + HEXUtil.HexStringFromBytes(payload), header));
         }
@@ -109,6 +116,9 @@ namespace Components.Communication
             {
                 payload = ProtobufConverter.SerializeModels(models);
             }
+            
+            Debug.Log("Post url path with models : " + _baseUri + path);
+            
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
             return Wrap(ObservableProtobufWebRequest.PostAndGetProtobufs(_baseUri + path, payload, header));
         }
@@ -121,6 +131,9 @@ namespace Components.Communication
         public UniRx.IObservable<List<IExtensible>> Post(string path, HttpStatusCode[] throughCodes = null)
         {
             var models = new List<IExtensible>();
+            
+            Debug.Log("Post url path : " + _baseUri + path);
+            
             return Post(path, models, throughCodes);
         }
 
@@ -135,6 +148,10 @@ namespace Components.Communication
         {
             var payload = ProtobufConverter.SerializeModels (models);
             var header = new Dictionary<string, string>(_defaultRequestHeaders) {{"Content-Type", "appliaction/octet-stream"}};
+            
+            Debug.Log("Put url path with models: " + _baseUri + path);
+            
+            
             return Wrap(ObservableProtobufWebRequest.PutAndGetProtobufs(_baseUri + path, payload, header));
         }
 
@@ -146,6 +163,8 @@ namespace Components.Communication
         public UniRx.IObservable<List<IExtensible>> Put(string path, HttpStatusCode[] throughCodes = null)
         {
             var models = new List<IExtensible>();
+            Debug.Log("Put url path: " + _baseUri + path);
+            
             return Put(path, models, throughCodes);
         }
 
