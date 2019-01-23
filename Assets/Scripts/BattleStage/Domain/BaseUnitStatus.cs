@@ -9,17 +9,17 @@ namespace BattleStage.Domain
     {
         public float HP
         {
-            get { return _baseHP  + (_levelHP * _percentHPByLevel * _baseHP); }
+            get { return _baseHP  *  (1 + (_levelHP * 10) / 100f); }
         }
         
         public float Attack
         {
-            get { return (_baseAttack + (_weaponEquiped != null ? _weaponEquiped.Attack : 0)) * (1 + (_levelAttack * _percentAttackByLevel)); }
+            get { return (_baseAttack * (1 + (_levelAttack * 10) / 100f) + (_weaponEquiped != null ? _weaponEquiped.Attack : 0)); }
         }
         
         public float Speed
         {
-            get { return _baseSpeed + _tempSpeed + (_levelSpeed * _percentSpeedByLevel * _baseSpeed) * Random.Range(0.85f, 1.15f); }
+            get { return (_baseSpeed  * (1 + (_levelSpeed * 10) / 100f) + _tempSpeed ); }
         }
 
         public int GoldDroupCount
@@ -32,22 +32,31 @@ namespace BattleStage.Domain
         /// <summary>
         /// Base status for each character will diff not the same.
         /// </summary>
+        [SerializeField]
         private int _baseHP;
+        [SerializeField]
         private int _baseAttack;
+        [SerializeField]
         private int _baseSpeed;
 
         /// <summary>
         /// Level (This will using Point we get for 2 wave to increase it)
         /// </summary>
+        [SerializeField]
         private int _levelHP;
+        [SerializeField]
         private int _levelAttack;
+        [SerializeField]
         private int _levelSpeed;
         
         /// <summary>
         /// Percent increase by level
         /// </summary>
+        [SerializeField]
         private float _percentHPByLevel;
+        [SerializeField]
         private float _percentAttackByLevel;
+        [SerializeField]
         private float _percentSpeedByLevel;
 
         /// <summary>
@@ -92,7 +101,7 @@ namespace BattleStage.Domain
         private Coroutine _speedCoroutine;
         
         public void SetBaseUnitStatus(int baseHp, int baseAttack, int baseSpeed, ResourceID resourceId, Weapon weapon = null,
-            Weapon granade = null, int goldDropCount = 0, int levelHp = 1, int levelAttack = 1, int levelSpeed = 1,
+            Weapon granade = null, int goldDropCount = 0, int levelHp = 0, int levelAttack = 0, int levelSpeed = 0,
             float percentHpByLevel = 0, float percentAttackByLevel = 0, float percentSpeedByLevel = 0)
         {
             _baseHP = baseHp;
@@ -112,7 +121,7 @@ namespace BattleStage.Domain
             _weaponEquiped = weapon;
             _grenadeEquiped = granade;
             
-            _currentHP = new ReactiveProperty<float>(_baseHP  + (_levelHP * _percentHPByLevel * _baseHP));
+            _currentHP = new ReactiveProperty<float>(_baseHP  *  (1 + (_levelHP * 10) / 100f));
             IsDie = new ReactiveProperty<bool>(false);
         }
 
@@ -164,19 +173,34 @@ namespace BattleStage.Domain
             _grenadeEquiped = granade;
         }
 
-        public void IncreaseHPLevel()
+        public void IncreaseHPLevel(int plus = 1)
         {
-            _levelHP++;
+            _levelHP = plus;
         }
         
-        public void IncreaseAttackLevel()
+        public void IncreaseAttackLevel(int plus = 1)
         {
-            _levelAttack++;
+            _levelAttack = plus;
         }
         
-        public void IncreaseSpeedLevel()
+        public void IncreaseSpeedLevel(int plus = 1)
         {
-            _levelSpeed++;
+            _levelSpeed = plus;
+        }
+        
+        public int GetHPLevel()
+        {
+            return _levelHP;
+        }
+        
+        public int GetttackLevel()
+        {
+            return _levelAttack;
+        }
+        
+        public int GetSpeedLevel()
+        {
+            return _levelSpeed;
         }
     }
 }

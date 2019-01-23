@@ -55,6 +55,8 @@ namespace BattleStage.Controller.Character
         public CharacterHM Character;
         
         public Camera CurrentCamera;
+
+        public Rigidbody Rigidbody;
         
         /// <summary>
         /// Local value for moving
@@ -69,10 +71,8 @@ namespace BattleStage.Controller.Character
 
         private readonly Subject<UniRx.Unit> _showRetryUI = new Subject<UniRx.Unit>();
 
-
         private bool _isInit;
         private List<Weapon> _weapons;
-        
         
         //Store Ammo , Grenade
         public List<Item> ItemsCollection;
@@ -88,6 +88,11 @@ namespace BattleStage.Controller.Character
         {
             _weapons = weapons;
             Character.UnitStatus.SetGranade(weapons.FirstOrDefault(d=>d.ThrowAble));
+        }
+
+        public List<Weapon> Weapons
+        {
+            get { return _weapons; }
         }
 
         public bool StillCanFire()
@@ -126,7 +131,7 @@ namespace BattleStage.Controller.Character
             EquipFirearms(weapon.Name, weapon.Collection);
             
             Weapon granade = weapons.FirstOrDefault(d=>d.ThrowAble);
-            Character.UnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade);
+            Character.UnitStatus.SetBaseUnitStatus(unit.HP, unit.Attack, unit.Speed, unit.ResourceID , weapon, granade, 0, 0, 0, 0,50,20,10);
             Character.UnitStatus.CurrentHP.Subscribe(hpValue =>
             {
                 _hpImage.fillAmount = hpValue/Character.UnitStatus.HP;
@@ -202,6 +207,21 @@ namespace BattleStage.Controller.Character
 
         private bool _canGetDamageByHit = true;
         private Coroutine getHitCoroutine;
+
+        public void AddItem(ItemType itemType, int count)
+        {
+            var itemKeep = ItemsCollection.FirstOrDefault(d => d.Type == itemType);
+            if (itemKeep != null)
+            {
+                itemKeep.Count+= count;
+                
+                var weaponEquiped = Character.UnitStatus.WeaponEquiped;
+                if (weaponEquiped.Type == itemType)
+                {
+                    _amountOfAmmoSubject.OnNext(itemKeep.Count);
+                }
+            }
+        }
         
         public void OnTriggerEnter(Collider other)
         {
@@ -241,18 +261,34 @@ namespace BattleStage.Controller.Character
             }
             
             float damgeValue = 0;
-            if (other.tag.Equals("Weapon"))
+            if (other.tag.Equals("Weapon") && _canGetDamageByHit)
             {
                 var damgeComponent = other.gameObject.GetComponent<Damage>();
                 if(Character.UnitStatus.IsDie.Value || !damgeComponent.IsEnemyDamage)
                     return;
                 damgeValue = damgeComponent.DamageValue;
                 
+                Character.UnitStatus.GetDamage(transform.position, damgeValue, new Vector3(0,45,0));
+            
+                _canGetDamageByHit = false;
+                if(getHitCoroutine != null)
+                    StopCoroutine(getHitCoroutine);
+                StartCoroutine(DelayForHit());
+                
+                if (Character.UnitStatus.IsDie.Value)
+                {
+                    Animator.SetBool("DieFront",true);
+                    Animator.speed = 1f;
+                }
+                
                 return;
             }
 
             if (other.tag.Equals("Enemy") && _canGetDamageByHit)
             {
+                Rigidbody.velocity = Vector3.zero;
+                Rigidbody.angularVelocity = Vector3.zero; 
+                
                 _canGetDamageByHit = false;
                 if(getHitCoroutine != null)
                     StopCoroutine(getHitCoroutine);

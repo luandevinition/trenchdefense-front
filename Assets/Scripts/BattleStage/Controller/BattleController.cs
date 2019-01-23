@@ -10,6 +10,7 @@ using Facade;
 using UI.ViewModels.Pages.Battle;
 using UI.Views.Parts;
 using UI.Views.Parts.Buttons;
+using UI.Views.SubPage;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,12 +40,27 @@ namespace BattleStage.Controller
 
         [SerializeField]
         private GameObject _uIRetry;
+        
+        [SerializeField]
+        private Text[] _textsForZombieKilled;
 
         [SerializeField]
         private GameObject _gameObjetcManagerPool;
         
         [SerializeField]
         private GameObject _gameObjetcNewWaveUI;
+        
+        [SerializeField]
+        private Text _newWaveReward1;
+        
+        [SerializeField]
+        private Text _newWaveReward2;
+        
+        [SerializeField]
+        private Text _newWaveReward3;
+        
+        [SerializeField]
+        private NextWavePage _nextWavePage;
         
         [SerializeField]
         private FireButtonView _throwSuppliesButtonView;
@@ -73,6 +89,7 @@ namespace BattleStage.Controller
         private Wave _currentWaveData;
 
         private int _killedZombies = 0;
+        private int[] _killedZombiesCollect;
         
         private readonly Subject<EnemyController> justKillOneZombie = new Subject<EnemyController>();
 
@@ -81,7 +98,7 @@ namespace BattleStage.Controller
             timePlayedText.text = "00:00:00";
             killedZombiesText.text = "0";
             _ammoCountText.text = "0";
-            
+            _killedZombiesCollect = new []{0,0,0,0,0};
             _selectWeaponIndex = selectWeaponIndex;
 
             justKillOneZombie.AsObservable().Subscribe(enemy =>
@@ -101,6 +118,9 @@ namespace BattleStage.Controller
                 _totalGold += enemy.ZombieData.GoldDropCount;
                 
                 _killedZombies++;
+                Debug.Log("Zombie ID : " + enemy.ZombieData.ID.Value);
+                _killedZombiesCollect[(enemy.ZombieData.ID.Value - 1)]++;
+                
                 killedZombies.OnNext(_killedZombies);
             }).AddTo(this);
 
@@ -112,6 +132,7 @@ namespace BattleStage.Controller
             viewModel.NextWaveObservable.Subscribe(newWaveData =>
             {
                 _gameObjetcNewWaveUI.SetActive(false);
+               
                 currentSecondCounter = 0;
                 _killedZombies = 0;
                 timePlayed.OnNext(currentSecondCounter);
@@ -135,9 +156,29 @@ namespace BattleStage.Controller
                 killedZombiesText.text = num.ToString();
                 if (num >= _currentWaveData.NumberZombiesOfWave)
                 {
-                    Time.timeScale = 0f;
                     _gameObjetcNewWaveUI.SetActive(true);
-                    StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
+                    
+                    _nextWavePage.SetSkillPoint(((_currentWaveData.WaveNumber + 1 ) % 2) == 0 ? 0 :1);
+                    
+                    _nextWavePage.OnClickButtonNextWave().Subscribe(_ =>
+                    {
+                        Time.timeScale = 0f;
+                        StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
+                    }).AddTo(this);
+                    
+                    int numberForRw1 = _characterUnitStatus.Weapons.Count(d => d.Type == ItemType.AMMO308);
+                    _newWaveReward1.text = "+" + numberForRw1;
+                    _characterUnitStatus.AddItem(ItemType.AMMO308 , _characterUnitStatus.Weapons.Where(d=>d.Type == ItemType.AMMO308).Select(d=>d.MagCapacity).Sum());
+                
+                    int numberForRw2 = _characterUnitStatus.Weapons.Count(d => d.Type == ItemType.AMMO10MM);
+                    _newWaveReward2.text = "+" + numberForRw2;
+                    _characterUnitStatus.AddItem(ItemType.AMMO10MM , _characterUnitStatus.Weapons.Where(d=>d.Type == ItemType.AMMO10MM).Select(d=>d.MagCapacity).Sum());
+              
+                    int numberForRw3 = _characterUnitStatus.Weapons.Count(d => d.Type == ItemType.ROCKET);
+                    _newWaveReward3.text = "+" + numberForRw3;
+                    _characterUnitStatus.AddItem(ItemType.ROCKET , _characterUnitStatus.Weapons.Where(d=>d.Type == ItemType.ROCKET).Select(d=>d.MagCapacity).Sum());
+              
+                    
                 }
             }).AddTo(this);
             
@@ -172,6 +213,13 @@ namespace BattleStage.Controller
             {
                 StartCoroutine(viewModel.LoseWave(currentWave, 0));
                 _gameObjetcManagerPool.transform.DestroyChildren();
+                
+                for (int i = 0 ; i < _textsForZombieKilled.Length ; i++)
+                {
+                    var text = _textsForZombieKilled[i];
+                    text.text = string.Format("{0:D6}", _killedZombiesCollect[i]);
+                }
+                
                 _uIRetry.SetActive(true);
             }).AddTo(this);
 

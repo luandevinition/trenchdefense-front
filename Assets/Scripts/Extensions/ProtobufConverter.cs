@@ -29,8 +29,6 @@ namespace Extensions
 
         private static ProtobufMessages DeserializeProtobufMessagesBinary(byte[] bytes)
         {
-            Debug.LogError("BYTE Size : " + bytes.Length);
-            
             var ms = new MemoryStream(bytes);
             var messages = new ProtobufMessages ();
             Serializer.Deserialize (ms, messages, typeof(ProtobufMessages));

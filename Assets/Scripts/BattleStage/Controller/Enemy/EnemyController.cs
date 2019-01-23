@@ -50,16 +50,18 @@ namespace BattleStage.Controller.Enemy
 
 		public Item ItemWillDrop;
 
+		public Rigidbody Rigidbody;
+
 		public void InitData(Transform followedTarget, ISubject<EnemyController> justKillOneZombie, Zombie zombie)
 		{
 			_followedTarget = followedTarget;
 
 			ZombieData = zombie;
-			
+			_capsuleCollider.enabled = true;
 			_enemyStatus.SetBaseUnitStatus(zombie.HP, zombie.Attack,
 				zombie.Speed, zombie.ResourceID, null, null, zombie.GoldDropCount);
 
-			_rangeAttack = UnityEngine.Random.Range(40, 50);
+			_rangeAttack = UnityEngine.Random.Range(70, 90);
 			_justKillOneZombie = justKillOneZombie;
 				 
 			Observable.Interval(new TimeSpan(0, 0, 2)).Where(_ => _isReachedToTarget).Subscribe(_ =>
@@ -74,11 +76,20 @@ namespace BattleStage.Controller.Enemy
 			}).AddTo(this);
 
 			ItemWillDrop = zombie.GetDropItem();
+			
+			if (_weaponDamage != null)
+			{
+				_weaponDamage.DamageValue = _enemyStatus.Attack;
+			}
+			
 		}
 		
 		void Update()
 		{
 			if(_enemyStatus == null || _enemyStatus.IsDie.Value ) return;
+			
+			Rigidbody.velocity = Vector3.zero;
+			Rigidbody.angularVelocity = Vector3.zero; 
 			
 			var direction = (_followedTarget.position - transform.position).normalized;
 
@@ -103,10 +114,6 @@ namespace BattleStage.Controller.Enemy
 			}
 			else
 			{
-				if (_weaponDamage != null)
-				{
-					_weaponDamage.DamageValue = _enemyStatus.Attack;
-				}
 				Animator.SetTrigger(Time.frameCount % 2 == 0 ? "Slash" : "Jab"); // Play animation randomly
 				Animator.speed = 0.2f;
 			}
@@ -133,7 +140,7 @@ namespace BattleStage.Controller.Enemy
 			if (_enemyStatus.IsDie.Value)
 			{
 				_justKillOneZombie.OnNext(this);
-				
+				_weaponDamage.DamageValue = 0;
 			    Animator.speed = 1f;
 				Animator.SetBool("Run", false);
 				Animator.SetBool("DieFront",true);

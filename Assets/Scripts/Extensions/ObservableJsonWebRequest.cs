@@ -102,7 +102,7 @@ namespace UniRx.JsonWebRequest
             IProgress<float> progress = null)
         {
             return ObservableUnity.FromCoroutine<AssetBundle>((observer, cancellation) =>
-                FetchAssetBundle(UnityWebRequest.GetAssetBundle(url, version, crc), null, observer, progress,
+                FetchAssetBundle(UnityWebRequestAssetBundle.GetAssetBundle(url, version, crc), null, observer, progress,
                     cancellation));
         }
 
