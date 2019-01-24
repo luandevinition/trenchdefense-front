@@ -7,6 +7,7 @@ using Domain.Wave;
 using EazyTools.SoundManager;
 using EZ_Pooling;
 using Facade;
+using UI.Scripts.PageTransitions;
 using UI.ViewModels.Pages.Battle;
 using UI.Views.Parts;
 using UI.Views.Parts.Buttons;
@@ -65,7 +66,7 @@ namespace BattleStage.Controller
         [SerializeField]
         private FireButtonView _throwSuppliesButtonView;
 
-        private int currentWave = 1;
+        private int currentWave = 0;
         private Wave _currentWave;
 
         private ISubject<int> _selectWeaponIndex;
@@ -93,6 +94,8 @@ namespace BattleStage.Controller
         
         private readonly Subject<EnemyController> justKillOneZombie = new Subject<EnemyController>();
 
+        private IDisposable _disposable;
+        
         public void InitData(IBattlePageViewModel viewModel, ISubject<int> selectWeaponIndex)
         {
             timePlayedText.text = "00:00:00";
@@ -133,6 +136,8 @@ namespace BattleStage.Controller
             {
                 _gameObjetcNewWaveUI.SetActive(false);
                
+                LoadingShortTransition.EndLoading();
+                
                 currentSecondCounter = 0;
                 _killedZombies = 0;
                 timePlayed.OnNext(currentSecondCounter);
@@ -157,12 +162,21 @@ namespace BattleStage.Controller
                 if (num >= _currentWaveData.NumberZombiesOfWave)
                 {
                     _gameObjetcNewWaveUI.SetActive(true);
+                    Debug.Log("Current wave = " + currentWave);
+
+                    _nextWavePage.SetSkillPoint(((currentWave + 1 ) % 2) == 0 ? 1 : 0);
+                    currentWave++;
+
+                    if (_disposable != null)
+                    {
+                        _disposable.Dispose();
+                    }
                     
-                    _nextWavePage.SetSkillPoint(((_currentWaveData.WaveNumber + 1 ) % 2) == 0 ? 0 :1);
-                    
-                    _nextWavePage.OnClickButtonNextWave().Subscribe(_ =>
+                    _disposable = _nextWavePage.OnClickButtonNextWave().Subscribe(_ =>
                     {
                         Time.timeScale = 0f;
+                        _gameObjetcNewWaveUI.SetActive(false);
+                        LoadingShortTransition.StartLoading();
                         StartCoroutine(viewModel.NextWave(currentWave, _characterUnitStatus.Character.UnitStatus.CurrentHPFloat));
                     }).AddTo(this);
                     
